@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-//Example Test_Mariana
+
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
