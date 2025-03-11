@@ -31,6 +31,7 @@ fun ComposeMultiScreenApp() { //La navegacion entre pantallas
     val navController = rememberNavController()
     SetupNavGraph(navController = navController)
 }
+//Example Develop
 
 @Composable
 fun SetupNavGraph(navController: NavHostController) { //Es el que nos va mandar a la pantalla del menu que vamos a querer por medio de una ruta
