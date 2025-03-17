@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.sieaplication.R
@@ -15,15 +14,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.text.style.TextAlign
-import androidx.navigation.NavController
-import org.jetbrains.annotations.Async
 import coil.compose.AsyncImage
-import com.example.sieaplication.ui.components.Bars
 import androidx.navigation.NavHostController
-import com.example.sieaplication.ui.theme.I900
-import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.filled.Build
@@ -32,16 +25,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
-import com.example.sieaplication.ui.theme.I900
+import com.example.sieaplication.ui.components.SliderMenu
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Main_Menu(navController: NavHostController) {
-
     // Scaffold: Barra superior fija y un contenedor para el contenido desplazable
     Scaffold(
+
         // Barra superior (TopAppBar)
         topBar = {
             TopAppBar(
@@ -166,6 +157,7 @@ fun Main_Menu(navController: NavHostController) {
             Spacer(modifier = Modifier.height(32.dp))
         }
     }
+
 }
 
 // (A) Tarjeta con info del estudiante

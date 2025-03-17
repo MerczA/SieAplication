@@ -27,15 +27,18 @@ import androidx.navigation.NavController
 import com.example.sieaplication.R
 import com.example.sieaplication.data.model.TableScores
 import com.example.sieaplication.ui.components.Bars
+import com.example.sieaplication.ui.components.SliderMenu
 
 
 @Composable
 fun CalificacionesTable(navController: NavController) {
-            TablaCalificaciones(navController = navController)
+
+    TablaCalificaciones(navController = navController)
 }
 
 @Composable
 fun TablaCalificaciones(navController: NavController) {
+
     val calificaciones = arrayOf(
         TableScores(1, "Desarrollo Aplicaciones Móviles", 100, 100, 100, 0, 100, 100, 0),
         TableScores(2, "Bases de Datos", 90, 95, 88, 92, 96, 93, 0),

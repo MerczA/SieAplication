@@ -30,6 +30,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.ui.unit.dp
 import com.example.sieaplication.data.model.TableScores
+import com.example.sieaplication.ui.components.SliderMenu
 
 
 @Composable
@@ -116,6 +117,7 @@ fun HorarioScreen(navController: NavController) {
             }
         }
     }
+
 }
 
 
