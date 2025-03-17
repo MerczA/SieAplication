@@ -5,12 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.sieaplication.ui.screens.Main_Menu
+import com.example.sieaplication.ui.screens.CalificacionesTable
 import com.example.sieaplication.ui.theme.SieAplicationTheme
 
 
@@ -35,9 +34,8 @@ fun ComposeMultiScreenApp() { //La navegacion entre pantallas
 
 @Composable
 fun SetupNavGraph(navController: NavHostController) { //Es el que nos va mandar a la pantalla del menu que vamos a querer por medio de una ruta
-    NavHost(navController = navController, startDestination = "") {
-        composable("main_menu") { Main_Menu(navController) }
-
+    NavHost(navController = navController, startDestination = "calificaciones") {
+        composable("calificaciones") { CalificacionesTable(navController) }
     }
 }
 

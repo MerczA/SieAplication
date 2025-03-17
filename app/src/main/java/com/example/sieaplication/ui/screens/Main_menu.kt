@@ -21,44 +21,6 @@ import androidx.navigation.NavHostController
 import com.example.sieaplication.R
 
 @Composable
-fun Main_Menu(navController: NavController) {
-    Bars()
-}
-
-
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun Bars() {
-
-
-    Column(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        // TopAppBar en la parte superior
-        TopAppBar(
-            colors = TopAppBarDefaults.topAppBarColors(
-                containerColor = colorResource(id = R.color.blueColorMain),
-                titleContentColor = Color.White
-            ),
-
-            title = { Text("Sie") },
-            actions = {
-
-                IconButton(onClick = {}) {
-                    Icon(
-                        imageVector = Icons.Filled.Settings,
-                        contentDescription = "Settings button"
-                    )
-                }
-            }
-        )
-
-    }
-
-}
-
-@Composable
 fun Options(){
 
 }
