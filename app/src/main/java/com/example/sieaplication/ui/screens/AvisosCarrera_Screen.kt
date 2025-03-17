@@ -18,20 +18,37 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.compose.foundation.Image
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import com.example.sieaplication.R
 
-
+@Composable
+fun AvisosCarreraScreenPreview(navController: NavController) {
+        AvisosCarreraScreen(navController = navController)
+}
 
 // Screen de Avisos para la carrera
 @Composable
-fun AvisosCarreraScreen() {
+fun AvisosCarreraScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.LightGray)
     ) {
+        // 🔹 Botón de "Atrás" en la parte superior izquierda
+        IconButton(
+            onClick = { navController.navigate("screen_avisos") },
+            modifier = Modifier
+                .align(Alignment.TopStart)
+                .padding(16.dp)
+        ) {
+            Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Atrás")
+        }
+
         Card(
             modifier = Modifier
                 .fillMaxWidth(0.9f)
@@ -67,12 +84,12 @@ fun AvisosCarreraScreen() {
                 ) {
                     // Placeholder de imagen
                     Image(
-                        painter = painterResource(id = R.drawable.mensaje), // Reemplaza "nombre_de_tu_imagen" con el nombre real de tu archivo
+                        painter = painterResource(id = R.drawable.mensaje),
                         contentDescription = "Descripción de la imagen",
                         modifier = Modifier
-                            .size(100.dp) // Ajusta el tamaño según necesites
+                            .size(100.dp)
                             .padding(4.dp),
-                        contentScale = ContentScale.Crop // Puedes ajustar la escala según lo necesites
+                        contentScale = ContentScale.Crop
                     )
 
                     // Texto principal
@@ -111,7 +128,8 @@ fun AvisosCarreraScreen() {
                             painter = painterResource(id = R.drawable.tics),
                             contentDescription = "Mensaje",
                             modifier = Modifier.fillMaxSize(),
-                            contentScale = ContentScale.Fit)
+                            contentScale = ContentScale.Fit
+                        )
                     }
                 }
 
@@ -142,14 +160,5 @@ fun AvisosCarreraScreen() {
                 }
             }
         }
-    }
-}
-
-// Función para mostrar la pantalla en la vista previa
-
-@Composable
-fun AvisosCarreraScreenPreview(navController: NavController) {
-    MaterialTheme {
-        AvisosCarreraScreen()
     }
 }

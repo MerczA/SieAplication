@@ -3,8 +3,12 @@ package com.example.sieaplication.ui.screens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,14 +22,28 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
-// Screen de Avisos para TECNM Aguascalientes
 @Composable
-fun AvisosTecnmScreen() {
+fun AvisosTecnmScreenPreview(navController: NavController) {
+
+        AvisosTecnmScreen(navController = navController)
+}
+
+@Composable
+fun AvisosTecnmScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.LightGray)
     ) {
+        IconButton(
+            onClick = { navController.navigate("screen_avisos") },
+            modifier = Modifier
+                .align(Alignment.TopStart)
+                .padding(16.dp)
+        ) {
+            Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Atrás")
+        }
+
         Card(
             modifier = Modifier
                 .fillMaxWidth(0.9f)
@@ -133,10 +151,3 @@ fun AvisosTecnmScreen() {
     }
 }
 
-// Función para mostrar la pantalla en la vista previa
-@Composable
-fun AvisosTecnmScreenPreview(navController: NavController) {
-    MaterialTheme {
-        AvisosTecnmScreen()
-    }
-}

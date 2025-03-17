@@ -51,7 +51,7 @@ fun Main_Menu(navController: NavHostController) {
                 },
                 // Ícono de ajustes a la derecha (actions)
                 actions = {
-                    IconButton(onClick = { /* TODO: acción de Ajustes */ }) {
+                    IconButton(onClick = { }) {
                         Icon(
                             imageVector = Icons.Default.Build,
                             contentDescription = "Settings",
@@ -135,7 +135,7 @@ fun Main_Menu(navController: NavHostController) {
                     ButtonCuadrado(
                         text = "Avisos Tecnm",
                         imageRes = R.drawable.aviso_icon,
-                        onClick = {}
+                        onClick = { navController.navigate("screen_avisos")}
                     )
                 }
                 // Fila 4

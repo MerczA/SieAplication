@@ -9,13 +9,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.sieaplication.data.model.Kardex
 import com.example.sieaplication.ui.screens.AvisosCarreraScreenPreview
-import com.example.sieaplication.ui.screens.AvisosSelectorScreenPreview
+import com.example.sieaplication.ui.screens.AvisosOpcion
 import com.example.sieaplication.ui.screens.AvisosTecnmScreenPreview
 import com.example.sieaplication.ui.screens.CalificacionesTable
+import com.example.sieaplication.ui.screens.KardexInfo
 import com.example.sieaplication.ui.screens.Main_Menu
 import com.example.sieaplication.ui.screens.PreviewHorarioScreen
-import com.example.sieaplication.ui.screens.StudentInfoScreen
 import com.example.sieaplication.ui.screens.TablaCalificaciones
 import com.example.sieaplication.ui.theme.SieAplicationTheme
 
@@ -37,13 +38,19 @@ fun ComposeMultiScreenApp() {
     SetupNavGraph(navController = navController)
 }
 
-
+@Composable
 fun SetupNavGraph(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "main_menu") {
         composable("main_menu") { Main_Menu(navController) }
         composable("calif_screen") { CalificacionesTable(navController) }
         composable("screen_horario") {PreviewHorarioScreen(navController) }
-        composable("screen_kardex") {StudentInfoScreen(navController) }
+        composable("screen_kardex") { KardexInfo(navController) }
+        composable("screen_avisos") {AvisosOpcion(navController) }
+        composable("screen_avisos_tecnm") {AvisosTecnmScreenPreview(navController) }
+        composable("screen_avisos_carrera") {AvisosCarreraScreenPreview(navController) }
+
+
+
 
 
     }
