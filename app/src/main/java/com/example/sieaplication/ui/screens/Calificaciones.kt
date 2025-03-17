@@ -70,6 +70,7 @@ fun TablaCalificaciones(navController: NavController) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 16.dp)
+                    .padding(top = 15.dp)
             )
 
             // 🔹 Caja con borde para la tabla
