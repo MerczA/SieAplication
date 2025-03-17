@@ -19,6 +19,7 @@ import coil.compose.AsyncImage
 import androidx.navigation.NavHostController
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -53,7 +54,7 @@ fun Main_Menu(navController: NavHostController) {
                 actions = {
                     IconButton(onClick = { }) {
                         Icon(
-                            imageVector = Icons.Default.Build,
+                            imageVector = Icons.Default.AccountCircle,
                             contentDescription = "Settings",
                             tint = Color.White
                         )
@@ -148,7 +149,7 @@ fun Main_Menu(navController: NavHostController) {
                     Spacer(modifier = Modifier.width(16.dp))
                     ButtonCuadrado(
                         text = "Credencial Digital",
-                        imageRes = R.drawable.card_icon,
+                        imageRes = R.drawable.credencial_digital_icon,
                         onClick = {}
                     )
                 }
