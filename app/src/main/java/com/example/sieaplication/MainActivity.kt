@@ -40,8 +40,6 @@ fun SetupNavGraph(navController: NavHostController) {
         composable("calif_screen") { CalificacionesTable(navController) }
         composable("screen_horario") {PreviewHorarioScreen(navController) }
 
-
-
     }
 }
 
