@@ -3,43 +3,40 @@ package com.example.sieaplication.ui.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
-import com.example.sieaplication.R
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.ui.text.style.TextAlign
-import coil.compose.AsyncImage
-import androidx.navigation.NavHostController
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import com.example.sieaplication.ui.components.SliderMenu
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import com.example.sieaplication.R
+import androidx.navigation.NavHostController
+
+// Ancho total de cada fila de botones: 160dp + 16dp + 160dp = 336dp
+private val GRID_WIDTH = 336.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Main_Menu(navController: NavHostController) {
-    // Scaffold: Barra superior fija y un contenedor para el contenido desplazable
-    Scaffold(
 
-        // Barra superior (TopAppBar)
+    Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        // Logo a la izquierda dentro del título
                         Image(
                             painter = painterResource(id = R.drawable.logotec),
                             contentDescription = "Logo",
@@ -50,9 +47,8 @@ fun Main_Menu(navController: NavHostController) {
                         Text("Sie")
                     }
                 },
-                // Ícono de ajustes a la derecha (actions)
                 actions = {
-                    IconButton(onClick = { }) {
+                    IconButton(onClick = { /* Ajustes */ }) {
                         Icon(
                             imageVector = Icons.Default.AccountCircle,
                             contentDescription = "Settings",
@@ -60,27 +56,26 @@ fun Main_Menu(navController: NavHostController) {
                         )
                     }
                 },
-                // Colores de la barra
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF00A7A7), // Color turquesa (ajusta a tu gusto)
+                    containerColor = Color(0xFF2196F3), // Cambia el color de la barra
                     titleContentColor = Color.White
                 )
             )
         },
-        // Color de fondo general del Scaffold
-        containerColor = Color(0xFF121212) // Ajusta según tu tema. Si prefieres claro: Color.White
+        containerColor = Color(0xFFEAEAEA) // Fondo de la pantalla
     ) { innerPadding ->
-
-        // Contenido desplazable
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .verticalScroll(rememberScrollState())  // Habilita scroll
-                .background(Color(0xFF121212))          // Fondo (mismo color que Scaffold)
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // 1) Tarjeta con info del estudiante
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Tarjeta de info (mismo ancho que las filas de botones)
             StudentInfoCard(
+                modifier = Modifier.width(GRID_WIDTH),
                 name = "Humberto Martin de la Torre",
                 career = "Ing. en Sistemas Computacionales",
                 semester = "8",
@@ -89,117 +84,155 @@ fun Main_Menu(navController: NavHostController) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // 2) Rejilla de 8 botones (2 col x 4 filas)
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+            // Fila 1 de botones
+            Row(
+                modifier = Modifier.width(GRID_WIDTH),
+                horizontalArrangement = Arrangement.Center
             ) {
-                // Fila 1
-                Row(horizontalArrangement = Arrangement.Center) {
-                    ButtonCuadrado(
-                        text = "Calificaciones",
-                        imageRes = R.drawable.calificaciones_icon,
-                        onClick = {navController.navigate("calif_screen")}
-                    )
-                    Spacer(modifier = Modifier.width(16.dp))
-                    ButtonCuadrado(
-                        text = "Horario",
-                        imageRes = R.drawable.horario_icon,
-                        onClick = { navController.navigate("screen_horario") }
-                    )
-                }
-                // Fila 2
-                Row(horizontalArrangement = Arrangement.Center) {
-                    ButtonCuadrado(
-                        text = "Kardex",
-                        imageRes = R.drawable.kardex_icon,
-                        onClick = { navController.navigate("screen_kardex") }
-                    )
-                    Spacer(modifier = Modifier.width(16.dp))
-                    ButtonCuadrado(
-                        text = "Grupos en preparación",
-                        imageRes = R.drawable.grupos_en_preparacion_icon,
-                        onClick = {}
-                    )
-                }
-                // Fila 3
-                Row(horizontalArrangement = Arrangement.Center) {
-                    ButtonCuadrado(
-                        text = "Reinscripción",
-                        imageRes = R.drawable.inscripsion_icon,
-                        onClick = {}
-                    )
-                    Spacer(modifier = Modifier.width(16.dp))
-                    ButtonCuadrado(
-                        text = "Avisos Tecnm",
-                        imageRes = R.drawable.aviso_icon,
-                        onClick = { navController.navigate("screen_avisos")}
-                    )
-                }
-                // Fila 4
-                Row(horizontalArrangement = Arrangement.Center) {
-                    ButtonCuadrado(
-                        text = "Documentos",
-                        imageRes = R.drawable.docuemntos_icon,
-                        onClick = {}
-                    )
-                    Spacer(modifier = Modifier.width(16.dp))
-                    ButtonCuadrado(
-                        text = "Credencial Digital",
-                        imageRes = R.drawable.credencial_digital_icon,
-                        onClick = {}
-                    )
-                }
+                ButtonCuadrado(
+                    text = "Calificaciones",
+                    imageRes = R.drawable.calificaciones_icon,
+                    onClick = {}
+                )
+                Spacer(modifier = Modifier.width(16.dp))
+                ButtonCuadrado(
+                    text = "Horario",
+                    imageRes = R.drawable.horario_icon,
+                    onClick = { navController.navigate("calif_screen") }
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Fila 2 de botones
+            Row(
+                modifier = Modifier.width(GRID_WIDTH),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                ButtonCuadrado(
+                    text = "Kardex",
+                    imageRes = R.drawable.kardex_icon,
+                    onClick = { navController.navigate("screen_horario") }
+                )
+                Spacer(modifier = Modifier.width(16.dp))
+                ButtonCuadrado(
+                    text = "Grupos en preparación",
+                    imageRes = R.drawable.grupos_en_preparacion_icon,
+                    onClick = {}
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Fila 3 de botones
+            Row(
+                modifier = Modifier.width(GRID_WIDTH),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                ButtonCuadrado(
+                    text = "Reinscripción",
+                    imageRes = R.drawable.inscripsion_icon,
+                    onClick = {}
+                )
+                Spacer(modifier = Modifier.width(16.dp))
+                ButtonCuadrado(
+                    text = "Avisos Tecnm",
+                    imageRes = R.drawable.aviso_icon,
+                    onClick = {}
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Fila 4 de botones
+            Row(
+                modifier = Modifier.width(GRID_WIDTH),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                ButtonCuadrado(
+                    text = "Documentos",
+                    imageRes = R.drawable.docuemntos_icon,
+                    onClick = {}
+                )
+                Spacer(modifier = Modifier.width(16.dp))
+                ButtonCuadrado(
+                    text = "Credencial Digital",
+                    imageRes = R.drawable.credencial_digital_icon,
+                    onClick = {}
+                )
             }
 
             Spacer(modifier = Modifier.height(32.dp))
         }
     }
-
 }
 
-// (A) Tarjeta con info del estudiante
 @Composable
 fun StudentInfoCard(
+    modifier: Modifier = Modifier,
     name: String,
     career: String,
     semester: String,
     controlNumber: String
 ) {
-    // Card con fondo gris claro (para resaltar)
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
+        modifier = modifier,
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFF1E1E1E) // Fondo algo más claro que 0xFF121212
+            containerColor = Color.White
         )
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            Text(
-                text = "Nombre: $name",
-                color = Color.White
+        Row(
+            modifier = Modifier.padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Foto de perfil más grande (96.dp)
+            Image(
+                painter = painterResource(id = R.drawable.alumno_foto_perfil), // Reemplaza con tu recurso
+                contentDescription = "Foto de perfil",
+                modifier = Modifier
+                    .size(96.dp)        // Aumenta el tamaño de la imagen
+                    .padding(end = 16.dp)
+                    .clip(CircleShape)
             )
-            Text(
-                text = "Carrera: $career",
-                color = Color.White
-            )
-            Text(
-                text = "Semestre: $semester",
-                color = Color.White
-            )
-            Text(
-                text = "No. Control: $controlNumber",
-                color = Color.White
-            )
+
+            // Columna de texto a la derecha
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.End,
+                verticalArrangement = Arrangement.spacedBy(4.dp) // Espacio entre líneas de texto
+            ) {
+                Text(
+                    text = name,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.End,
+                    color = Color.Black,
+                    fontSize = 14.sp            // Texto un poco más pequeño
+                )
+                Text(
+                    text = "Carrera: $career",
+                    textAlign = TextAlign.End,
+                    color = Color.Black,
+                    fontSize = 14.sp
+                )
+                Text(
+                    text = "Semestre: $semester",
+                    textAlign = TextAlign.End,
+                    color = Color.Black,
+                    fontSize = 14.sp
+                )
+                Text(
+                    text = "Número de Control: $controlNumber",
+                    textAlign = TextAlign.End,
+                    color = Color.Black,
+                    fontSize = 14.sp
+                )
+            }
         }
     }
 }
 
-// (B) Botón cuadrado con imagen e ícono
+
+// (B) Botón cuadrado con imagen
 @Composable
 fun ButtonCuadrado(
     text: String,
@@ -208,11 +241,10 @@ fun ButtonCuadrado(
 ) {
     Button(
         onClick = onClick,
-        modifier = Modifier.size(160.dp),
+        modifier = Modifier.size(160.dp),  // Botón cuadrado 160x160
         shape = RoundedCornerShape(0.dp),
-        // Fondo azul oscuro
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFF003366)
+            containerColor = Color(0xFF2196F3) // Color azul. Ajusta a tu gusto
         )
     ) {
         Column(
@@ -223,17 +255,16 @@ fun ButtonCuadrado(
             Text(
                 text = text,
                 textAlign = TextAlign.Center,
-                color = Color.White, // Texto blanco
+                color = Color.White,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 8.dp)
             )
             Spacer(modifier = Modifier.height(8.dp))
-            // Imagen (Ícono)
             AsyncImage(
                 model = imageRes,
                 contentDescription = "Imagen",
-                modifier = Modifier.size(80.dp)
+                modifier = Modifier.size(64.dp)
             )
         }
     }
