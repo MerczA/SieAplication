@@ -73,7 +73,7 @@ fun Main_Menu(
                 ButtonCuadrado(
                     text = "Horario",
                     imageRes = R.drawable.horario_icon,
-                    onClick = {}
+                    onClick = {navController.navigate("screen_horario")}
                 )
                 Spacer(modifier = Modifier.width(16.dp))
                 ButtonCuadrado(
