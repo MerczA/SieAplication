@@ -17,23 +17,21 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.text.style.TextAlign
+import androidx.navigation.NavController
+import org.jetbrains.annotations.Async
 import coil.compose.AsyncImage
+import com.example.sieaplication.ui.components.Bars
+import androidx.navigation.NavHostController
+
 
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(showBackground = true)
 @Composable
 fun Main_Menu(
-    onDatosGeneralesClick: () -> Unit = {},
-    onCalificacionesClick: () -> Unit = {},
-    onHorarioClick: () -> Unit = {},
-    onKardexClick: () -> Unit = {},
-    onGruposPreparacionClick: () -> Unit = {},
-    onReinscripcionClick: () -> Unit = {},
-    onDocumentosClick: () -> Unit = {},
-    onAjustesClick: () -> Unit = {}
+    navController:NavHostController
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
+        Bars()
 
         // (1) FILA SUPERIOR: Logo (izq) + Ajustes (der), anclada arriba
         Row(
@@ -44,14 +42,7 @@ fun Main_Menu(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.logotec), // Reemplaza con tu logo
-                contentDescription = "Logo",
-                modifier = Modifier.size(180.dp)  // Ajusta según tu preferencia
-            )
-            Button(onClick = onAjustesClick) {
-                Text("Ajustes")
-            }
+
         }
 
         // (2) CUADRÍCULA 2x3 CENTRADA en la pantalla
@@ -73,7 +64,7 @@ fun Main_Menu(
                 ButtonCuadrado(
                     text = "Calificaciones",
                     imageRes = R.drawable.calificaciones_icon,
-                    onClick = {}
+                    onClick = { navController.navigate("calif_screen") }
                 )
             }
 
@@ -106,21 +97,18 @@ fun Main_Menu(
                     onClick = {}
                 )
             }
-        }
-
-        // (3) BOTÓN DOCUMENTOS, anclado abajo
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.BottomCenter) // Fija la fila en la parte inferior
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Button(
-                onClick = onDocumentosClick,
-                modifier = Modifier.size(width = 300.dp, height = 60.dp)
-            ) {
-                Text("Documentos")
+            Row(horizontalArrangement = Arrangement.Center) {
+                ButtonCuadrado(
+                    text = "Avisos Tecnm",
+                    imageRes = R.drawable.datos_generales,
+                    onClick = {}
+                )
+                Spacer(modifier = Modifier.width(16.dp))
+                ButtonCuadrado(
+                    text = "Credencial Digital",
+                    imageRes = R.drawable.kardex_icon,
+                    onClick = {}
+                )
             }
         }
     }

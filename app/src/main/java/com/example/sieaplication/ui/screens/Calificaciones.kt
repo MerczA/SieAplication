@@ -43,9 +43,8 @@ fun CalificacionesTable(navController: NavController) {
 
 }
 
-
-    @Composable
-    fun TablaCalificaciones() {
+@Composable
+fun TablaCalificaciones() {
         val calificaciones = listOf(
             TableScores(1, "Desarrollo Aplicaciones Móviles", 100, 100, 100, 100, 100, 100,0),
             TableScores(2, "Bases de Datos", 90, 95, 88, 92, 96, 93,0),

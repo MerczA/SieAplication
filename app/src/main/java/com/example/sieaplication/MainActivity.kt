@@ -10,6 +10,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.sieaplication.ui.screens.CalificacionesTable
+import com.example.sieaplication.ui.screens.Main_Menu
+import com.example.sieaplication.ui.screens.TablaCalificaciones
 import com.example.sieaplication.ui.theme.SieAplicationTheme
 
 class MainActivity : ComponentActivity() {
@@ -33,18 +35,10 @@ fun ComposeMultiScreenApp() {
 @Composable
 fun SetupNavGraph(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "main_menu") {
-        composable("main_menu") {
-            Main_Menu(
-                onDatosGeneralesClick = { navController.navigate("datos_generales") },
-                onCalificacionesClick = { navController.navigate("calificaciones") },
-                onHorarioClick = { navController.navigate("horario") },
-                onKardexClick = { navController.navigate("kardex") },
-                onGruposPreparacionClick = { navController.navigate("grupos_preparacion") },
-                onReinscripcionClick = { navController.navigate("reinscripcion") },
-                onDocumentosClick = { navController.navigate("documentos") },
-                onAjustesClick = { navController.navigate("ajustes") }
-            )
-        }
+        composable("calif_screen") { CalificacionesTable(navController) }
+        composable("main_menu") { Main_Menu(navController) }
+
+
     }
 }
 
