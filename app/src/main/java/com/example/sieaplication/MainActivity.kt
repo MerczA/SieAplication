@@ -42,6 +42,7 @@ fun SetupNavGraph(navController: NavHostController) {
         composable("screen_horario") {PreviewHorarioScreen(navController) }
         composable("screen_kardex") {StudentInfoScreen(navController) }
 
+
     }
 }
 
