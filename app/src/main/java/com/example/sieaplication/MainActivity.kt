@@ -9,7 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.sieaplication.ui.screens.Main_Menu
+import com.example.sieaplication.ui.screens.CalificacionesTable
 import com.example.sieaplication.ui.theme.SieAplicationTheme
 
 class MainActivity : ComponentActivity() {
@@ -45,7 +45,8 @@ fun SetupNavGraph(navController: NavHostController) {
                 onAjustesClick = { navController.navigate("ajustes") }
             )
         }
-
-
     }
 }
+
+
+
