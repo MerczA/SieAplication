@@ -30,6 +30,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.ui.unit.dp
 import com.example.sieaplication.data.model.TableScores
+import com.example.sieaplication.ui.components.Bars
 import com.example.sieaplication.ui.components.SliderMenu
 
 
@@ -41,6 +42,7 @@ fun PreviewHorarioScreen(navController: NavController) {
 
 @Composable
 fun HorarioScreen(navController: NavController) {
+    Bars()
     val horarios = listOf( // Convierte a List directamente
         Horario(1, "TALLER INVESTIG.", 4, 7, "HECTOR SALVADOR GONZALEZ", "10:00-11:00", "Lunes a Jueves"),
         Horario(2, "DES. APL / DISP. MOV", 4, 7, "ITIC RICARDO EMMANUEL REY", "07:00-08:00", "Lunes a Jueves"),

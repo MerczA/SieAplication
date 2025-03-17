@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -31,44 +32,36 @@ fun Bars() {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-
-
-        // TopAppBar en la parte superior
-        TopAppBar(
-            colors = TopAppBarDefaults.topAppBarColors(
-                containerColor = colorResource(id = R.color.teal_200),
-                titleContentColor = Color.White
-            ),
-
-
-            title = {
-                Image(
-                    painter = painterResource(id = R.drawable.logotec), // Reemplaza con tu logo
-                    contentDescription = "Logo",
-                    modifier = Modifier.size(80.dp)  // Ajusta según tu preferencia
+            TopAppBar(
+                title = {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        // Logo a la izquierda dentro del título
+                        Image(
+                            painter = painterResource(id = R.drawable.logotec),
+                            contentDescription = "Logo",
+                            modifier = Modifier
+                                .size(48.dp)
+                                .padding(end = 8.dp)
+                        )
+                        Text("Sie")
+                    }
+                },
+                // Ícono de ajustes a la derecha (actions)
+                actions = {
+                    IconButton(onClick = { }) {
+                        Icon(
+                            imageVector = Icons.Default.AccountCircle,
+                            contentDescription = "Settings",
+                            tint = Color.White
+                        )
+                    }
+                },
+                // Colores de la barra
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color(0xFF00A7A7), // Color turquesa (ajusta a tu gusto)
+                    titleContentColor = Color.White
                 )
-                Column(modifier = Modifier
-                    .padding(80.dp,10.dp,0.dp,0.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Text("Sie") }
-                    },
-
-            actions = {
-
-                IconButton(onClick = {}) {
-                    Icon(
-                        imageVector = Icons.Filled.Settings,
-                        contentDescription = "Settings button"
-                    )
-                }
-
-            }
-
-        )
-
+            )
+        }
 
     }
-
-}
