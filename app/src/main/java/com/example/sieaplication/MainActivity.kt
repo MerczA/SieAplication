@@ -12,6 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.sieaplication.ui.screens.CalificacionesTable
 import com.example.sieaplication.ui.screens.Main_Menu
 import com.example.sieaplication.ui.screens.PreviewHorarioScreen
+import com.example.sieaplication.ui.screens.StudentInfoScreen
 import com.example.sieaplication.ui.screens.TablaCalificaciones
 import com.example.sieaplication.ui.theme.SieAplicationTheme
 
@@ -39,8 +40,7 @@ fun SetupNavGraph(navController: NavHostController) {
         composable("main_menu") { Main_Menu(navController) }
         composable("calif_screen") { CalificacionesTable(navController) }
         composable("screen_horario") {PreviewHorarioScreen(navController) }
-
-
+        composable("screen_kardex") {StudentInfoScreen(navController) }
 
     }
 }
