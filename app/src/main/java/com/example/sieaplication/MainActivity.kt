@@ -12,7 +12,6 @@ import androidx.navigation.compose.rememberNavController
 import com.example.sieaplication.ui.screens.CalificacionesTable
 import com.example.sieaplication.ui.theme.SieAplicationTheme
 
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,25 +19,34 @@ class MainActivity : ComponentActivity() {
         setContent {
             SieAplicationTheme {
                 ComposeMultiScreenApp()
-                }
             }
         }
     }
+}
 
 @Composable
-fun ComposeMultiScreenApp() { //La navegacion entre pantallas
+fun ComposeMultiScreenApp() {
     val navController = rememberNavController()
     SetupNavGraph(navController = navController)
 }
-//Example Develop
 
 @Composable
-fun SetupNavGraph(navController: NavHostController) { //Es el que nos va mandar a la pantalla del menu que vamos a querer por medio de una ruta
-    NavHost(navController = navController, startDestination = "calificaciones") {
-        composable("calificaciones") { CalificacionesTable(navController) }
+fun SetupNavGraph(navController: NavHostController) {
+    NavHost(navController = navController, startDestination = "main_menu") {
+        composable("main_menu") {
+            Main_Menu(
+                onDatosGeneralesClick = { navController.navigate("datos_generales") },
+                onCalificacionesClick = { navController.navigate("calificaciones") },
+                onHorarioClick = { navController.navigate("horario") },
+                onKardexClick = { navController.navigate("kardex") },
+                onGruposPreparacionClick = { navController.navigate("grupos_preparacion") },
+                onReinscripcionClick = { navController.navigate("reinscripcion") },
+                onDocumentosClick = { navController.navigate("documentos") },
+                onAjustesClick = { navController.navigate("ajustes") }
+            )
+        }
     }
 }
-
 
 
 
