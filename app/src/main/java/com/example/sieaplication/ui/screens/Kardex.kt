@@ -27,10 +27,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.sieaplication.ui.components.Bars
 import com.example.sieaplication.ui.components.SliderMenu
 
 @Composable
 fun KardexInfo(navController: NavController) {
+    Bars()
     val student = Kardex(
         controlNumber = "22151197",
         name = "GEZA GEOVANNI MERCZ ARELLANO",
@@ -54,6 +56,7 @@ fun KardexInfo(navController: NavController) {
         currentSubjects = 7,
         currentCredits = 31
     )
+
 
     Column(
         modifier = Modifier

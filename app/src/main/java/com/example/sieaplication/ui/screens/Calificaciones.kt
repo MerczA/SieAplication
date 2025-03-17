@@ -44,6 +44,7 @@ fun TablaCalificaciones(navController: NavController) {
         TableScores(2, "Bases de Datos", 90, 95, 88, 92, 96, 93, 0),
         TableScores(3, "Programación Web", 85, 80, 82, 88, 90, 86, 0)
     )
+    Bars()
 
     Box(
         modifier = Modifier
