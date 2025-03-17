@@ -54,6 +54,7 @@ fun TablaCalificaciones(navController: NavController) {
         ) {
             Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Atrás")
         }
+    }
 
         Column(
             modifier = Modifier
@@ -149,6 +150,5 @@ fun TablaCalificaciones(navController: NavController) {
                 }
             }
         }
-    }
 }
 

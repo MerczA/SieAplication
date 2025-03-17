@@ -41,13 +41,13 @@ fun PreviewHorarioScreen(navController: NavController) {
 @Composable
 fun HorarioScreen(navController: NavController) {
     val horarios = listOf( // Convierte a List directamente
-        Horario(1, "TALLER INVESTIG.", 4, 7, "HECTOR SALVADOR GONZALEZ", "10:00-11:00", "Lunes a Viernes"),
-        Horario(2, "DES. APL / DISP. MOV", 4, 7, "ITIC RICARDO EMMANUEL REY", "07:00-08:00", "Lunes a Viernes"),
-        Horario(3, "SIS OP I", 4, 6, "LIC. MIRIAM MALO TORRES", "12:00-13:00", "Lunes a Viernes"),
-        Horario(4, "NEGOCIOS ELEC I", 4, 7, "EDGAR RAUL BAÑUELOS DIAZ", "08:00-09:00", "Lunes y Miércoles"),
+        Horario(1, "TALLER INVESTIG.", 4, 7, "HECTOR SALVADOR GONZALEZ", "10:00-11:00", "Lunes a Jueves"),
+        Horario(2, "DES. APL / DISP. MOV", 4, 7, "ITIC RICARDO EMMANUEL REY", "07:00-08:00", "Lunes a Jueves"),
+        Horario(3, "SIS OP I", 4, 6, "LIC. MIRIAM MALO TORRES", "12:00-13:00", "Lunes a Jueves"),
+        Horario(4, "NEGOCIOS ELEC I", 4, 7, "EDGAR RAUL BAÑUELOS DIAZ", "08:00-09:00", "Lunes y Jueves"),
         Horario(5, "REDES EMERGENTES", 5, 7, "DR. MARCO ANTONIO HERNAND", "11:00-12:00", "Lunes a Viernes"),
         Horario(6, "TELECOM", 5, 6, "LIC. CYNTHIA VANESSA TEJE", "13:00-14:00", "Lunes a Viernes"),
-        Horario(7, "INTERA HUM COM", 4, 7, "DOC. RICARDO MENDOZA GONZ", "09:00-10:00", "Lunes a Viernes")
+        Horario(7, "INTERA HUM COM", 4, 7, "DOC. RICARDO MENDOZA GONZ", "09:00-10:00", "Lunes a Jueves")
     )
 
     Column(
