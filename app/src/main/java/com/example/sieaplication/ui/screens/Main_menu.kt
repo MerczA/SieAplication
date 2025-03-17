@@ -110,13 +110,13 @@ fun Main_Menu(navController: NavHostController) {
                     ButtonCuadrado(
                         text = "Calificaciones",
                         imageRes = R.drawable.calificaciones_icon,
-                        onClick = {}
+                        onClick = {navController.navigate("calif_screen")}
                     )
                     Spacer(modifier = Modifier.width(16.dp))
                     ButtonCuadrado(
                         text = "Horario",
                         imageRes = R.drawable.horario_icon,
-                        onClick = { navController.navigate("calif_screen") }
+                        onClick = { navController.navigate("screen_horario") }
                     )
                 }
                 // Fila 2
@@ -124,7 +124,7 @@ fun Main_Menu(navController: NavHostController) {
                     ButtonCuadrado(
                         text = "Kardex",
                         imageRes = R.drawable.kardex_icon,
-                        onClick = { navController.navigate("screen_horario") }
+                        onClick = { navController.navigate("screen_kardex") }
                     )
                     Spacer(modifier = Modifier.width(16.dp))
                     ButtonCuadrado(
