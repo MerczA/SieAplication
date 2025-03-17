@@ -28,12 +28,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.sieaplication.R
 
 //pantalla de login
-@Preview(showBackground = true)
 @Composable
-fun LoginScreen(){
+fun LoginScreen(navController: NavController){
     var controlNumber by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -89,7 +89,7 @@ fun LoginScreen(){
                 .height(20.dp)
         )
         Button(
-            onClick = {/*inicio de sesion*/},
+            onClick = {navController.navigate("main_menu") },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1A237E)),
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier

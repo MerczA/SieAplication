@@ -15,6 +15,7 @@ import com.example.sieaplication.ui.screens.AvisosOpcion
 import com.example.sieaplication.ui.screens.AvisosTecnmScreenPreview
 import com.example.sieaplication.ui.screens.CalificacionesTable
 import com.example.sieaplication.ui.screens.KardexInfo
+import com.example.sieaplication.ui.screens.LoginScreen
 import com.example.sieaplication.ui.screens.Main_Menu
 import com.example.sieaplication.ui.screens.PreviewHorarioScreen
 import com.example.sieaplication.ui.screens.TablaCalificaciones
@@ -40,7 +41,8 @@ fun ComposeMultiScreenApp() {
 
 @Composable
 fun SetupNavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = "main_menu") {
+    NavHost(navController = navController, startDestination = "login") {
+        composable("login") { LoginScreen(navController) }
         composable("main_menu") { Main_Menu(navController) }
         composable("calif_screen") { CalificacionesTable(navController) }
         composable("screen_horario") {PreviewHorarioScreen(navController) }
