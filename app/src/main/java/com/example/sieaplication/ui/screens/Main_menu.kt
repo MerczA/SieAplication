@@ -299,7 +299,7 @@ fun ButtonCuadrado(
     Button(
         onClick = onClick,
         modifier = Modifier.size(160.dp),  // Botón cuadrado 160x160
-        shape = RoundedCornerShape(10.dp),
+        shape = RoundedCornerShape(13.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = Color(0xFF2196F3) // Color azul. Ajusta a tu gusto
         )
@@ -311,11 +311,13 @@ fun ButtonCuadrado(
         ) {
             Text(
                 text = text,
+                fontWeight = FontWeight.Bold,
+                fontSize = 17.sp,
                 textAlign = TextAlign.Center,
                 color = Color.White,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 8.dp)
+                    .padding(top = 5.dp)
             )
             Spacer(modifier = Modifier.height(8.dp))
             AsyncImage(
