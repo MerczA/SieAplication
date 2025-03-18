@@ -299,7 +299,7 @@ fun ButtonCuadrado(
     Button(
         onClick = onClick,
         modifier = Modifier.size(160.dp),  // Botón cuadrado 160x160
-        shape = RoundedCornerShape(0.dp),
+        shape = RoundedCornerShape(10.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = Color(0xFF2196F3) // Color azul. Ajusta a tu gusto
         )
