@@ -27,10 +27,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.sieaplication.ui.components.Bars
 import com.example.sieaplication.ui.components.SliderMenu
 
 @Composable
 fun KardexInfo(navController: NavController) {
+    Bars()
     val student = Kardex(
         controlNumber = "22151197",
         name = "GEZA GEOVANNI MERCZ ARELLANO",
@@ -55,10 +57,11 @@ fun KardexInfo(navController: NavController) {
         currentCredits = 31
     )
 
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(top=90.dp)
     ) {
         // Botón de regreso arriba a la izquierda
         Row(

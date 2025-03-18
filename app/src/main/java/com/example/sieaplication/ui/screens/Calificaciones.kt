@@ -42,13 +42,16 @@ fun TablaCalificaciones(navController: NavController) {
     val calificaciones = arrayOf(
         TableScores(1, "Desarrollo Aplicaciones Móviles", 100, 100, 100, 0, 100, 100, 0),
         TableScores(2, "Bases de Datos", 90, 95, 88, 92, 96, 93, 0),
-        TableScores(3, "Programación Web", 85, 80, 82, 88, 90, 86, 0)
+        TableScores(3, "Programación Web", 85, 80, 82, 88, 90, 86, 0),
+        TableScores(1, "Desarrollo Aplicaciones Móviles2", 100, 100, 100, 0, 100, 100, 0),
+        TableScores(2, "Bases de Datos3", 90, 95, 88, 92, 96, 93, 0),
+        TableScores(3, "Programación Web4", 85, 80, 82, 88, 90, 86, 0)
     )
-
+    Bars()
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(16.dp,100.dp,16.dp,0.dp)
     ) {
         // 🔹 Botón de "Atrás" en la parte superior izquierda
         IconButton(
@@ -62,7 +65,7 @@ fun TablaCalificaciones(navController: NavController) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = 50.dp), // 📌 Agregar espacio debajo del botón
+                .padding(top = 100.dp), // 📌 Agregar espacio debajo del botón
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // 🔹 TÍTULO "Calificaciones" centrado
@@ -81,7 +84,6 @@ fun TablaCalificaciones(navController: NavController) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .border(2.dp, Color.Black)
                     .padding(8.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {

@@ -20,16 +20,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.sieaplication.ui.components.Bars
 
 
-
-    @Composable
-    fun AvisosOpcion(navController: NavController) {
+@Composable
+fun AvisosOpcion(navController: NavController) {
         AvisosSelectorScreen(navController = navController)
-    }
+}
 
     @Composable
     fun AvisosSelectorScreen(navController: NavController) {
+
         Box(
             modifier = Modifier
                 .fillMaxSize()
