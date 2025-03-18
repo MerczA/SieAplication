@@ -85,7 +85,7 @@ fun AvisosTecnmScreen(navController: NavController) {
                         contentAlignment = Alignment.Center
                     ) {
                         Text("Imagen", color = Color.Gray)
-                    }
+                }
 
                     // Texto principal
                     Column(

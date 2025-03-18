@@ -1,7 +1,6 @@
 package com.example.sieaplication.ui.screens
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -11,7 +10,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -48,16 +47,74 @@ fun Main_Menu(navController: NavHostController) {
                     }
                 },
                 actions = {
-                    IconButton(onClick = { /* Ajustes */ }) {
-                        Icon(
-                            imageVector = Icons.Default.AccountCircle,
-                            contentDescription = "Settings",
-                            tint = Color.White
-                        )
+                    // (A) Variable de estado para controlar el menú
+                    var menuExpanded by remember { mutableStateOf(false) }
+
+                    // (B) Contenedor del IconButton + DropdownMenu
+                    Box {
+                        // Botón del ícono (abre/cierra el menú)
+                        IconButton(onClick = { menuExpanded = !menuExpanded }) {
+                            Icon(
+                                imageVector = Icons.Default.AccountCircle,
+                                contentDescription = "Abrir menú",
+                                tint = Color.White
+                            )
+                        }
+
+                        // Menú desplegable
+                        DropdownMenu(
+                            expanded = menuExpanded,
+                            onDismissRequest = { menuExpanded = false }
+                        ) {
+                            // 1) Información personal
+                            DropdownMenuItem(
+                                text = { Text("Información personal") },
+                                onClick = {
+                                    // Cierra el menú
+                                    menuExpanded = false
+                                    // Sin funcionalidad extra por ahora
+                                }
+                            )
+                            // 2) Información domicilio y contacto
+                            DropdownMenuItem(
+                                text = { Text("Información domicilio y contacto") },
+                                onClick = {
+                                    menuExpanded = false
+                                }
+                            )
+                            // 3) Información escolar
+                            DropdownMenuItem(
+                                text = { Text("Información escolar") },
+                                onClick = {
+                                    menuExpanded = false
+                                }
+                            )
+                            // 4) Cambiar datos
+                            DropdownMenuItem(
+                                text = { Text("Cambiar datos") },
+                                onClick = {
+                                    menuExpanded = false
+                                }
+                            )
+                            // 5) Cambiar contraseña
+                            DropdownMenuItem(
+                                text = { Text("Cambiar contraseña") },
+                                onClick = {
+                                    menuExpanded = false
+                                }
+                            )
+                            // 6) Cerrar sesión
+                            DropdownMenuItem(
+                                text = { Text("Cerrar sesión") },
+                                onClick = {
+                                    menuExpanded = false
+                                }
+                            )
+                        }
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF2196F3), // Cambia el color de la barra
+                    containerColor = Color(0xFF2196F3), // Color de la barra
                     titleContentColor = Color.White
                 )
             )
@@ -98,7 +155,11 @@ fun Main_Menu(navController: NavHostController) {
                 ButtonCuadrado(
                     text = "Horario",
                     imageRes = R.drawable.horario_icon,
+
+                    onClick = { /* Sin funcionalidad por ahora */ }
+=======
                     onClick = { navController.navigate("screen_horario") }
+
                 )
             }
 
@@ -112,7 +173,11 @@ fun Main_Menu(navController: NavHostController) {
                 ButtonCuadrado(
                     text = "Kardex",
                     imageRes = R.drawable.kardex_icon,
+
+                    onClick = { /* Sin funcionalidad por ahora */ }
+=======
                     onClick = { navController.navigate("screen_kardex") }
+
                 )
                 Spacer(modifier = Modifier.width(16.dp))
                 ButtonCuadrado(
@@ -167,6 +232,7 @@ fun Main_Menu(navController: NavHostController) {
     }
 }
 
+// (A) Tarjeta con info del estudiante
 @Composable
 fun StudentInfoCard(
     modifier: Modifier = Modifier,
@@ -231,7 +297,6 @@ fun StudentInfoCard(
     }
 }
 
-
 // (B) Botón cuadrado con imagen
 @Composable
 fun ButtonCuadrado(
@@ -242,7 +307,7 @@ fun ButtonCuadrado(
     Button(
         onClick = onClick,
         modifier = Modifier.size(160.dp),  // Botón cuadrado 160x160
-        shape = RoundedCornerShape(0.dp),
+        shape = RoundedCornerShape(13.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = Color(0xFF2196F3) // Color azul. Ajusta a tu gusto
         )
@@ -254,11 +319,13 @@ fun ButtonCuadrado(
         ) {
             Text(
                 text = text,
+                fontWeight = FontWeight.Bold,
+                fontSize = 17.sp,
                 textAlign = TextAlign.Center,
                 color = Color.White,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 8.dp)
+                    .padding(top = 5.dp)
             )
             Spacer(modifier = Modifier.height(8.dp))
             AsyncImage(
