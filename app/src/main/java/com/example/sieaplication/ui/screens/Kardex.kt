@@ -61,7 +61,7 @@ fun KardexInfo(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(top=90.dp)
     ) {
         // Botón de regreso arriba a la izquierda
         Row(

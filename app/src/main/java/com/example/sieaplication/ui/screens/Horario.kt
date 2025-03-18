@@ -56,26 +56,33 @@ fun HorarioScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(top = 95.dp) // Ajusta este valor según la altura de tu TopBar
+            .padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Botón de regreso mejor ubicado
-        IconButton(
-            onClick = { navController.navigate("main_menu") },
-            modifier = Modifier.align(Alignment.Start)
-        ) {
-            Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Atrás")
-        }
-
-        Text(
-            text = "Horario de Clases",
-            fontWeight = FontWeight.Bold,
-            fontSize = MaterialTheme.typography.headlineSmall.fontSize,
-            textAlign = TextAlign.Center,
+        // Fila con el botón de retroceso y el título alineados
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 8.dp)
-        )
+                .padding(bottom = 8.dp), // Espacio entre el título y la lista
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconButton(
+                onClick = { navController.navigate("main_menu") }
+            ) {
+                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Atrás")
+            }
+
+            Spacer(modifier = Modifier.width(8.dp)) // Espaciado entre el botón y el título
+
+            Text(
+                text = "Horario de Clases",
+                fontWeight = FontWeight.Bold,
+                fontSize = MaterialTheme.typography.headlineSmall.fontSize,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.weight(1f) // Hace que el texto ocupe el espacio restante
+            )
+        }
 
         LazyColumn(
             modifier = Modifier
@@ -83,6 +90,13 @@ fun HorarioScreen(navController: NavController) {
                 .border(2.dp, Color.Black)
                 .padding(8.dp)
         ) {
+            val horarios = listOf(
+                Horario(1, "TALLER INVESTIG.", 4, 7, "HECTOR SALVADOR GONZALEZ", "10:00-11:00", "Lunes a Jueves"),
+                Horario(2, "DES. APL / DISP. MOV", 4, 7, "ITIC RICARDO EMMANUEL REY", "07:00-08:00", "Lunes a Jueves"),
+                Horario(3, "SIS OP I", 4, 6, "LIC. MIRIAM MALO TORRES", "12:00-13:00", "Lunes a Jueves"),
+                Horario(4, "NEGOCIOS ELEC I", 4, 7, "EDGAR RAUL BAÑUELOS DIAZ", "08:00-09:00", "Lunes y Jueves")
+            )
+
             items(horarios) { horario ->
                 Column(
                     modifier = Modifier
@@ -119,6 +133,7 @@ fun HorarioScreen(navController: NavController) {
             }
         }
     }
+
 
 }
 
