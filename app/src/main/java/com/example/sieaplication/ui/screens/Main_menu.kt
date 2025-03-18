@@ -265,14 +265,14 @@ fun StudentInfoCard(
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.End,
-                verticalArrangement = Arrangement.spacedBy(4.dp) // Espacio entre líneas de texto
+                verticalArrangement = Arrangement.spacedBy(3.dp) // Espacio entre líneas de texto
             ) {
                 Text(
                     text = name,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.End,
                     color = Color.Black,
-                    fontSize = 14.sp            // Texto un poco más pequeño
+                    fontSize = 14.sp
                 )
                 Text(
                     text = "Carrera: $career",
@@ -331,7 +331,7 @@ fun ButtonCuadrado(
             AsyncImage(
                 model = imageRes,
                 contentDescription = "Imagen",
-                modifier = Modifier.size(64.dp)
+                modifier = Modifier.size(80.dp)
             )
         }
     }
