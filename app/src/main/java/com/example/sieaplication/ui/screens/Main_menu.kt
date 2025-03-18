@@ -156,8 +156,7 @@ fun Main_Menu(navController: NavHostController) {
                     text = "Horario",
                     imageRes = R.drawable.horario_icon,
 
-                    onClick = { /* Sin funcionalidad por ahora */ }
-=======
+
                     onClick = { navController.navigate("screen_horario") }
 
                 )
@@ -174,8 +173,6 @@ fun Main_Menu(navController: NavHostController) {
                     text = "Kardex",
                     imageRes = R.drawable.kardex_icon,
 
-                    onClick = { /* Sin funcionalidad por ahora */ }
-=======
                     onClick = { navController.navigate("screen_kardex") }
 
                 )

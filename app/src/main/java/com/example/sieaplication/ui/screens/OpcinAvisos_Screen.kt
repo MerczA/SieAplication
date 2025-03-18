@@ -30,7 +30,6 @@ fun AvisosOpcion(navController: NavController) {
 
     @Composable
     fun AvisosSelectorScreen(navController: NavController) {
-
         Box(
             modifier = Modifier
                 .fillMaxSize()
