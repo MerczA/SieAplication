@@ -28,10 +28,11 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.sieaplication.R
 
 @Composable
-fun NewPasswordScreen(){
+fun NewPasswordScreen(navController: NavController){
     var newPassword by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
 
@@ -85,7 +86,7 @@ fun NewPasswordScreen(){
                 .height(20.dp)
         )
         Button(
-            onClick = {},
+            onClick = {navController.navigate("login")},
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1B5E20)),
             shape= RoundedCornerShape(8.dp),
             modifier = Modifier

@@ -27,7 +27,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -105,7 +104,7 @@ fun LoginScreen(navController: NavController){
             modifier = Modifier
                 .height(10.dp)
         )
-        TextButton(onClick = { showDialog=true }) {
+        TextButton(onClick = { navController.navigate("new_password")}) {
             Text("Recuperar Contraseña", color = Color(0xFF3D5AFE))
         }
         if (showDialog) {
