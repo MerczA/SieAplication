@@ -1,5 +1,6 @@
 package com.example.sieaplication.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,10 +26,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.sieaplication.R
 import com.example.sieaplication.ui.components.Bars
 import com.example.sieaplication.ui.components.SliderMenu
+
 
 @Composable
 fun KardexInfo(navController: NavController) {
@@ -57,13 +61,11 @@ fun KardexInfo(navController: NavController) {
         currentCredits = 31
     )
 
-
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(top=90.dp)
     ) {
-        // Botón de regreso arriba a la izquierda
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Start
@@ -75,7 +77,6 @@ fun KardexInfo(navController: NavController) {
             }
         }
 
-        // Título
         Text(
             text = "Información del Estudiante",
             style = MaterialTheme.typography.headlineSmall,
@@ -83,7 +84,6 @@ fun KardexInfo(navController: NavController) {
         )
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Tarjeta con información del estudiante
         Card(
             modifier = Modifier.fillMaxWidth(),
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
@@ -117,6 +117,15 @@ fun KardexInfo(navController: NavController) {
                 InfoRow(label = "Materias Cursando", value = student.currentSubjects.toString())
                 InfoRow(label = "Créditos Cursando", value = student.currentCredits.toString())
             }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(
+            onClick = { navController.navigate("screen_kardex_full") },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(text = "Ver Kardex grafico")
         }
     }
 }
