@@ -90,12 +90,7 @@ fun HorarioScreen(navController: NavController) {
                 .border(2.dp, Color.Black)
                 .padding(8.dp)
         ) {
-            val horarios = listOf(
-                Horario(1, "TALLER INVESTIG.", 4, 7, "HECTOR SALVADOR GONZALEZ", "10:00-11:00", "Lunes a Jueves"),
-                Horario(2, "DES. APL / DISP. MOV", 4, 7, "ITIC RICARDO EMMANUEL REY", "07:00-08:00", "Lunes a Jueves"),
-                Horario(3, "SIS OP I", 4, 6, "LIC. MIRIAM MALO TORRES", "12:00-13:00", "Lunes a Jueves"),
-                Horario(4, "NEGOCIOS ELEC I", 4, 7, "EDGAR RAUL BAÑUELOS DIAZ", "08:00-09:00", "Lunes y Jueves")
-            )
+
 
             items(horarios) { horario ->
                 Column(

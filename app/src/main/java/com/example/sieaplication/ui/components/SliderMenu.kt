@@ -26,7 +26,6 @@ import androidx.compose.material3.DrawerValue
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.example.sieaplication.ui.screens.CalificacionesTable
 
 
 @Composable
@@ -67,5 +66,7 @@ fun SliderMenu(navController: NavController) { // 🔹 Recibe el NavController
                 }
             }
         }
-    ) {}
+    ) {
+
+    }
 }

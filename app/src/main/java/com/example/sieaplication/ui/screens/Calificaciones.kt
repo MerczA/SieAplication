@@ -30,11 +30,7 @@ import com.example.sieaplication.ui.components.Bars
 import com.example.sieaplication.ui.components.SliderMenu
 
 
-@Composable
-fun CalificacionesTable(navController: NavController) {
 
-    TablaCalificaciones(navController = navController)
-}
 
 @Composable
 fun TablaCalificaciones(navController: NavController) {

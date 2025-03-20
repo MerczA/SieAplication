@@ -104,7 +104,7 @@ fun LoginScreen(navController: NavController){
             modifier = Modifier
                 .height(10.dp)
         )
-        TextButton(onClick = { navController.navigate("new_password")}) {
+        TextButton(onClick = { navController.navigate("recoveryPassword")}) {
             Text("Recuperar Contraseña", color = Color(0xFF3D5AFE))
         }
         if (showDialog) {

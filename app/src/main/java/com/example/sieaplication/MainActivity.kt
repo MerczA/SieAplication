@@ -13,13 +13,12 @@ import com.example.sieaplication.data.model.Kardex
 import com.example.sieaplication.ui.screens.AvisosCarreraScreenPreview
 import com.example.sieaplication.ui.screens.AvisosOpcion
 import com.example.sieaplication.ui.screens.AvisosTecnmScreenPreview
-import com.example.sieaplication.ui.screens.CalificacionesTable
 import com.example.sieaplication.ui.screens.ImageScreen
 import com.example.sieaplication.ui.screens.KardexInfo
 import com.example.sieaplication.ui.screens.LoginScreen
 import com.example.sieaplication.ui.screens.Main_Menu
 import com.example.sieaplication.ui.screens.NewPasswordScreen
-import com.example.sieaplication.ui.screens.PasswordRecoveryScreen
+import com.example.sieaplication.ui.screens.PasswordVerificationScreen
 import com.example.sieaplication.ui.screens.PreviewHorarioScreen
 import com.example.sieaplication.ui.screens.T_Digital
 import com.example.sieaplication.ui.screens.TablaCalificaciones
@@ -48,7 +47,7 @@ fun SetupNavGraph(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "login") {
         composable("login") { LoginScreen(navController) }
         composable("main_menu") { Main_Menu(navController) }
-        composable("calif_screen") { CalificacionesTable(navController) }
+        composable("calif_screen") { TablaCalificaciones(navController) }
         composable("screen_horario") {PreviewHorarioScreen(navController) }
         composable("screen_kardex") { KardexInfo(navController) }
         composable("screen_avisos") {AvisosOpcion(navController) }
@@ -56,7 +55,7 @@ fun SetupNavGraph(navController: NavHostController) {
         composable("screen_avisos_carrera") {AvisosCarreraScreenPreview(navController) }
         composable("T_Digital") { T_Digital(navController) }
         composable("screen_kardex_full") {ImageScreen(navController) }
-        composable("recoveryPassword") {PasswordRecoveryScreen(navController) }
+        composable("recoveryPassword") {PasswordVerificationScreen(navController) }
         composable("new_password") {NewPasswordScreen(navController) }
 
 
