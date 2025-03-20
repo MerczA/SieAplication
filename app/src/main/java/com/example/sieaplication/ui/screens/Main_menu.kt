@@ -148,23 +148,7 @@ fun Main_Menu(navController: NavHostController) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Fila 4 de botones
-            Row(
-                modifier = Modifier.width(GRID_WIDTH),
-                horizontalArrangement = Arrangement.Center
-            ) {
-                ButtonCuadrado(
-                    text = "Documentos",
-                    imageRes = R.drawable.docuemntos_icon,
-                    onClick = {}
-                )
-                Spacer(modifier = Modifier.width(16.dp))
-                ButtonCuadrado(
-                    text = "Credencial Digital",
-                    imageRes = R.drawable.credencial_digital_icon,
-                    onClick = {navController.navigate("T_Digital")}
-                )
-            }
+
 
             // Fila 4
             ButtonRow(
