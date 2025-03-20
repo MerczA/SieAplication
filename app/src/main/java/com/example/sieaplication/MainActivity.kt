@@ -4,13 +4,24 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.sieaplication.data.model.Kardex
+import com.example.sieaplication.ui.screens.AvisosCarreraScreenPreview
+import com.example.sieaplication.ui.screens.AvisosOpcion
+import com.example.sieaplication.ui.screens.AvisosTecnmScreenPreview
+import com.example.sieaplication.ui.screens.CalificacionesTable
+import com.example.sieaplication.ui.screens.ImageScreen
+import com.example.sieaplication.ui.screens.KardexInfo
+import com.example.sieaplication.ui.screens.LoginScreen
+import com.example.sieaplication.ui.screens.Main_Menu
+import com.example.sieaplication.ui.screens.NewPasswordScreen
+import com.example.sieaplication.ui.screens.PasswordRecoveryScreen
+import com.example.sieaplication.ui.screens.PreviewHorarioScreen
+import com.example.sieaplication.ui.screens.TablaCalificaciones
 import com.example.sieaplication.ui.theme.SieAplicationTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,29 +30,40 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SieAplicationTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                ComposeMultiScreenApp()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun ComposeMultiScreenApp() {
+    val navController = rememberNavController()
+    SetupNavGraph(navController = navController)
 }
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    SieAplicationTheme {
-        Greeting("Android")
+fun SetupNavGraph(navController: NavHostController) {
+    NavHost(navController = navController, startDestination = "login") {
+        composable("login") { LoginScreen(navController) }
+        composable("main_menu") { Main_Menu(navController) }
+        composable("calif_screen") { CalificacionesTable(navController) }
+        composable("screen_horario") {PreviewHorarioScreen(navController) }
+        composable("screen_kardex") { KardexInfo(navController) }
+        composable("screen_avisos") {AvisosOpcion(navController) }
+        composable("screen_avisos_tecnm") {AvisosTecnmScreenPreview(navController) }
+        composable("screen_avisos_carrera") {AvisosCarreraScreenPreview(navController) }
+        composable("screen_kardex_full") {ImageScreen(navController) }
+        composable("recoveryPassword") {PasswordRecoveryScreen(navController) }
+        composable("new_password") {NewPasswordScreen(navController) }
+
+
+
+
+
+
+
+
     }
 }
+
