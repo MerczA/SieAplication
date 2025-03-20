@@ -220,7 +220,7 @@ fun Main_Menu(navController: NavHostController) {
                 ButtonCuadrado(
                     text = "Credencial Digital",
                     imageRes = R.drawable.credencial_digital_icon,
-                    onClick = {}
+                    onClick = {navController.navigate("T_Digital")}
                 )
             }
 
