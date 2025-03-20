@@ -157,7 +157,7 @@ fun Main_Menu(navController: NavHostController) {
                 onLeftClick = {},
                 rightButtonText = "Credencial Digital",
                 rightButtonIcon = R.drawable.credencial_digital_icon,
-                onRightClick = {}
+                onRightClick = {navController.navigate("T_Digital")}
             )
 
 

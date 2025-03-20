@@ -54,9 +54,7 @@ fun SetupNavGraph(navController: NavHostController) {
         composable("screen_avisos") {AvisosOpcion(navController) }
         composable("screen_avisos_tecnm") {AvisosTecnmScreenPreview(navController) }
         composable("screen_avisos_carrera") {AvisosCarreraScreenPreview(navController) }
-
         composable("T_Digital") { T_Digital(navController) }
-
         composable("screen_kardex_full") {ImageScreen(navController) }
         composable("recoveryPassword") {PasswordRecoveryScreen(navController) }
         composable("new_password") {NewPasswordScreen(navController) }
