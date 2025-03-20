@@ -10,8 +10,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,16 +30,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.sieaplication.R
-
+@Preview(showBackground = true)
 @Composable
 fun NewPasswordScreen(){
     var newPassword by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
+    var passwordVisible by remember { mutableStateOf(false) } //varaible para el estado de la contraseña
 
     Column(
         modifier = Modifier
@@ -46,7 +55,7 @@ fun NewPasswordScreen(){
             painter= painterResource(id= R.drawable.logotec),
             contentDescription = "Logo del ITA",
             modifier = Modifier
-                .size(320.dp)
+                .size(250.dp)
         )
 
         Text(
@@ -60,12 +69,22 @@ fun NewPasswordScreen(){
         )
         OutlinedTextField(
             value = newPassword,
-            onValueChange = {newPassword=it},
+            onValueChange = {newPassword = it},
             label = {Text("Nueva Contraseña")},
-            visualTransformation = PasswordVisualTransformation(),
             singleLine = true,
-            modifier = Modifier
-                .fillMaxWidth(0.9f)
+            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),//determina si la contraseña se mostarara o no
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Password //teclado optimizado para contraseñas
+            ),
+            trailingIcon = { //icono de lado del textField
+                IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                    Icon(
+                        imageVector = if (passwordVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff,
+                        contentDescription = if (passwordVisible) "Ocultar contraseña" else "Mostrar contraseña"
+                    )
+                }
+            },
+            modifier = Modifier.fillMaxWidth(0.8f)
         )
         Spacer (
             modifier = Modifier
@@ -73,12 +92,22 @@ fun NewPasswordScreen(){
         )
         OutlinedTextField(
             value = confirmPassword,
-            onValueChange = {confirmPassword=it},
+            onValueChange = {confirmPassword = it},
             label = {Text("Verificar Contraseña")},
-            visualTransformation = PasswordVisualTransformation(),
             singleLine = true,
-            modifier = Modifier
-                .fillMaxWidth(0.9f)
+            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Password
+            ),
+            trailingIcon = {
+                IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                    Icon(
+                        imageVector = if (passwordVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff,
+                        contentDescription = if (passwordVisible) "Ocultar contraseña" else "Mostrar contraseña"
+                    )
+                }
+            },
+            modifier = Modifier.fillMaxWidth(0.8f)
         )
         Spacer (
             modifier = Modifier
@@ -91,7 +120,7 @@ fun NewPasswordScreen(){
             modifier = Modifier
                 .fillMaxWidth(0.7f)
         ) {
-            Text (text= "Enviar", color = Color.White)
+            Text (text= "ENVIAR", color = Color.White)
         }
     }
 }
