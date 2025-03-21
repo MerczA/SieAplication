@@ -19,6 +19,7 @@ import com.example.sieaplication.ui.screens.LoginScreen
 import com.example.sieaplication.ui.screens.Main_Menu
 import com.example.sieaplication.ui.screens.NewPasswordScreen
 import com.example.sieaplication.ui.screens.PasswordVerificationScreen
+import com.example.sieaplication.ui.screens.PersonalInfoEditScreen
 import com.example.sieaplication.ui.screens.PreviewHorarioScreen
 import com.example.sieaplication.ui.screens.T_Digital
 import com.example.sieaplication.ui.screens.TablaCalificaciones
@@ -57,6 +58,8 @@ fun SetupNavGraph(navController: NavHostController) {
         composable("screen_kardex_full") {ImageScreen(navController) }
         composable("recoveryPassword") {PasswordVerificationScreen(navController) }
         composable("new_password") {NewPasswordScreen(navController) }
+        composable("edit_personal_info") { PersonalInfoEditScreen(navController) }
+
 
 
 

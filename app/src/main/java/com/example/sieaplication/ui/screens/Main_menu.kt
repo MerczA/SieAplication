@@ -69,7 +69,9 @@ fun Main_Menu(navController: NavHostController) {
                             )
                             DropdownMenuItem(
                                 text = { Text("Cambiar datos") },
-                                onClick = { menuExpanded = false }
+                                onClick = {
+                                    menuExpanded = false
+                                    navController.navigate("edit_personal_info")}
                             )
                             DropdownMenuItem(
                                 text = { Text("Cambiar contraseña") },
