@@ -27,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.sieaplication.R
@@ -80,7 +81,9 @@ fun KardexInfo(navController: NavController) {
         Text(
             text = "Información del Estudiante",
             style = MaterialTheme.typography.headlineSmall,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(8.dp))
 
@@ -123,10 +126,13 @@ fun KardexInfo(navController: NavController) {
 
         Button(
             onClick = { navController.navigate("screen_kardex_full") },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .width(200.dp) // Ajusta el ancho del botón
+                .align(Alignment.CenterHorizontally) // Lo centra en la columna
         ) {
-            Text(text = "Ver Kardex grafico")
+            Text(text = "Ver Kardex gráfico")
         }
+
     }
 }
 
