@@ -13,8 +13,11 @@ import com.example.sieaplication.ui.screens.AvisosCarreraScreenPreview
 import com.example.sieaplication.ui.screens.AvisosOpcion
 import com.example.sieaplication.ui.screens.AvisosTecnmScreenPreview
 import com.example.sieaplication.ui.screens.CalificacionesScreen
+import com.example.sieaplication.ui.screens.GeneralInfoScreen
+import com.example.sieaplication.ui.screens.ImageScreen
 import com.example.sieaplication.ui.screens.HorarioPorSemestreScreen
 import com.example.sieaplication.ui.screens.KardexInfo
+import com.example.sieaplication.ui.screens.LoadingScreen
 import com.example.sieaplication.ui.screens.LoginScreen
 import com.example.sieaplication.ui.screens.Main_Menu
 import com.example.sieaplication.ui.screens.NewPasswordScreen
@@ -46,6 +49,7 @@ fun ComposeMultiScreenApp() {
 fun SetupNavGraph(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "login") {
         composable("login") { LoginScreen(navController) }
+        composable("loading") { LoadingScreen(navController) }
         composable("main_menu") { Main_Menu(navController) }
         composable("calif_screen") { CalificacionesScreen(navController) }
         composable("screen_horario") {PreviewHorarioScreen(navController) }
@@ -58,6 +62,8 @@ fun SetupNavGraph(navController: NavHostController) {
         composable("recoveryPassword") {PasswordVerificationScreen(navController) }
         composable("new_password") {NewPasswordScreen(navController) }
         composable("edit_personal_info") { PersonalInfoEditScreen(navController) }
+        composable("general_info") {GeneralInfoScreen(navController) }
+
 
 
 

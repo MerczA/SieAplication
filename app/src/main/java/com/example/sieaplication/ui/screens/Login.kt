@@ -87,7 +87,11 @@ fun LoginScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(20.dp))
 
         Button(
+
+            onClick = { navController.navigate("loading") },
+
             onClick = { navController.navigate("main_menu") },
+
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1A237E)),
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier.fillMaxWidth(0.6f)
@@ -95,9 +99,17 @@ fun LoginScreen(navController: NavController) {
             Text("Iniciar Sesión", color = Color.White)
         }
 
+
+        Spacer (
+            modifier = Modifier
+                .height(10.dp)
+        )
+        TextButton(onClick = { navController.navigate("recoveryPassword")}) {
+
         Spacer(modifier = Modifier.height(10.dp))
 
         TextButton(onClick = { navController.navigate("recoveryPassword") }) {
+
             Text("Recuperar Contraseña", color = Color(0xFF3D5AFE))
         }
 

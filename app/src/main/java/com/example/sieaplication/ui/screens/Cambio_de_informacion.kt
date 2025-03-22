@@ -5,6 +5,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
@@ -14,6 +16,9 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -23,14 +28,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.sieaplication.R
+import com.example.sieaplication.ui.components.Bars
 import java.util.Calendar
 
 @Composable
 fun PersonalInfoEditScreen(navController: NavHostController) {
+
     val context = LocalContext.current
 
     // Estados con la información "guardada" (actual)
@@ -66,6 +75,7 @@ fun PersonalInfoEditScreen(navController: NavHostController) {
     }
 
     Scaffold(
+        topBar = {Bars(navController)},
         containerColor = Color(0xFFF5F5F5)
     ) { innerPadding ->
         Column(
@@ -76,6 +86,28 @@ fun PersonalInfoEditScreen(navController: NavHostController) {
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                IconButton(onClick = { navController.navigate("main_menu") }) {
+                    Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Atrás")
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+
+                Text(
+                    text = "Cambio de Información",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = MaterialTheme.typography.headlineSmall.fontSize,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.weight(1f) // Esto lo centra correctamente
+                )
+
+                Spacer(modifier = Modifier.width(48.dp)) // Simula el espacio del ícono de regreso
+            }
+
             // Tarjeta que muestra la información actual guardada
             Card(
                 modifier = Modifier.fillMaxWidth(),
