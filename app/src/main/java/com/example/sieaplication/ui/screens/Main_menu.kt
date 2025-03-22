@@ -56,16 +56,10 @@ fun Main_Menu(navController: NavHostController) {
                             onDismissRequest = { menuExpanded = false }
                         ) {
                             DropdownMenuItem(
-                                text = { Text("Información personal") },
-                                onClick = { menuExpanded = false }
-                            )
-                            DropdownMenuItem(
-                                text = { Text("Información domicilio y contacto") },
-                                onClick = { menuExpanded = false }
-                            )
-                            DropdownMenuItem(
-                                text = { Text("Información escolar") },
-                                onClick = { menuExpanded = false }
+                                text = { Text("Información General") },
+                                onClick = {
+                                    menuExpanded = false
+                                    navController.navigate("general_info")}
                             )
                             DropdownMenuItem(
                                 text = { Text("Cambiar datos") },
@@ -75,7 +69,9 @@ fun Main_Menu(navController: NavHostController) {
                             )
                             DropdownMenuItem(
                                 text = { Text("Cambiar contraseña") },
-                                onClick = { menuExpanded = false }
+                                onClick = {
+                                    menuExpanded = false
+                                    navController.navigate("new_password")}
                             )
                             DropdownMenuItem(
                                 text = { Text("Cerrar sesión") },
@@ -109,7 +105,8 @@ fun Main_Menu(navController: NavHostController) {
                 name = "Humberto Martin de la Torre",
                 career = "Ing. en Sistemas Computacionales",
                 semester = "8",
-                controlNumber = "C17150832"
+                controlNumber = "C17150832",
+                adress = ""
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -268,7 +265,8 @@ fun StudentInfoCard(
     name: String,
     career: String,
     semester: String,
-    controlNumber: String
+    controlNumber: String,
+    adress: String
 ) {
     Card(
         modifier = modifier,
