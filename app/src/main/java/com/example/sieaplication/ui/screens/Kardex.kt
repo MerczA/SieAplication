@@ -36,7 +36,7 @@ import com.example.sieaplication.ui.components.SliderMenu
 
 @Composable
 fun KardexInfo(navController: NavController) {
-    Bars()
+    Bars(navController)
     val student = Kardex(
         controlNumber = "22151197",
         name = "GEZA GEOVANNI MERCZ ARELLANO",

@@ -33,7 +33,7 @@ import com.example.sieaplication.ui.components.Bars
 
 @Composable
 fun T_Digital(navController: NavHostController) {
-    Bars()
+    Bars(navController)
     var isFlipped by remember { mutableStateOf(false) } // Estado para voltear la tarjeta
     val qrBitmap = generateQRCode("https://sie.aguascalientes.tecnm.mx/cgi-bin/sie.pl?Opc=PINDEXESTUDIANTE&psie=intertec&dummy=0")
     val context = LocalContext.current
@@ -52,7 +52,7 @@ fun T_Digital(navController: NavHostController) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        Bars() // Se coloca arriba
+        Bars(navController) // Se coloca arriba
 
         Spacer(modifier = Modifier.height(16.dp)) // Espaciado
 
