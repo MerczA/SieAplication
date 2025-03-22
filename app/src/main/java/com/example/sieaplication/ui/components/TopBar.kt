@@ -39,67 +39,63 @@ import com.example.sieaplication.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Bars(navController: NavController) {
-        TopAppBar(
-            title = {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Image(
-                        painter = painterResource(id = R.drawable.logotec),
-                        contentDescription = "Logo",
-                        modifier = Modifier
-                            .size(48.dp)
-                            .padding(end = 8.dp)
+    TopAppBar(
+        title = {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Image(
+                    painter = painterResource(id = R.drawable.logotec),
+                    contentDescription = "Logo",
+                    modifier = Modifier
+                        .size(48.dp)
+                        .padding(end = 8.dp)
+                )
+                Text("Sie")
+            }
+        },
+        actions = {
+            var menuExpanded by remember { mutableStateOf(false) }
+            Box {
+                IconButton(onClick = { menuExpanded = !menuExpanded }) {
+                    Icon(
+                        imageVector = Icons.Default.AccountCircle,
+                        contentDescription = "Abrir menú",
+                        tint = Color.White
                     )
-                    Text("Sie")
                 }
-            },
-            actions = {
-                var menuExpanded by remember { mutableStateOf(false) }
-                Box {
-                    IconButton(onClick = { menuExpanded = !menuExpanded }) {
-                        Icon(
-                            imageVector = Icons.Default.AccountCircle,
-                            contentDescription = "Abrir menú",
-                            tint = Color.White
-                        )
-                    }
-                    DropdownMenu(
-                        expanded = menuExpanded,
-                        onDismissRequest = { menuExpanded = false }
-                    ) {
-                        DropdownMenuItem(
-                            text = { Text("Información personal") },
-                            onClick = { menuExpanded = false }
-                        )
-                        DropdownMenuItem(
-                            text = { Text("Información domicilio y contacto") },
-                            onClick = { menuExpanded = false }
-                        )
-                        DropdownMenuItem(
-                            text = { Text("Información escolar") },
-                            onClick = { menuExpanded = false }
-                        )
-                        DropdownMenuItem(
-                            text = { Text("Cambiar datos") },
-                            onClick = {
-                                menuExpanded = false
-                                navController.navigate("edit_personal_info")}
-                        )
-                        DropdownMenuItem(
-                            text = { Text("Cambiar contraseña") },
-                            onClick = { menuExpanded = false }
-                        )
-                        DropdownMenuItem(
-                            text = { Text("Cerrar sesión") },
-                            onClick = { menuExpanded = false }
-                        )
-                    }
+                DropdownMenu(
+                    expanded = menuExpanded,
+                    onDismissRequest = { menuExpanded = false }
+                ) {
+                    DropdownMenuItem(
+                        text = { Text("Información General") },
+                        onClick = {
+                            menuExpanded = false
+                            navController.navigate("general_info")}
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Cambiar datos") },
+                        onClick = {
+                            menuExpanded = false
+                            navController.navigate("edit_personal_info")}
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Cambiar contraseña") },
+                        onClick = {
+                            menuExpanded = false
+                            navController.navigate("new_password")}
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Cerrar sesión") },
+                        onClick = { menuExpanded = false }
+                    )
                 }
-            },
-            colors = TopAppBarDefaults.topAppBarColors(
-                containerColor = Color(0xFF2196F3),
-                titleContentColor = Color.White
-            )
+            }
+        },
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = Color(0xFF2196F3),
+            titleContentColor = Color.White
         )
+    )
     }
 
 
