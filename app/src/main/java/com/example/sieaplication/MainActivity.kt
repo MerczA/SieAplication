@@ -14,7 +14,6 @@ import com.example.sieaplication.ui.screens.AvisosOpcion
 import com.example.sieaplication.ui.screens.AvisosTecnmScreenPreview
 import com.example.sieaplication.ui.screens.CalificacionesScreen
 import com.example.sieaplication.ui.screens.GeneralInfoScreen
-import com.example.sieaplication.ui.screens.ImageScreen
 import com.example.sieaplication.ui.screens.HorarioPorSemestreScreen
 import com.example.sieaplication.ui.screens.KardexInfo
 import com.example.sieaplication.ui.screens.LoadingScreen

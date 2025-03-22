@@ -90,7 +90,6 @@ fun LoginScreen(navController: NavController) {
 
             onClick = { navController.navigate("loading") },
 
-            onClick = { navController.navigate("main_menu") },
 
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1A237E)),
             shape = RoundedCornerShape(8.dp),
@@ -100,36 +99,37 @@ fun LoginScreen(navController: NavController) {
         }
 
 
-        Spacer (
+        Spacer(
             modifier = Modifier
                 .height(10.dp)
         )
-        TextButton(onClick = { navController.navigate("recoveryPassword")}) {
-
-        Spacer(modifier = Modifier.height(10.dp))
-
         TextButton(onClick = { navController.navigate("recoveryPassword") }) {
 
-            Text("Recuperar Contraseña", color = Color(0xFF3D5AFE))
-        }
+            Spacer(modifier = Modifier.height(10.dp))
 
-        if (showDialog) {
-            AlertDialog(
-                onDismissRequest = { showDialog = false },
-                containerColor = Color(0xFFE8EAF6),
-                titleContentColor = Color(0xFF303F9F),
-                textContentColor = Color(0xFF3F51B5),
-                confirmButton = {
-                    Button(
-                        onClick = { showDialog = false },
-                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF3D5AFE))
-                    ) {
-                        Text("OK", color = Color.White)
-                    }
-                },
-                title = { Text("Recuperación de la Contraseña") },
-                text = { Text("La contraseña será enviada al correo que tienes registrado.") }
-            )
+            TextButton(onClick = { navController.navigate("recoveryPassword") }) {
+
+                Text("Recuperar Contraseña", color = Color(0xFF3D5AFE))
+            }
+
+            if (showDialog) {
+                AlertDialog(
+                    onDismissRequest = { showDialog = false },
+                    containerColor = Color(0xFFE8EAF6),
+                    titleContentColor = Color(0xFF303F9F),
+                    textContentColor = Color(0xFF3F51B5),
+                    confirmButton = {
+                        Button(
+                            onClick = { showDialog = false },
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF3D5AFE))
+                        ) {
+                            Text("OK", color = Color.White)
+                        }
+                    },
+                    title = { Text("Recuperación de la Contraseña") },
+                    text = { Text("La contraseña será enviada al correo que tienes registrado.") }
+                )
+            }
         }
     }
 }
