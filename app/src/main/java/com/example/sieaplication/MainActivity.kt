@@ -13,7 +13,7 @@ import com.example.sieaplication.ui.screens.AvisosCarreraScreenPreview
 import com.example.sieaplication.ui.screens.AvisosOpcion
 import com.example.sieaplication.ui.screens.AvisosTecnmScreenPreview
 import com.example.sieaplication.ui.screens.CalificacionesScreen
-import com.example.sieaplication.ui.screens.ImageScreen
+import com.example.sieaplication.ui.screens.HorarioPorSemestreScreen
 import com.example.sieaplication.ui.screens.KardexInfo
 import com.example.sieaplication.ui.screens.LoginScreen
 import com.example.sieaplication.ui.screens.Main_Menu
@@ -54,7 +54,7 @@ fun SetupNavGraph(navController: NavHostController) {
         composable("screen_avisos_tecnm") {AvisosTecnmScreenPreview(navController) }
         composable("screen_avisos_carrera") {AvisosCarreraScreenPreview(navController) }
         composable("T_Digital") { T_Digital(navController) }
-        composable("screen_kardex_full") {ImageScreen(navController) }
+        composable("screen_kardex_full") {HorarioPorSemestreScreen(navController) }
         composable("recoveryPassword") {PasswordVerificationScreen(navController) }
         composable("new_password") {NewPasswordScreen(navController) }
         composable("edit_personal_info") { PersonalInfoEditScreen(navController) }

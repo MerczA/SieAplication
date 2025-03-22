@@ -32,81 +32,75 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.sieaplication.R
 
-//pantalla de login
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+
 @Composable
-fun LoginScreen(navController: NavController){
+fun LoginScreen(navController: NavController) {
     var controlNumber by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var showDialog by remember { mutableStateOf(false) }
+    val scrollState = rememberScrollState() // Estado del scroll
 
-    Column (
+    Column(
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .verticalScroll(scrollState), // Habilita el scroll vertical
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
-
-    ){
-
+    ) {
         Image(
-            painter = painterResource(id =R.drawable.logotec),
+            painter = painterResource(id = R.drawable.logotec),
             contentDescription = "Logo ITA",
-            modifier = Modifier
-            .size(350.dp)
+            modifier = Modifier.size(350.dp)
         )
 
         Text(
             text = "Sistema de Integración Escolar",
-            fontSize=20.sp,
+            fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
-            color = Color (0xFF303F9F),
-            modifier = Modifier
-                .padding(top=16.dp)
+            color = Color(0xFF303F9F),
+            modifier = Modifier.padding(top = 16.dp)
         )
-        Spacer (
-            modifier = Modifier
-                .height(20.dp)
-        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
         OutlinedTextField(
             value = controlNumber,
-            onValueChange = {controlNumber = it},
-            label = {Text("Número de Control")},
+            onValueChange = { controlNumber = it },
+            label = { Text("Número de Control") },
             singleLine = true,
-            modifier = Modifier
-                .fillMaxWidth(0.8f)
+            modifier = Modifier.fillMaxWidth(0.8f)
         )
-        Spacer (
-            modifier = Modifier
-                .height(12.dp)
-        )
+
+        Spacer(modifier = Modifier.height(12.dp))
+
         OutlinedTextField(
             value = password,
-            onValueChange = {password = it},
-            label = {Text("Contraseña")},
-            visualTransformation = PasswordVisualTransformation(),//tapa la contraseña
+            onValueChange = { password = it },
+            label = { Text("Contraseña") },
+            visualTransformation = PasswordVisualTransformation(),
             singleLine = true,
-            modifier = Modifier
-                .fillMaxWidth(0.8f)
+            modifier = Modifier.fillMaxWidth(0.8f)
         )
-        Spacer (
-            modifier = Modifier
-                .height(20.dp)
-        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
         Button(
-            onClick = {navController.navigate("main_menu") },
+            onClick = { navController.navigate("main_menu") },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1A237E)),
             shape = RoundedCornerShape(8.dp),
-            modifier = Modifier
-                .fillMaxWidth(0.6f)
+            modifier = Modifier.fillMaxWidth(0.6f)
         ) {
             Text("Iniciar Sesión", color = Color.White)
         }
-        Spacer (
-            modifier = Modifier
-                .height(10.dp)
-        )
-        TextButton(onClick = { navController.navigate("recoveryPassword")}) {
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        TextButton(onClick = { navController.navigate("recoveryPassword") }) {
             Text("Recuperar Contraseña", color = Color(0xFF3D5AFE))
         }
+
         if (showDialog) {
             AlertDialog(
                 onDismissRequest = { showDialog = false },
@@ -127,7 +121,5 @@ fun LoginScreen(navController: NavController){
         }
     }
 }
-
-
 
 
