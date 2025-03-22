@@ -183,7 +183,7 @@ fun MateriaBox(materia: MateriaKardex) {
     Box(
         modifier = Modifier
             .width(200.dp)
-            .height(100.dp)
+            .height(130.dp)
             .padding(4.dp)
             .border(2.dp, Color.Black, RoundedCornerShape(8.dp))
             .background(color, RoundedCornerShape(8.dp))
