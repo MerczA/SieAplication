@@ -23,6 +23,10 @@ import coil.compose.AsyncImage
 import com.example.sieaplication.R
 import androidx.navigation.NavHostController
 
+
+// Ancho total de cada fila de botones: 160dp + 16dp + 160dp = 336dp
+val GRID_WIDTH = 336.dp
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Main_Menu(navController: NavHostController) {
@@ -198,6 +202,24 @@ fun ButtonRow(
             )
         }
 
+            // Fila 4 de botones
+            Row(
+                modifier = Modifier.width(GRID_WIDTH),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                ButtonCuadrado(
+                    text = "Documentos",
+                    imageRes = R.drawable.docuemntos_icon,
+                    onClick = {navController.navigate("screen_Documentos")}
+                )
+                Spacer(modifier = Modifier.width(16.dp))
+                ButtonCuadrado(
+                    text = "Credencial Digital",
+                    imageRes = R.drawable.credencial_digital_icon,
+                    onClick = {navController.navigate("T_Digital")}
+                )
+            }
+
         // Caja derecha (mitad de la fila, cuadrada)
         Box(
             modifier = Modifier
@@ -212,6 +234,7 @@ fun ButtonRow(
         }
     }
 }
+
 
 /**
  * Botón cuadrado que llena el espacio asignado por la caja que lo contiene.
