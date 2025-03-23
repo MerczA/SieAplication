@@ -25,7 +25,7 @@ import com.example.sieaplication.R
 import androidx.navigation.NavHostController
 
 // Ancho total de cada fila de botones: 160dp + 16dp + 160dp = 336dp
-private val GRID_WIDTH = 336.dp
+val GRID_WIDTH = 336.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -214,7 +214,7 @@ fun Main_Menu(navController: NavHostController) {
                 ButtonCuadrado(
                     text = "Documentos",
                     imageRes = R.drawable.docuemntos_icon,
-                    onClick = {}
+                    onClick = {navController.navigate("screen_Documentos")}
                 )
                 Spacer(modifier = Modifier.width(16.dp))
                 ButtonCuadrado(

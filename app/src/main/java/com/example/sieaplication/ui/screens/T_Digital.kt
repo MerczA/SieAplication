@@ -11,6 +11,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
@@ -28,116 +30,110 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.common.BitMatrix
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import com.example.sieaplication.ui.components.Bars
 
 
 @Composable
 fun T_Digital(navController: NavHostController) {
     Bars()
-    var isFlipped by remember { mutableStateOf(false) } // Estado para voltear la tarjeta
     val qrBitmap = generateQRCode("https://sie.aguascalientes.tecnm.mx/cgi-bin/sie.pl?Opc=PINDEXESTUDIANTE&psie=intertec&dummy=0")
-    val context = LocalContext.current
-    val activity = remember { context.findActivity() } // Obtiene la Activity de forma segura
-
-    LaunchedEffect(Unit) {
-        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-    }
-
-    DisposableEffect(Unit) {
-        onDispose {
-            activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-        }
-    }
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(top = 95.dp, bottom = 80.dp) // Espacio para la TopBar y BottomBar
+            .padding(horizontal = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Bars() // Se coloca arriba
+        // Barra superior con botón de regreso y título
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconButton(onClick = { navController.navigate("main_menu") }) {
+                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Atrás")
+            }
 
-        Spacer(modifier = Modifier.height(16.dp)) // Espaciado
+            Spacer(modifier = Modifier.width(8.dp))
 
+            Text(
+                text = "Tarjeta Digital",
+                fontWeight = FontWeight.Bold,
+                fontSize = MaterialTheme.typography.headlineSmall.fontSize,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.weight(1f)
+            )
+        }
+
+        // Tarjeta Digital
         Box(
             modifier = Modifier
-                .fillMaxSize()
-                .weight(1f),
+                .fillMaxHeight()
+                .padding(bottom = 16.dp), // Espacio extra para evitar empalmes
             contentAlignment = Alignment.Center
         ) {
-            DigitalCard()
-        }
-    }
-}
-
-@Composable
-fun DigitalCard() {
-    var isFlipped by remember { mutableStateOf(false) } // Estado para voltear la tarjeta
-    val qrBitmap = generateQRCode("https://sie.aguascalientes.tecnm.mx/cgi-bin/sie.pl?Opc=PINDEXESTUDIANTE&psie=intertec&dummy=0")
-
-    Card(
-        shape = RoundedCornerShape(16.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .padding(30.dp)
-            .clickable { isFlipped = !isFlipped },
-        elevation = CardDefaults.cardElevation(8.dp)
-    ) {
-        if (isFlipped) {
-            // LADO POSTERIOR (QR)
-            Box(
+            Card(
+                shape = RoundedCornerShape(16.dp),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
-                contentAlignment = Alignment.Center
+                elevation = CardDefaults.cardElevation(8.dp)
             ) {
-                qrBitmap?.let {
-                    Image(bitmap = it.asImageBitmap(), contentDescription = "QR Code", modifier = Modifier.size(150.dp))
-                }
-            }
-        } else {
-            // LADO FRONTAL (Datos del estudiante)
-            Row(modifier = Modifier.padding(16.dp)) {
-                // Foto del estudiante (izquierda)
-                Image(
-                    painter = painterResource(id = R.drawable.android), // Reemplázalo con la imagen real
-                    contentDescription = "Foto del estudiante",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(200.dp) // Ajuste de tamaño
-                        .clip(RoundedCornerShape(16.dp))
-                )
-
-                Spacer(modifier = Modifier.width(16.dp)) // Espaciado entre la foto y los datos
-
-                // Datos del estudiante
                 Column(
                     modifier = Modifier
-                        .weight(1f)
-                        .height(IntrinsicSize.Min) // Ajusta la altura a los contenidos
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     // Logo de la institución
                     Image(
-                        painter = painterResource(id = R.drawable.ita_logo), // Reemplázalo con el logo real
+                        painter = painterResource(id = R.drawable.ita_logo),
                         contentDescription = "Logo de la institución",
                         contentScale = ContentScale.Fit,
-                        modifier = Modifier.height(100.dp) // Ajuste del tamaño
+                        modifier = Modifier.height(100.dp)
                     )
 
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
 
-                    // Datos del alumno
-                    Text("Nombre del Alumno", fontWeight = FontWeight.Bold, fontSize = 20.sp)
-                    Text("Carrera: Ingeniería en Sistemas", fontSize = 16.sp, color = Color.Gray)
-                    Text("Número de Control: 12345678", fontSize = 16.sp, color = Color.Gray)
+                    // Datos del estudiante
+                    Text("Humberto Martin de la Torre", fontWeight = FontWeight.Bold, fontSize = 20.sp)
+                    Text("Carrera: Ing. en Sistemas Computacionales", fontSize = 14.sp, color = Color.Gray)
+                    Text("Control: C17150832", fontSize = 16.sp, color = Color.Gray)
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(20.dp))
 
-                    // Pie de tarjeta
+                    // Código QR centrado y adaptable
+                    qrBitmap?.let {
+                        Image(
+                            bitmap = it.asImageBitmap(),
+                            contentDescription = "Código QR",
+                            modifier = Modifier
+                                .size(200.dp) // Tamaño ajustado para evitar problemas en pantallas pequeñas
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    // NSS a la izquierda y "Estudiante" a la derecha
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
+                        modifier = Modifier.fillMaxWidth()
                     ) {
-                        Text("Estudiante", fontSize = 14.sp, fontWeight = FontWeight.Bold, color = Color.Gray)
-                        Text("NNS: 987654321", fontSize = 14.sp, fontWeight = FontWeight.Bold, color = Color.Gray)
+                        Text(
+                            "NSS: 987654321",
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.weight(1f)) // Empuja "Estudiante" hacia la derecha
+                        Text(
+                            "Estudiante",
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Gray
+                        )
                     }
                 }
             }

@@ -14,6 +14,7 @@ import com.example.sieaplication.ui.screens.AvisosCarreraScreenPreview
 import com.example.sieaplication.ui.screens.AvisosOpcion
 import com.example.sieaplication.ui.screens.AvisosTecnmScreenPreview
 import com.example.sieaplication.ui.screens.CalificacionesTable
+import com.example.sieaplication.ui.screens.Documentos
 import com.example.sieaplication.ui.screens.KardexInfo
 import com.example.sieaplication.ui.screens.LoginScreen
 import com.example.sieaplication.ui.screens.Main_Menu
@@ -52,6 +53,7 @@ fun SetupNavGraph(navController: NavHostController) {
         composable("screen_avisos_tecnm") {AvisosTecnmScreenPreview(navController) }
         composable("screen_avisos_carrera") {AvisosCarreraScreenPreview(navController) }
         composable("T_Digital") { T_Digital(navController) }
+        composable("screen_Documentos") { Documentos(navController) }
 
 
 
