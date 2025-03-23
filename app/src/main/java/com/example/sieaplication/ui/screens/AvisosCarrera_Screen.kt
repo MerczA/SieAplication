@@ -1,9 +1,12 @@
 package com.example.sieaplication.ui.screens
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -12,13 +15,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.sieaplication.R
 
 @Composable
 fun AvisosCarreraScreenPreview(navController: NavController) {
@@ -27,6 +33,30 @@ fun AvisosCarreraScreenPreview(navController: NavController) {
 
 @Composable
 fun AvisosCarreraScreen(navController: NavController) {
+    // Lista de avisos secundarios con datos personalizados
+    val avisosSecundarios = listOf(
+        Aviso(
+            imageResId = R.drawable.avisoscarrerauno, // Cambia por el ID de tu imagen
+            title = "Open House",
+            description = "Los laborarios de redes no estaran disponibles el 27 de marzo por motivos del evento "
+        ),
+        Aviso(
+            imageResId = R.drawable.avisoscarrerados, // Cambia por el ID de tu imagen
+            title = "Atención Psicologica",
+            description = "Acudir a este correo si necesitas atención psicologica, atn.psicologica@aguascalientes.tecnm.mx "
+        ),
+        Aviso(
+            imageResId = R.drawable.avisoscarreratres, // Cambia por el ID de tu imagen
+            title = "Objetos olvidados en el CC",
+            description = "Dejaron estos termos en el area A del CC"
+        ),
+        Aviso(
+            imageResId = R.drawable.avisoscarreracuatro, // Cambia por el ID de tu imagen
+            title = "Objetos olvidados",
+            description = "Olvidaron unos lentes, se encuentra con la cordinadora"
+        )
+    )
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -65,92 +95,132 @@ fun AvisosCarreraScreen(navController: NavController) {
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = "AVISOS [CARRERA]",
-                        fontSize = 20.sp, // Aumentamos el tamaño para mejor jerarquía
+                        text = "AVISOS [TICS]",
+                        fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Center,
                         color = Color(0xFF003087) // Azul oscuro para el título
                     )
                 }
 
-                // Contenido principal
-                Row(
+                // Aviso principal: Imagen grande arriba, título y texto debajo
+                Column(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    // Placeholder de imagen
+                    // Imagen principal
                     Box(
                         modifier = Modifier
-                            .size(100.dp)
-                            .background(Color(0xFFF5F5F5)) // Fondo gris muy claro para el placeholder
+                            .fillMaxWidth()
+                            .height(200.dp)
+                            .background(Color(0xFFF5F5F5))
                             .border(1.dp, Color(0xFFDDDDDD), RoundedCornerShape(8.dp)),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text(
-                            text = "Imagen",
-                            color = Color.Gray,
-                            fontSize = 12.sp
+                        Image(
+                            painter = painterResource(id = R.drawable.avisoscarreaprincipal),
+                            contentDescription = "Imagen principal",
+                            modifier = Modifier.fillMaxSize(),
+                            contentScale = ContentScale.Fit
                         )
                     }
 
-                    // Texto principal
+                    // Título y texto principal debajo de la imagen
                     Column(
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier.padding(top = 8.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
+                        // Título en negritas
                         Text(
-                            text = "Lorem ipsum dolor sit amet et delectus accommodare his consul copiosae legendos at vix ad putent delectus delicata usu. Vidit",
+                            text = "Torneo de FIFA",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.DarkGray,
+                            textAlign = TextAlign.Center
+                        )
+
+                        // Texto descriptivo
+                        Text(
+                            text = "Los alumnos de la materia de Administración de proyectos, estamos organizando el siguiente evento: \n" +
+                                    "Para los interesados las inscripciones pueden ser en el enlace que está en comentarios, en el salón 51 de 9:00 a 10:00 am o si lo prefieren también puede ser conmigo.",
                             fontSize = 14.sp,
                             color = Color.DarkGray,
-                            lineHeight = 20.sp
+                            lineHeight = 20.sp,
+                            textAlign = TextAlign.Center
                         )
                     }
                 }
 
-                // Segunda imagen (placeholder)
-                Box(
+                // Avisos secundarios en forma de lista desplazable (LazyColumn)
+                LazyColumn(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(120.dp)
-                        .background(Color(0xFFF5F5F5))
-                        .border(1.dp, Color(0xFFDDDDDD), RoundedCornerShape(8.dp)),
-                    contentAlignment = Alignment.Center
+                        .weight(1f), // Ocupa el espacio restante
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Text(
-                        text = "Imagen",
-                        color = Color.Gray,
-                        fontSize = 12.sp
-                    )
-                }
-
-                // Grid inferior
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    for (i in 1..3) {
+                    items(avisosSecundarios) { aviso ->
                         Card(
                             modifier = Modifier
-                                .weight(1f)
-                                .height(80.dp),
+                                .fillMaxWidth()
+                                .height(100.dp),
                             shape = RoundedCornerShape(8.dp),
                             elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
                             colors = CardDefaults.cardColors(containerColor = Color.White),
                             border = BorderStroke(1.dp, Color(0xFFDDDDDD))
                         ) {
-                            Box(
+                            Row(
                                 modifier = Modifier
                                     .fillMaxSize()
                                     .padding(8.dp),
-                                contentAlignment = Alignment.Center
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
-                                Text(
-                                    text = "Lorem ipsum dolor sit amet et delectus",
-                                    fontSize = 12.sp,
-                                    color = Color.DarkGray, // Texto legible
-                                    textAlign = TextAlign.Center,
-                                    lineHeight = 16.sp
-                                )
+                                // Placeholder para la imagen a la izquierda
+                                Box(
+                                    modifier = Modifier
+                                        .size(60.dp)
+                                        .background(Color(0xFFF5F5F5))
+                                        .border(1.dp, Color(0xFFDDDDDD), RoundedCornerShape(8.dp)),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        text = "Imagen",
+                                        color = Color.Gray,
+                                        fontSize = 10.sp
+                                    )
+
+                                    // Código comentado para agregar una imagen real
+                                    Image(
+                                        painter = painterResource(id = aviso.imageResId),
+                                        contentDescription = "Imagen de ${aviso.title}",
+                                        modifier = Modifier.fillMaxSize(),
+                                        contentScale = ContentScale.Fit
+                                    )
+
+                                }
+
+                                // Columna para el título y el texto a la derecha de la imagen
+                                Column(
+                                    modifier = Modifier.weight(1f),
+                                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                                ) {
+                                    // Título en negritas
+                                    Text(
+                                        text = aviso.title,
+                                        fontSize = 14.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = Color.DarkGray
+                                    )
+
+                                    // Texto descriptivo debajo del título
+                                    Text(
+                                        text = aviso.description,
+                                        fontSize = 12.sp,
+                                        color = Color.DarkGray,
+                                        lineHeight = 16.sp
+                                    )
+                                }
                             }
                         }
                     }
