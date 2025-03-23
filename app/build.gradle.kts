@@ -49,6 +49,13 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.ui)
+    implementation(libs.material3)
+    implementation(libs.androidx.ui.text)
+    implementation(libs.androidx.material.icons.extended)
+    implementation(libs.androidx.espresso.core)
+    implementation(libs.coil.compose) // Versión más reciente
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -56,4 +63,10 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(libs.core)
+    implementation(libs.androidx.ui.v150) // Versión actualizada de Jetpack Compose
+    implementation(libs.ui.tooling.preview)
+    implementation(libs.androidx.runtime.livedata)
+    implementation(libs.androidx.material3.vlatestversion)
+
 }
