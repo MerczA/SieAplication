@@ -29,7 +29,7 @@ import com.example.sieaplication.ui.components.Bars
 @Composable
 fun Documentos(navController: NavHostController) {
     Scaffold(
-        topBar = { Bars() }, // Define la barra de navegación correctamente
+        topBar = { Bars(navController) }, // Define la barra de navegación correctamente
         content = { paddingValues ->
             Column(
                 modifier = Modifier
@@ -66,13 +66,13 @@ fun Documentos(navController: NavHostController) {
                     modifier = Modifier.width(GRID_WIDTH),
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    ButtonCuadrado(
+                    ButtonSquare(
                         text = "Historial Academico",
                         imageRes = R.drawable.kardex_icon,
                         onClick = { navController.navigate("calif_screen") }
                     )
                     Spacer(modifier = Modifier.width(16.dp))
-                    ButtonCuadrado(
+                    ButtonSquare(
                         text = "Calificaciones",
                         imageRes = R.drawable.calificaciones_icon,
                         onClick = { navController.navigate("screen_horario") }
@@ -85,13 +85,13 @@ fun Documentos(navController: NavHostController) {
                     modifier = Modifier.width(GRID_WIDTH),
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    ButtonCuadrado(
+                    ButtonSquare(
                         text = "Constancias",
                         imageRes = R.drawable.docuemntos_icon,
                         onClick = { navController.navigate("documentos_screen") }
                     )
                     Spacer(modifier = Modifier.width(16.dp))
-                    ButtonCuadrado(
+                    ButtonSquare(
                         text = "Comprobante de inscripciones",
                         imageRes = R.drawable.credencial_digital_icon,
                         onClick = { navController.navigate("credencial_screen") }

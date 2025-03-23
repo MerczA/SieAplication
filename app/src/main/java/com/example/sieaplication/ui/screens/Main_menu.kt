@@ -157,10 +157,10 @@ fun Main_Menu(navController: NavHostController) {
             ButtonRow(
                 leftButtonText = "Documentos",
                 leftButtonIcon = R.drawable.docuemntos_icon,
-                onLeftClick = {},
+                onLeftClick = { navController.navigate("screen_Documentos")},
                 rightButtonText = "Credencial Digital",
                 rightButtonIcon = R.drawable.credencial_digital_icon,
-                onRightClick = {navController.navigate("T_Digital")}
+                onRightClick = { navController.navigate("T_Digital")}
             )
 
 
@@ -202,23 +202,7 @@ fun ButtonRow(
             )
         }
 
-            // Fila 4 de botones
-            Row(
-                modifier = Modifier.width(GRID_WIDTH),
-                horizontalArrangement = Arrangement.Center
-            ) {
-                ButtonCuadrado(
-                    text = "Documentos",
-                    imageRes = R.drawable.docuemntos_icon,
-                    onClick = {navController.navigate("screen_Documentos")}
-                )
-                Spacer(modifier = Modifier.width(16.dp))
-                ButtonCuadrado(
-                    text = "Credencial Digital",
-                    imageRes = R.drawable.credencial_digital_icon,
-                    onClick = {navController.navigate("T_Digital")}
-                )
-            }
+
 
         // Caja derecha (mitad de la fila, cuadrada)
         Box(
