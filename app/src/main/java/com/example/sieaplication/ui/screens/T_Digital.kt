@@ -36,7 +36,12 @@ import com.example.sieaplication.ui.components.Bars
 
 @Composable
 fun T_Digital(navController: NavHostController) {
+
     Bars()
+
+    Bars(navController)
+    var isFlipped by remember { mutableStateOf(false) } // Estado para voltear la tarjeta
+
     val qrBitmap = generateQRCode("https://sie.aguascalientes.tecnm.mx/cgi-bin/sie.pl?Opc=PINDEXESTUDIANTE&psie=intertec&dummy=0")
 
     Column(
@@ -46,6 +51,7 @@ fun T_Digital(navController: NavHostController) {
             .padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
         // Barra superior con botón de regreso y título
         Row(
             modifier = Modifier
@@ -56,6 +62,9 @@ fun T_Digital(navController: NavHostController) {
             IconButton(onClick = { navController.navigate("main_menu") }) {
                 Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Atrás")
             }
+
+        Bars(navController) // Se coloca arriba
+
 
             Spacer(modifier = Modifier.width(8.dp))
 

@@ -19,14 +19,12 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
 import com.example.sieaplication.data.model.MenuModel
-import com.example.sieaplication.ui.screens.TablaCalificaciones
 import kotlinx.coroutines.launch
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.DrawerValue
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.example.sieaplication.ui.screens.CalificacionesTable
 
 
 @Composable
@@ -67,5 +65,7 @@ fun SliderMenu(navController: NavController) { // 🔹 Recibe el NavController
                 }
             }
         }
-    ) {}
+    ) {
+
+    }
 }
