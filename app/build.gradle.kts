@@ -69,4 +69,9 @@ dependencies {
     implementation(libs.androidx.runtime.livedata)
     implementation(libs.androidx.material3.vlatestversion)
 
+    implementation(libs.accompanist.swiperefresh)
+    implementation (libs.kotlinx.coroutines.android)
+    //Coil Async
+    implementation(libs.coil.compose)
+
 }
