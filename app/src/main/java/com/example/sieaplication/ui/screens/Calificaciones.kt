@@ -1,14 +1,12 @@
 package com.example.sieaplication.ui.screens
 
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.foundation.background
+
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -21,21 +19,16 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.sieaplication.R
 import com.example.sieaplication.data.model.Materia
 import com.example.sieaplication.ui.components.Bars
-import com.example.sieaplication.ui.components.SliderMenu
 
 @Composable
 fun CalificacionesScreen(navController: NavController) {
@@ -140,14 +133,19 @@ fun FlipCard(materia: Materia) {
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally,
+                            ) {
                             Text("U1: ${materia.calificaciones[0]}")
+                            Spacer(modifier = Modifier.height(5.dp))
                             Text("U2: ${materia.calificaciones[1]}")
+                            Spacer(modifier = Modifier.height(5.dp))
                             Text("U3: ${materia.calificaciones[2]}")
                         }
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text("U4: ${materia.calificaciones[3]}")
+                            Spacer(modifier = Modifier.height(5.dp))
                             Text("U5: ${materia.calificaciones[4]}")
+                            Spacer(modifier = Modifier.height(5.dp))
                             Text("U6: ${materia.calificaciones[5]}")
                         }
                     }
