@@ -1,5 +1,8 @@
 package com.example.sieaplication.ui.screens
 
+import android.content.Context
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -34,13 +37,26 @@ import com.example.sieaplication.R
 
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.sieaplication.data.model.UserModel
+import com.example.sieaplication.data.viewmodel.UserViewModel
 
 @Composable
 fun LoginScreen(navController: NavController) {
-    var controlNumber by remember { mutableStateOf("") }
+
+   LoginForm(navController)
+}
+
+@Composable
+fun LoginForm(
+    navController: NavController,
+    viewModel: UserViewModel = viewModel()) {
+    var user by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var showDialog by remember { mutableStateOf(false) }
     val scrollState = rememberScrollState() // Estado del scroll
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -66,8 +82,8 @@ fun LoginScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(20.dp))
 
         OutlinedTextField(
-            value = controlNumber,
-            onValueChange = { controlNumber = it },
+            value = user,
+            onValueChange = { user = it },
             label = { Text("Número de Control") },
             singleLine = true,
             modifier = Modifier.fillMaxWidth(0.8f)
@@ -88,7 +104,7 @@ fun LoginScreen(navController: NavController) {
 
         Button(
 
-            onClick = { navController.navigate("loading") },
+            onClick = { TryLogin(user,password, context, viewModel, navController) },
 
 
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1A237E)),
@@ -129,6 +145,26 @@ fun LoginScreen(navController: NavController) {
                     title = { Text("Recuperación de la Contraseña") },
                     text = { Text("La contraseña será enviada al correo que tienes registrado.") }
                 )
+            }
+        }
+    }
+}
+
+
+fun TryLogin(user: String, password: String, context: Context, viewModel: UserViewModel, navController: NavController){
+    if(user == "" || password == ""){
+        Toast.makeText(
+            context,
+            "User or Password cannot be empty",
+            Toast.LENGTH_SHORT
+        ).show()
+    } else {
+        val user_Model = UserModel(0,"", user, password)
+        viewModel.loginApi(user_Model){ jsonResponse ->
+            val loginStatus = jsonResponse?.get("login")?.asString
+            Log.d("debug", "LOGIN STATUS: $loginStatus")
+            if(loginStatus == "success"){
+                navController.navigate("main_menu")
             }
         }
     }
