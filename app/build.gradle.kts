@@ -2,7 +2,13 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    //
+    id("com.google.devtools.ksp")
+
+
+
 }
+
 
 android {
     namespace = "com.example.sieaplication"
@@ -82,6 +88,13 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.converter.gson)
     //
+
+    //Room
+
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx) // opcional pero recomendado
+    ksp(libs.androidx.room.compiler)
+
 
 
 }

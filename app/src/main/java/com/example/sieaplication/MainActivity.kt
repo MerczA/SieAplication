@@ -65,7 +65,7 @@ fun SetupNavGraph(navController: NavHostController) {
         composable("edit_personal_info") { PersonalInfoEditScreen(navController) }
         composable("general_info") {GeneralInfoScreen(navController) }
 
-
     }
 }
+
 
