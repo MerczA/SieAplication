@@ -74,4 +74,14 @@ dependencies {
     //Coil Async
     implementation(libs.coil.compose)
 
+
+    // retrofit
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
+    implementation(libs.retrofit)
+    implementation(libs.okhttp)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.converter.gson)
+    //
+
+
 }
