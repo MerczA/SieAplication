@@ -1,6 +1,6 @@
 [versions]
 accompanistSwiperefresh = "0.31.2-alpha"
-agp = "8.8.2"
+agp = "8.9.0"
 coilCompose = "2.6.0"
 core = "3.5.2"
 kotlin = "2.0.0"

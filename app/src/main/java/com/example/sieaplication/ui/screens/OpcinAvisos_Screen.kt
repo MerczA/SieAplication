@@ -24,15 +24,19 @@ import com.example.sieaplication.ui.components.Bars
 
 @Composable
 fun AvisosOpcion(navController: NavController) {
-    AvisosSelectorScreen(navController = navController)
+    Column(modifier = Modifier.fillMaxSize()) {
+        Bars(navController = navController)
+        AvisosSelectorContent(navController = navController)
+    }
 }
 
+
 @Composable
-fun AvisosSelectorScreen(navController: NavController) {
+fun AvisosSelectorContent(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White) // Fondo blanco como en la pantalla de inicio
+            .background(Color.White)
             .padding(16.dp)
     ) {
         // 🔹 Botón de "Atrás" en la parte superior izquierda
@@ -64,7 +68,7 @@ fun AvisosSelectorScreen(navController: NavController) {
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(140.dp)
+                    .height(155.dp)
                     .clickable { navController.navigate("screen_avisos_tecnm") },
                 shape = RoundedCornerShape(12.dp),
                 elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
@@ -115,7 +119,7 @@ fun AvisosSelectorScreen(navController: NavController) {
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(140.dp)
+                    .height(155.dp)
                     .clickable { navController.navigate("screen_avisos_carrera") },
                 shape = RoundedCornerShape(12.dp),
                 elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
@@ -168,5 +172,5 @@ fun AvisosSelectorScreen(navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 fun AvisosSelectorScreenPreview() {
-    AvisosSelectorScreen(navController = NavController(LocalContext.current))
+    AvisosOpcion(navController = NavController(LocalContext.current))
 }

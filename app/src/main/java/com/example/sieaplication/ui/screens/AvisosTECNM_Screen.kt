@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.sieaplication.R
+import com.example.sieaplication.ui.components.Bars
 
 // Clase de datos para representar un aviso secundario
 data class Aviso(
@@ -33,13 +34,32 @@ data class Aviso(
     val description: String // Texto descriptivo del aviso
 )
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AvisosTecnmScreenPreview(navController: NavController) {
-    AvisosTecnmScreen(navController = navController)
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Avisos TecNM") },
+                navigationIcon = {
+                    IconButton(onClick = { navController.navigate("screen_avisos") }) {
+                        Icon(Icons.Default.ArrowBack, contentDescription = "Atrás")
+                    }
+                }
+            )
+        }
+    ) { paddingValues ->
+        AvisosTecnmScreen(
+            navController = navController,
+            modifier = Modifier,
+            paddingValues = paddingValues
+        )
+    }
 }
 
+
 @Composable
-fun AvisosTecnmScreen(navController: NavController) {
+fun AvisosTecnmScreen(navController: NavController, modifier: Modifier = Modifier, paddingValues: PaddingValues = PaddingValues(0.dp) ) {
     // Lista de avisos secundarios con datos personalizados
     val avisosSecundarios = listOf(
         Aviso(
@@ -73,6 +93,7 @@ fun AvisosTecnmScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .padding(paddingValues)
             .background(Color.White) // Fondo blanco para consistencia
             .padding(16.dp)
     ) {
