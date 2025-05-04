@@ -1,5 +1,6 @@
 package com.example.sieaplication.ui.screens
 
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -14,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -91,14 +93,20 @@ fun Main_Menu(navController: NavHostController) {
             )
         },
         containerColor = Color(0xFFEAEAEA)
-    ) { innerPadding ->
+    ) { innerPadding -> //aquí inician los cambios para adaptar el landscape
+
+        // Detecta la configuración actual de la pantalla (portrait o landscape)
+        val configuration = LocalConfiguration.current
+        //Verifica si la pantalla está en orientación horizontal
+        val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+        //Layout base que contiene toodo el contenido
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+        ) { //
             Spacer(modifier = Modifier.height(16.dp))
 
             // Tarjeta de info: .fillMaxWidth() para ajustarse a la pantalla
@@ -115,53 +123,146 @@ fun Main_Menu(navController: NavHostController) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Fila 1
-            ButtonRow(
-                leftButtonText = "Calificaciones",
-                leftButtonIcon = R.drawable.calificaciones_icon,
-                onLeftClick = { navController.navigate("calif_screen") },
-                rightButtonText = "Horario",
-                rightButtonIcon = R.drawable.horario_icon,
-                onRightClick = { navController.navigate("screen_horario") }
-            )
+            //  Condición para adaptar los botones al modo horizontal o vertical
+            if (isLandscape) {
+                //  MODO HORIZONTAL (landscape): botones organizados en filas de 3
+                val botones = listOf(
+                    Triple("Calificaciones", R.drawable.calificaciones_icon) { navController.navigate("calif_screen") },
+                    Triple("Horario", R.drawable.horario_icon) { navController.navigate("screen_horario") },
+                    Triple("Kardex", R.drawable.kardex_icon) { navController.navigate("screen_kardex") },
+                    Triple("Grupos", R.drawable.grupos_en_preparacion_icon) {},
+                    Triple("Reinscripción", R.drawable.inscripsion_icon) {},
+                    Triple("Avisos Tecnm", R.drawable.aviso_icon) { navController.navigate("screen_avisos") },
+                    Triple("Documentos", R.drawable.docuemntos_icon) { navController.navigate("screen_Documentos") },
+                    Triple("Credencial", R.drawable.credencial_digital_icon) { navController.navigate("T_Digital") }
+                )
 
-            Spacer(modifier = Modifier.height(16.dp))
+                // Divide los botones en grupos de 3 por fila
+                botones.chunked(3).forEach { fila ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 8.dp),
+                        horizontalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        // Crea cada botón dentro de su espacio cuadrado
+                        fila.forEach { (text, icon, action) ->
+                            Box(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .aspectRatio(1f)
+                            ) {
+                                ButtonSquare(
+                                    text = text,
+                                    imageRes = icon,
+                                    onClick = action
+                                )
+                            }
+                        }
 
-            // Fila 2
-            ButtonRow(
-                leftButtonText = "Kardex",
-                leftButtonIcon = R.drawable.kardex_icon,
-                onLeftClick = { navController.navigate("screen_kardex") },
-                rightButtonText = "Grupos en preparación",
-                rightButtonIcon = R.drawable.grupos_en_preparacion_icon,
-                onRightClick = {}
-            )
+                        //  Rellena espacios si hay menos de 3 botones
+                        repeat(3 - fila.size) {
+                            Spacer(modifier = Modifier.weight(1f))
+                        }
+                    }
+                }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            } else {
+                //  MODO VERTICAL (portrait): diseño actual, filas de 2 botones
+                ButtonRow(
+                    leftButtonText = "Calificaciones",
+                    leftButtonIcon = R.drawable.calificaciones_icon,
+                    onLeftClick = { navController.navigate("calif_screen") },
+                    rightButtonText = "Horario",
+                    rightButtonIcon = R.drawable.horario_icon,
+                    onRightClick = { navController.navigate("screen_horario") }
+                )
 
-            // Fila 3
-            ButtonRow(
-                leftButtonText = "Reinscripción",
-                leftButtonIcon = R.drawable.inscripsion_icon,
-                onLeftClick = {},
-                rightButtonText = "Avisos Tecnm",
-                rightButtonIcon = R.drawable.aviso_icon,
-                onRightClick = { navController.navigate("screen_avisos") }
-            )
+                Spacer(modifier = Modifier.height(16.dp))
 
-            Spacer(modifier = Modifier.height(16.dp))
+                ButtonRow(
+                    leftButtonText = "Kardex",
+                    leftButtonIcon = R.drawable.kardex_icon,
+                    onLeftClick = { navController.navigate("screen_kardex") },
+                    rightButtonText = "Grupos en preparación",
+                    rightButtonIcon = R.drawable.grupos_en_preparacion_icon,
+                    onRightClick = {}
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                ButtonRow(
+                    leftButtonText = "Reinscripción",
+                    leftButtonIcon = R.drawable.inscripsion_icon,
+                    onLeftClick = {},
+                    rightButtonText = "Avisos Tecnm",
+                    rightButtonIcon = R.drawable.aviso_icon,
+                    onRightClick = { navController.navigate("screen_avisos") }
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                ButtonRow(
+                    leftButtonText = "Documentos",
+                    leftButtonIcon = R.drawable.docuemntos_icon,
+                    onLeftClick = { navController.navigate("screen_Documentos") },
+                    rightButtonText = "Credencial Digital",
+                    rightButtonIcon = R.drawable.credencial_digital_icon,
+                    onRightClick = { navController.navigate("T_Digital") }
+                )
+            }
+
+            //remplaze los buttonrow con una version que se adapta dinamicamente por medio de un if (POR ESO ESTA COMENTADO)
+
+//            // Fila 1
+//            ButtonRow(
+//                leftButtonText = "Calificaciones",
+//                leftButtonIcon = R.drawable.calificaciones_icon,
+//                onLeftClick = { navController.navigate("calif_screen") },
+//                rightButtonText = "Horario",
+//                rightButtonIcon = R.drawable.horario_icon,
+//                onRightClick = { navController.navigate("screen_horario") }
+//            )
+//
+//            Spacer(modifier = Modifier.height(16.dp))
+//
+//            // Fila 2
+//            ButtonRow(
+//                leftButtonText = "Kardex",
+//                leftButtonIcon = R.drawable.kardex_icon,
+//                onLeftClick = { navController.navigate("screen_kardex") },
+//                rightButtonText = "Grupos en preparación",
+//                rightButtonIcon = R.drawable.grupos_en_preparacion_icon,
+//                onRightClick = {}
+//            )
+//
+//            Spacer(modifier = Modifier.height(16.dp))
+//
+//            // Fila 3
+//            ButtonRow(
+//                leftButtonText = "Reinscripción",
+//                leftButtonIcon = R.drawable.inscripsion_icon,
+//                onLeftClick = {},
+//                rightButtonText = "Avisos Tecnm",
+//                rightButtonIcon = R.drawable.aviso_icon,
+//                onRightClick = { navController.navigate("screen_avisos") }
+//            )
+//
+//            Spacer(modifier = Modifier.height(16.dp))
+//
+//
+//
+//            // Fila 4
+//            ButtonRow(
+//                leftButtonText = "Documentos",
+//                leftButtonIcon = R.drawable.docuemntos_icon,
+//                onLeftClick = { navController.navigate("screen_Documentos")},
+//                rightButtonText = "Credencial Digital",
+//                rightButtonIcon = R.drawable.credencial_digital_icon,
+//                onRightClick = { navController.navigate("T_Digital")}
+//            )
 
 
-
-            // Fila 4
-            ButtonRow(
-                leftButtonText = "Documentos",
-                leftButtonIcon = R.drawable.docuemntos_icon,
-                onLeftClick = { navController.navigate("screen_Documentos")},
-                rightButtonText = "Credencial Digital",
-                rightButtonIcon = R.drawable.credencial_digital_icon,
-                onRightClick = { navController.navigate("T_Digital")}
-            )
 
 
             Spacer(modifier = Modifier.height(32.dp))
