@@ -18,11 +18,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.sieaplication.R
 import com.example.sieaplication.ui.components.Bars
+import com.example.sieaplication.ui.components.BarsScreens
 
 @Composable
 fun Documentos(navController: NavHostController) {
     Scaffold(
-        topBar = { Bars(navController) },
+        topBar = { BarsScreens(navController) },
         content = { paddingValues ->
             Column(
                 modifier = Modifier
@@ -37,9 +38,7 @@ fun Documentos(navController: NavHostController) {
                         .padding(bottom = 16.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    IconButton(onClick = { navController.navigate("main_menu") }) {
-                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Atrás")
-                    }
+
                     Text(
                         text = "Documentos",
                         fontWeight = FontWeight.Bold,

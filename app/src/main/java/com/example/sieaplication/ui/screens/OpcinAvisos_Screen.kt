@@ -21,11 +21,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.sieaplication.ui.components.Bars
+import com.example.sieaplication.ui.components.BarsScreens
 
 @Composable
 fun AvisosOpcion(navController: NavController) {
     Column(modifier = Modifier.fillMaxSize()) {
-        Bars(navController = navController)
+        BarsScreens(navController = navController)
         AvisosSelectorContent(navController = navController)
     }
 }
@@ -39,13 +40,7 @@ fun AvisosSelectorContent(navController: NavController) {
             .background(Color.White)
             .padding(16.dp)
     ) {
-        // 🔹 Botón de "Atrás" en la parte superior izquierda
-        IconButton(
-            onClick = { navController.navigate("main_menu") },
-            modifier = Modifier.align(Alignment.TopStart)
-        ) {
-            Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Atrás")
-        }
+
 
         Column(
             modifier = Modifier

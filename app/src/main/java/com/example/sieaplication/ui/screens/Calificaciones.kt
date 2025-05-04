@@ -27,10 +27,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.sieaplication.data.model.Materia
 import com.example.sieaplication.ui.components.Bars
+import com.example.sieaplication.ui.components.BarsScreens
 
 @Composable
 fun CalificacionesScreen(navController: NavController) {
-    Bars(navController)
+    BarsScreens(navController)
     val materias = listOf(
         Materia("TALLER INVESTIG.", listOf(90.0, 85.0, 88.0, 92.0, 87.0, 91.0)),
         Materia("DES. APL / DISP. MOV", listOf(80.0, 75.0, 78.0, 82.0, 77.0, 81.0)),
@@ -55,21 +56,15 @@ fun CalificacionesScreen(navController: NavController) {
                 .padding(bottom = 8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            IconButton(onClick = { navController.navigate("main_menu") }) {
-                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Atrás")
-            }
-
-            Spacer(modifier = Modifier.width(8.dp))
 
             Text(
                 text = "Calificaciones",
                 fontWeight = FontWeight.Bold,
                 fontSize = MaterialTheme.typography.headlineSmall.fontSize,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.weight(1f) // Esto lo centra correctamente
+                modifier = Modifier.weight(4f) // Esto lo centra correctamente
             )
 
-            Spacer(modifier = Modifier.width(48.dp)) // Simula el espacio del ícono de regreso
         }
 
         // Lista de materias con tarjetas animadas

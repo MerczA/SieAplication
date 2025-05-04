@@ -32,12 +32,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.sieaplication.R
 import com.example.sieaplication.ui.components.Bars
+import com.example.sieaplication.ui.components.BarsScreens
 import com.example.sieaplication.ui.components.SliderMenu
 
 
 @Composable
 fun KardexInfo(navController: NavController) {
-    Bars(navController)
+    BarsScreens(navController)
     val student = Kardex(
         controlNumber = "22151197",
         name = "GEZA GEOVANNI MERCZ ARELLANO",
@@ -70,12 +71,9 @@ fun KardexInfo(navController: NavController) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Start
+
         ) {
-            IconButton(
-                onClick = { navController.navigate("main_menu") }
-            ) {
-                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Atrás")
-            }
+
         }
 
         Text(

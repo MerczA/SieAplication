@@ -41,6 +41,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.sieaplication.ui.components.Bars
+import com.example.sieaplication.ui.components.BarsScreens
 import com.example.sieaplication.ui.components.SliderMenu
 
 
@@ -60,7 +61,7 @@ fun HorarioScreen(navController: NavController) {
     )
 
     Scaffold(
-        topBar = { Bars(navController) } // Usa Scaffold para manejar la TopBar correctamente
+        topBar = { BarsScreens(navController) } // Usa Scaffold para manejar la TopBar correctamente
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -76,9 +77,6 @@ fun HorarioScreen(navController: NavController) {
                     .padding(vertical = 8.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                IconButton(onClick = { navController.navigate("main_menu") }) {
-                    Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Atrás")
-                }
 
                 Text(
                     text = "Horario",
@@ -88,7 +86,6 @@ fun HorarioScreen(navController: NavController) {
                     modifier = Modifier.weight(1f) // Asegura que el título se centre correctamente
                 )
 
-                Spacer(modifier = Modifier.width(48.dp)) // Espacio para mantener el título centrado
             }
 
             // Lista de horarios
