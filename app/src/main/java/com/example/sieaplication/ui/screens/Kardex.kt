@@ -27,12 +27,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.sieaplication.R
 import com.example.sieaplication.ui.components.Bars
-import com.example.sieaplication.ui.components.SliderMenu
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+
+import androidx.compose.material.*
+
+
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 
 
 @Composable
@@ -45,7 +55,7 @@ fun KardexInfo(navController: NavController) {
         period = "ENE-JUN25",
         selectedStudy = "ING. TICS",
         plan = "ITIC-2010-225",
-        specialty = "TECNOLOGÍAS DIGITALES EMERGENTES",
+        specialty = "TECNOLOGÍAS DIGITALES E.",
         status = "VIGENTE",
         admission = "2223 AGODIC2022",
         validatedSemesters = 0,
@@ -65,84 +75,105 @@ fun KardexInfo(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top=90.dp)
+            .background(Color(0xFFE0E0E0))
+            .verticalScroll(rememberScrollState())
+            .padding(top = 90.dp)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Start
         ) {
-            IconButton(
-                onClick = { navController.navigate("main_menu") }
-            ) {
+            IconButton(onClick = { navController.navigate("main_menu") }) {
                 Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Atrás")
             }
         }
 
         Text(
             text = "Información del Estudiante",
-            style = MaterialTheme.typography.headlineSmall,
-            fontWeight = FontWeight.Bold,
+            style = TextStyle(
+                fontWeight = FontWeight.Bold,
+                fontSize = 22.sp,
+                color = Color.Black
+            ),
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center
         )
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         Card(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
-                InfoRow(label = "Nombre", value = student.name)
-                InfoRow(label = "No. Control", value = student.controlNumber)
-                InfoRow(label = "CURP", value = student.curp)
-                InfoRow(label = "Período", value = student.period)
+                InfoRow("Nombre", student.name)
+                InfoRow("No. Control", student.controlNumber)
+                InfoRow("CURP", student.curp)
+                InfoRow("Período", student.period)
                 Divider(modifier = Modifier.padding(vertical = 8.dp))
 
-                InfoRow(label = "Carrera", value = student.selectedStudy)
-                InfoRow(label = "Plan", value = student.plan)
-                InfoRow(label = "Especialidad", value = student.specialty)
-                InfoRow(label = "Situación", value = student.status)
+                InfoRow("Carrera", student.selectedStudy)
+                InfoRow("Plan", student.plan)
+                InfoRow("Especialidad", student.specialty)
+                InfoRow("Situación", student.status)
                 Divider(modifier = Modifier.padding(vertical = 8.dp))
 
-                InfoRow(label = "Ingreso", value = student.admission)
-                InfoRow(label = "Semestres Validados", value = student.validatedSemesters.toString())
-                InfoRow(label = "Créditos Plan", value = student.totalCredits.toString())
-                InfoRow(label = "Créditos Aprobados", value = student.approvedCredits.toString())
-                InfoRow(label = "Porcentaje", value = "${student.progressPercentage}%")
+                InfoRow("Ingreso", student.admission)
+                InfoRow("Semestres Validados", student.validatedSemesters.toString())
+                InfoRow("Créditos Plan", student.totalCredits.toString())
+                InfoRow("Créditos Aprobados", student.approvedCredits.toString())
+                InfoRow("Porcentaje", "${student.progressPercentage}%")
                 Divider(modifier = Modifier.padding(vertical = 8.dp))
 
-                InfoRow(label = "Materias Totales", value = student.totalSubjects.toString())
-                InfoRow(label = "Materias Cursadas", value = student.takenSubjects.toString())
-                InfoRow(label = "Materias Aprobadas", value = student.approvedSubjects.toString())
-                InfoRow(label = "Prom. con Rep", value = student.gpaWithFails.toString())
-                InfoRow(label = "Prom. sin Rep", value = student.gpaWithoutFails.toString())
-                InfoRow(label = "Semestre", value = student.semester.toString())
-                InfoRow(label = "Materias Cursando", value = student.currentSubjects.toString())
-                InfoRow(label = "Créditos Cursando", value = student.currentCredits.toString())
+                InfoRow("Materias Totales", student.totalSubjects.toString())
+                InfoRow("Materias Cursadas", student.takenSubjects.toString())
+                InfoRow("Materias Aprobadas", student.approvedSubjects.toString())
+                InfoRow("Prom. con Rep", student.gpaWithFails.toString())
+                InfoRow("Prom. sin Rep", student.gpaWithoutFails.toString())
+                InfoRow("Semestre", student.semester.toString())
+                InfoRow("Materias Cursando", student.currentSubjects.toString())
+                InfoRow("Créditos Cursando", student.currentCredits.toString())
             }
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(24.dp))
 
         Button(
             onClick = { navController.navigate("screen_kardex_full") },
             modifier = Modifier
-                .width(200.dp) // Ajusta el ancho del botón
-                .align(Alignment.CenterHorizontally) // Lo centra en la columna
+                .width(220.dp)
+                .align(Alignment.CenterHorizontally)
         ) {
             Text(text = "Ver Kardex gráfico")
         }
 
+        Spacer(modifier = Modifier.height(32.dp))
     }
 }
-
 @Composable
 fun InfoRow(label: String, value: String) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(text = label, fontWeight = FontWeight.Bold)
-        Text(text = value, color = Color.Gray)
+        Text(
+            text = label,
+            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
+            color = Color.DarkGray
+        )
+        Text(
+            text = value,
+            style = MaterialTheme.typography.bodyLarge,
+            color = Color.Black
+        )
     }
 }
+
+
+
+
+
