@@ -93,7 +93,9 @@ dependencies {
 
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx) // opcional pero recomendado
-    ksp(libs.androidx.room.compiler)
+    //ksp(libs.androidx.room.compiler)
+    add("ksp", libs.androidx.room.compiler)
+
 
 
 
