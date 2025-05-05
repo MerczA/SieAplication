@@ -80,6 +80,21 @@ fun Main_Menu(navController: NavHostController) {
                                     navController.navigate("new_password")}
                             )
                             DropdownMenuItem(
+                                text = { Text("Recordatorios") },
+                                onClick = {
+                                    menuExpanded = false
+                                    navController.navigate("agregar_recordatorio")
+                                }
+                            )
+                            DropdownMenuItem(
+                                text = { Text("Ver recordatorios") },
+                                onClick = {
+                                    menuExpanded = false
+                                    navController.navigate("ver_recordatorios")
+                                }
+                            )
+
+                            DropdownMenuItem(
                                 text = { Text("Cerrar sesión") },
                                 onClick = { menuExpanded = false }
                             )
