@@ -19,9 +19,11 @@ import com.example.sieaplication.ui.screens.LoadingScreen
 import com.example.sieaplication.ui.screens.LoginScreen
 import com.example.sieaplication.ui.screens.Main_Menu
 import com.example.sieaplication.ui.screens.NewPasswordScreen
+import com.example.sieaplication.ui.screens.Fichas_pago
 import com.example.sieaplication.ui.screens.PasswordVerificationScreen
 import com.example.sieaplication.ui.screens.PersonalInfoEditScreen
 import com.example.sieaplication.ui.screens.PreviewHorarioScreen
+import com.example.sieaplication.ui.screens.Reglamento
 import com.example.sieaplication.ui.screens.T_Digital
 import com.example.sieaplication.ui.theme.SieAplicationTheme
 import androidx.room.Room
@@ -80,6 +82,8 @@ fun SetupNavGraph(
         composable("screen_avisos") {AvisosOpcion(navController) }
         composable("T_Digital") { T_Digital(navController) }
         composable("screen_Documentos") { Documentos(navController) }
+        composable("screen_Ficha") { Fichas_pago(navController) }
+        composable("screen_Reglamento") { Reglamento(navController) }
         composable("screen_kardex_full") {HorarioPorSemestreScreen(navController) }
         composable("recoveryPassword") {PasswordVerificationScreen(navController) }
         composable("new_password") {NewPasswordScreen(navController) }
