@@ -9,9 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.sieaplication.ui.screens.AvisosCarreraScreenPreview
 import com.example.sieaplication.ui.screens.AvisosOpcion
-import com.example.sieaplication.ui.screens.AvisosTecnmScreenPreview
 import com.example.sieaplication.ui.screens.Documentos
 import com.example.sieaplication.ui.screens.CalificacionesScreen
 import com.example.sieaplication.ui.screens.GeneralInfoScreen
@@ -28,6 +26,14 @@ import com.example.sieaplication.ui.screens.PreviewHorarioScreen
 import com.example.sieaplication.ui.screens.Reglamento
 import com.example.sieaplication.ui.screens.T_Digital
 import com.example.sieaplication.ui.theme.SieAplicationTheme
+import androidx.room.Room
+import com.example.sieaplication.data.model.AppDataBase
+import com.example.sieaplication.data.viewmodel.RecordatorioViewModel
+import androidx.compose.runtime.remember
+import com.example.sieaplication.ui.screens.AgregarRecordatorioScreen
+import com.example.sieaplication.ui.screens.ListaRecordatoriosScreen
+
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,15 +46,32 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
 @Composable
 fun ComposeMultiScreenApp() {
     val navController = rememberNavController()
-    SetupNavGraph(navController = navController)
+
+    //  Instanciar base de datos
+    val context = androidx.compose.ui.platform.LocalContext.current
+     val db = Room.databaseBuilder(
+        context,
+        AppDataBase::class.java,
+        "recordatorios_db"
+    ).build()
+
+    //  Instanciar ViewModel
+    val recordatorioViewModel = remember {
+        RecordatorioViewModel(db.recordatorioDao())
+    }
+    //  Pasar el ViewModel como argumento
+    SetupNavGraph(navController = navController, recordatorioViewModel = recordatorioViewModel)
 }
 
+
 @Composable
-fun SetupNavGraph(navController: NavHostController) {
+fun SetupNavGraph(
+    navController: NavHostController,
+    recordatorioViewModel: RecordatorioViewModel
+) {
     NavHost(navController = navController, startDestination = "login") {
         composable("login") { LoginScreen(navController) }
         composable("loading") { LoadingScreen(navController) }
@@ -57,8 +80,6 @@ fun SetupNavGraph(navController: NavHostController) {
         composable("screen_horario") {PreviewHorarioScreen(navController) }
         composable("screen_kardex") { KardexInfo(navController) }
         composable("screen_avisos") {AvisosOpcion(navController) }
-        composable("screen_avisos_tecnm") {AvisosTecnmScreenPreview(navController) }
-        composable("screen_avisos_carrera") {AvisosCarreraScreenPreview(navController) }
         composable("T_Digital") { T_Digital(navController) }
         composable("screen_Documentos") { Documentos(navController) }
         composable("screen_Ficha") { Fichas_pago(navController) }
@@ -68,8 +89,9 @@ fun SetupNavGraph(navController: NavHostController) {
         composable("new_password") {NewPasswordScreen(navController) }
         composable("edit_personal_info") { PersonalInfoEditScreen(navController) }
         composable("general_info") {GeneralInfoScreen(navController) }
-
-
+        composable("agregar_recordatorio") { AgregarRecordatorioScreen(viewModel = recordatorioViewModel) }
+        composable("ver_recordatorios") { ListaRecordatoriosScreen(viewModel = recordatorioViewModel) }
     }
 }
+
 

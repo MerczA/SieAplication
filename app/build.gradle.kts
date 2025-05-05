@@ -2,7 +2,13 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    //
+    id("com.google.devtools.ksp")
+
+
+
 }
+
 
 android {
     namespace = "com.example.sieaplication"
@@ -68,5 +74,29 @@ dependencies {
     implementation(libs.ui.tooling.preview)
     implementation(libs.androidx.runtime.livedata)
     implementation(libs.androidx.material3.vlatestversion)
+
+    implementation(libs.accompanist.swiperefresh)
+    implementation (libs.kotlinx.coroutines.android)
+    //Coil Async
+    implementation(libs.coil.compose)
+
+
+    // retrofit
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
+    implementation(libs.retrofit)
+    implementation(libs.okhttp)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.converter.gson)
+    //
+
+    //Room
+
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx) // opcional pero recomendado
+    //ksp(libs.androidx.room.compiler)
+    add("ksp", libs.androidx.room.compiler)
+
+
+
 
 }
