@@ -1,53 +1,24 @@
 package com.example.sieaplication.ui.screens
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Divider
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.ui.unit.dp
-import com.example.sieaplication.data.model.Kardex
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.sieaplication.ui.components.Bars
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-
-import androidx.compose.material.*
-
-
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-
+import com.example.sieaplication.data.model.Kardex
+import com.example.sieaplication.ui.components.BarsScreens
 
 @Composable
 fun KardexInfo(navController: NavController) {
-    Bars(navController)
     val student = Kardex(
         controlNumber = "22151197",
         name = "GEZA GEOVANNI MERCZ ARELLANO",
@@ -72,86 +43,85 @@ fun KardexInfo(navController: NavController) {
         currentCredits = 31
     )
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFFE0E0E0))
-            .verticalScroll(rememberScrollState())
-            .padding(top = 90.dp)
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Start
-        ) {
-            IconButton(onClick = { navController.navigate("main_menu") }) {
-                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Atrás")
-            }
-        }
-
-        Text(
-            text = "Información del Estudiante",
-            style = TextStyle(
-                fontWeight = FontWeight.Bold,
-                fontSize = 22.sp,
-                color = Color.Black
-            ),
-            modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Card(
+    Scaffold(
+        topBar = { BarsScreens(navController) },
+        containerColor = Color(0xFFE0E0E0)
+    ) { innerPadding ->
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
-            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+                .fillMaxSize()
+                .padding(innerPadding)
+                .padding(horizontal = 16.dp)
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                InfoRow("Nombre", student.name)
-                InfoRow("No. Control", student.controlNumber)
-                InfoRow("CURP", student.curp)
-                InfoRow("Período", student.period)
-                Divider(modifier = Modifier.padding(vertical = 8.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-                InfoRow("Carrera", student.selectedStudy)
-                InfoRow("Plan", student.plan)
-                InfoRow("Especialidad", student.specialty)
-                InfoRow("Situación", student.status)
-                Divider(modifier = Modifier.padding(vertical = 8.dp))
+            Text(
+                text = "Información del Estudiante",
+                style = TextStyle(
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 22.sp,
+                    color = Color.Black
+                ),
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center
+            )
+            Spacer(modifier = Modifier.height(16.dp))
 
-                InfoRow("Ingreso", student.admission)
-                InfoRow("Semestres Validados", student.validatedSemesters.toString())
-                InfoRow("Créditos Plan", student.totalCredits.toString())
-                InfoRow("Créditos Aprobados", student.approvedCredits.toString())
-                InfoRow("Porcentaje", "${student.progressPercentage}%")
-                Divider(modifier = Modifier.padding(vertical = 8.dp))
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                colors = CardDefaults.cardColors(containerColor = Color.White),
+                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    InfoRow("Nombre", student.name)
+                    InfoRow("No. Control", student.controlNumber)
+                    InfoRow("CURP", student.curp)
+                    InfoRow("Período", student.period)
+                    Divider(modifier = Modifier.padding(vertical = 8.dp))
 
-                InfoRow("Materias Totales", student.totalSubjects.toString())
-                InfoRow("Materias Cursadas", student.takenSubjects.toString())
-                InfoRow("Materias Aprobadas", student.approvedSubjects.toString())
-                InfoRow("Prom. con Rep", student.gpaWithFails.toString())
-                InfoRow("Prom. sin Rep", student.gpaWithoutFails.toString())
-                InfoRow("Semestre", student.semester.toString())
-                InfoRow("Materias Cursando", student.currentSubjects.toString())
-                InfoRow("Créditos Cursando", student.currentCredits.toString())
+                    InfoRow("Carrera", student.selectedStudy)
+                    InfoRow("Plan", student.plan)
+                    InfoRow("Especialidad", student.specialty)
+                    InfoRow("Situación", student.status)
+                    Divider(modifier = Modifier.padding(vertical = 8.dp))
+
+                    InfoRow("Ingreso", student.admission)
+                    InfoRow("Semestres Validados", student.validatedSemesters.toString())
+                    InfoRow("Créditos Plan", student.totalCredits.toString())
+                    InfoRow("Créditos Aprobados", student.approvedCredits.toString())
+                    InfoRow("Porcentaje", "${student.progressPercentage}%")
+                    Divider(modifier = Modifier.padding(vertical = 8.dp))
+
+                    InfoRow("Materias Totales", student.totalSubjects.toString())
+                    InfoRow("Materias Cursadas", student.takenSubjects.toString())
+                    InfoRow("Materias Aprobadas", student.approvedSubjects.toString())
+                    InfoRow("Prom. con Rep", student.gpaWithFails.toString())
+                    InfoRow("Prom. sin Rep", student.gpaWithoutFails.toString())
+                    InfoRow("Semestre", student.semester.toString())
+                    InfoRow("Materias Cursando", student.currentSubjects.toString())
+                    InfoRow("Créditos Cursando", student.currentCredits.toString())
+                }
             }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            Button(
+                onClick = { navController.navigate("screen_kardex_full") },
+                modifier = Modifier
+                    .width(220.dp)
+                    .align(Alignment.CenterHorizontally)
+            ) {
+                Text(text = "Ver Kardex gráfico")
+            }
+
+            Spacer(modifier = Modifier.height(32.dp))
         }
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        Button(
-            onClick = { navController.navigate("screen_kardex_full") },
-            modifier = Modifier
-                .width(220.dp)
-                .align(Alignment.CenterHorizontally)
-        ) {
-            Text(text = "Ver Kardex gráfico")
-        }
-
-        Spacer(modifier = Modifier.height(32.dp))
     }
 }
+
 @Composable
 fun InfoRow(label: String, value: String) {
     Row(
@@ -172,8 +142,3 @@ fun InfoRow(label: String, value: String) {
         )
     }
 }
-
-
-
-
-

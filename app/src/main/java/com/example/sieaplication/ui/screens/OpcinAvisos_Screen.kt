@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.sieaplication.R
+import com.example.sieaplication.ui.components.BarsScreens
 
 // Clase de datos para representar un aviso
 data class Aviso(
@@ -46,6 +47,7 @@ fun AvisosOpcion(navController: NavController) {
     AvisosSelectorScreen(navController = navController)
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AvisosSelectorScreen(navController: NavController) {
     // Lista combinada de avisos de Carrera y TECNM (excluyendo el aviso principal)
@@ -108,218 +110,216 @@ fun AvisosSelectorScreen(navController: NavController) {
         )
     )
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White)
-            .padding(16.dp)
-    ) {
-        // Botón de "Atrás" en la parte superior izquierda
-        IconButton(
-            onClick = { navController.navigate("main_menu") },
-            modifier = Modifier.align(Alignment.TopStart)
-        ) {
-            Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Atrás")
-        }
-
-        // Tarjeta principal
-        Card(
+    Scaffold(
+        topBar = { BarsScreens(navController) },
+        containerColor = Color(0xFFEAEAEA) // Fondo consistente con la pantalla Documentos
+    ) { innerPadding ->
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.85f)
-                .align(Alignment.Center),
-            shape = RoundedCornerShape(12.dp),
-            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White)
+                .fillMaxSize()
+                .padding(innerPadding)
+                .padding(horizontal = 16.dp), // Padding horizontal como en Documentos
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Column(
+            // Tarjeta principal
+            Card(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.85f)
+                    .padding(top = 16.dp), // Espacio adicional para no pegarse al Top Bar
+                shape = RoundedCornerShape(12.dp),
+                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                colors = CardDefaults.cardColors(containerColor = Color.White)
             ) {
-                // Encabezado
-                Box(
+                Column(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 8.dp),
-                    contentAlignment = Alignment.Center
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    Text(
-                        text = "TODOS LOS AVISOS",
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center,
-                        color = Color(0xFF003087)
-                    )
-                }
+                    // Encabezado
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 8.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "TODOS LOS AVISOS",
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center,
+                            color = Color(0xFF003087)
+                        )
+                    }
 
-                // Lista de avisos en LazyColumn
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    // Aviso principal
-                    item {
-                        Column(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            // Imagen principal
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(200.dp)
-                                    .background(Color(0xFFF5F5F5))
-                                    .border(1.dp, Color(0xFFDDDDDD), RoundedCornerShape(8.dp)),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.tecnmmejorescuela),
-                                    contentDescription = "Imagen de TECNM",
-                                    modifier = Modifier.fillMaxSize(),
-                                    contentScale = ContentScale.Fit
-                                )
-                            }
-
-                            // Título y texto principal debajo de la imagen
+                    // Lista de avisos en LazyColumn
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        // Aviso principal
+                        item {
                             Column(
-                                modifier = Modifier.padding(top = 8.dp),
-                                horizontalAlignment = Alignment.CenterHorizontally,
-                                verticalArrangement = Arrangement.spacedBy(4.dp)
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalAlignment = Alignment.CenterHorizontally
                             ) {
+                                // Imagen principal
                                 Box(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .height(40.dp)
-                                        .verticalScroll(rememberScrollState())
+                                        .height(200.dp)
+                                        .background(Color(0xFFF5F5F5))
+                                        .border(1.dp, Color(0xFFDDDDDD), RoundedCornerShape(8.dp)),
+                                    contentAlignment = Alignment.Center
                                 ) {
-                                    Text(
-                                        text = "Se consolida el TecNM campus Instituto Tecnológico de Aguascalientes como Mejor Escuela de Ingeniería del País",
-                                        fontSize = 16.sp,
-                                        fontWeight = FontWeight.Bold,
-                                        color = Color.DarkGray,
-                                        textAlign = TextAlign.Center
+                                    Image(
+                                        painter = painterResource(id = R.drawable.tecnmmejorescuela),
+                                        contentDescription = "Imagen de TECNM",
+                                        modifier = Modifier.fillMaxSize(),
+                                        contentScale = ContentScale.Fit
                                     )
                                 }
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .height(100.dp)
-                                        .verticalScroll(rememberScrollState())
+
+                                // Título y texto principal debajo de la imagen
+                                Column(
+                                    modifier = Modifier.padding(top = 8.dp),
+                                    horizontalAlignment = Alignment.CenterHorizontally,
+                                    verticalArrangement = Arrangement.spacedBy(4.dp)
                                 ) {
-                                    Text(
-                                        text = "Reconoce ANFEI AL TECNOLÓGICO de Aguascalientes como la mejor escuela de ingeniería en el país\n" +
-                                                "Es el máximo reconocimiento que recibe una institución por su calidad educativa en el ámbito de las ingenierías.",
-                                        fontSize = 14.sp,
-                                        color = Color.DarkGray,
-                                        lineHeight = 20.sp,
-                                        textAlign = TextAlign.Center
-                                    )
+                                    Box(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(40.dp)
+                                            .verticalScroll(rememberScrollState())
+                                    ) {
+                                        Text(
+                                            text = "Se consolida el TecNM campus Instituto Tecnológico de Aguascalientes como Mejor Escuela de Ingeniería del País",
+                                            fontSize = 16.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            color = Color.DarkGray,
+                                            textAlign = TextAlign.Center
+                                        )
+                                    }
+                                    Box(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(100.dp)
+                                            .verticalScroll(rememberScrollState())
+                                    ) {
+                                        Text(
+                                            text = "Reconoce ANFEI AL TECNOLÓGICO de Aguascalientes como la mejor escuela de ingeniería en el país\n" +
+                                                    "Es el máximo reconocimiento que recibe una institución por su calidad educativa en el ámbito de las ingenierías.",
+                                            fontSize = 14.sp,
+                                            color = Color.DarkGray,
+                                            lineHeight = 20.sp,
+                                            textAlign = TextAlign.Center
+                                        )
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    // Avisos secundarios
-                    items(avisosSecundarios) { aviso ->
-                        Card(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(100.dp),
-                            shape = RoundedCornerShape(8.dp),
-                            elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
-                            colors = CardDefaults.cardColors(containerColor = Color.White)
-                        ) {
-                            Row(
-                                modifier = Modifier.fillMaxSize(),
-                                verticalAlignment = Alignment.CenterVertically
+                        // Avisos secundarios
+                        items(avisosSecundarios) { aviso ->
+                            Card(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(100.dp),
+                                shape = RoundedCornerShape(8.dp),
+                                elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
+                                colors = CardDefaults.cardColors(containerColor = Color.White)
                             ) {
-                                // Borde izquierdo
-                                Box(
-                                    modifier = Modifier
-                                        .width(4.dp)
-                                        .fillMaxHeight()
-                                        .background(
-                                            when (aviso.source) {
-                                                AvisoSource.CARRERA -> Color(0xFF1E90FF)
-                                                AvisoSource.TECNM -> Color(0xFF8B0000)
-                                            }
-                                        )
-                                )
-
-                                // Contenido principal
                                 Row(
-                                    modifier = Modifier
-                                        .weight(1f)
-                                        .padding(8.dp),
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                    modifier = Modifier.fillMaxSize(),
+                                    verticalAlignment = Alignment.CenterVertically
                                 ) {
-                                    // Imagen a la izquierda
+                                    // Borde izquierdo
                                     Box(
                                         modifier = Modifier
-                                            .size(60.dp)
-                                            .background(Color(0xFFF5F5F5))
-                                            .border(1.dp, Color(0xFFDDDDDD), RoundedCornerShape(8.dp)),
-                                        contentAlignment = Alignment.Center
-                                    ) {
-                                        Image(
-                                            painter = painterResource(id = aviso.imageResId),
-                                            contentDescription = "Imagen de ${aviso.title}",
-                                            modifier = Modifier.fillMaxSize(),
-                                            contentScale = ContentScale.Fit
-                                        )
-                                    }
+                                            .width(4.dp)
+                                            .fillMaxHeight()
+                                            .background(
+                                                when (aviso.source) {
+                                                    AvisoSource.CARRERA -> Color(0xFF1E90FF)
+                                                    AvisoSource.TECNM -> Color(0xFF8B0000)
+                                                }
+                                            )
+                                    )
 
-                                    // Columna para título y texto
-                                    Column(
-                                        modifier = Modifier.weight(1f),
-                                        verticalArrangement = Arrangement.spacedBy(4.dp)
+                                    // Contenido principal
+                                    Row(
+                                        modifier = Modifier
+                                            .weight(1f)
+                                            .padding(8.dp),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.spacedBy(8.dp)
                                     ) {
+                                        // Imagen a la izquierda
                                         Box(
                                             modifier = Modifier
-                                                .fillMaxWidth()
-                                                .height(24.dp)
-                                                .verticalScroll(rememberScrollState())
+                                                .size(60.dp)
+                                                .background(Color(0xFFF5F5F5))
+                                                .border(1.dp, Color(0xFFDDDDDD), RoundedCornerShape(8.dp)),
+                                            contentAlignment = Alignment.Center
                                         ) {
-                                            Text(
-                                                text = aviso.title,
-                                                fontSize = 14.sp,
-                                                fontWeight = FontWeight.Bold,
-                                                color = Color.DarkGray
+                                            Image(
+                                                painter = painterResource(id = aviso.imageResId),
+                                                contentDescription = "Imagen de ${aviso.title}",
+                                                modifier = Modifier.fillMaxSize(),
+                                                contentScale = ContentScale.Fit
                                             )
                                         }
-                                        Box(
-                                            modifier = Modifier
-                                                .fillMaxWidth()
-                                                .height(48.dp)
-                                                .verticalScroll(rememberScrollState())
-                                        ) {
-                                            Text(
-                                                text = aviso.description,
-                                                fontSize = 12.sp,
-                                                color = Color.DarkGray,
-                                                lineHeight = 16.sp
-                                            )
-                                        }
-                                    }
-                                }
 
-                                // Borde derecho
-                                Box(
-                                    modifier = Modifier
-                                        .width(4.dp)
-                                        .fillMaxHeight()
-                                        .background(
-                                            when (aviso.source) {
-                                                AvisoSource.CARRERA -> Color(0xFF1E90FF)
-                                                AvisoSource.TECNM -> Color(0xFF8B0000)
+                                        // Columna para título y texto
+                                        Column(
+                                            modifier = Modifier.weight(1f),
+                                            verticalArrangement = Arrangement.spacedBy(4.dp)
+                                        ) {
+                                            Box(
+                                                modifier = Modifier
+                                                    .fillMaxWidth()
+                                                    .height(24.dp)
+                                                    .verticalScroll(rememberScrollState())
+                                            ) {
+                                                Text(
+                                                    text = aviso.title,
+                                                    fontSize = 14.sp,
+                                                    fontWeight = FontWeight.Bold,
+                                                    color = Color.DarkGray
+                                                )
                                             }
-                                        )
-                                )
+                                            Box(
+                                                modifier = Modifier
+                                                    .fillMaxWidth()
+                                                    .height(48.dp)
+                                                    .verticalScroll(rememberScrollState())
+                                            ) {
+                                                Text(
+                                                    text = aviso.description,
+                                                    fontSize = 12.sp,
+                                                    color = Color.DarkGray,
+                                                    lineHeight = 16.sp
+                                                )
+                                            }
+                                        }
+                                    }
+
+                                    // Borde derecho
+                                    Box(
+                                        modifier = Modifier
+                                            .width(4.dp)
+                                            .fillMaxHeight()
+                                            .background(
+                                                when (aviso.source) {
+                                                    AvisoSource.CARRERA -> Color(0xFF1E90FF)
+                                                    AvisoSource.TECNM -> Color(0xFF8B0000)
+                                                }
+                                            )
+                                    )
+                                }
                             }
                         }
                     }
