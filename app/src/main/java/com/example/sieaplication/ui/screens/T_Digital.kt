@@ -32,12 +32,13 @@ import com.google.zxing.common.BitMatrix
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import com.example.sieaplication.ui.components.Bars
+import com.example.sieaplication.ui.components.BarsScreens
 
 
 @Composable
 fun T_Digital(navController: NavHostController) {
 
-    Bars(navController)
+    BarsScreens(navController)
 
     var isFlipped by remember { mutableStateOf(false) } // Estado para voltear la tarjeta
 
@@ -56,11 +57,9 @@ fun T_Digital(navController: NavHostController) {
                 .padding(bottom = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            IconButton(onClick = { navController.popBackStack() }) {
-                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Atrás")
-            }
+
             Text(
-                text = "Documentos",
+                text = "Credencial Digital",
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
                 textAlign = TextAlign.Center,

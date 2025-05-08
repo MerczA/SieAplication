@@ -29,10 +29,11 @@ import androidx.navigation.NavController
 import com.example.sieaplication.R
 import com.example.sieaplication.data.model.MateriaKardex
 import com.example.sieaplication.ui.components.Bars
+import com.example.sieaplication.ui.components.BarsScreens
 
 @Composable
 fun HorarioPorSemestreScreen(navController: NavController) {
-    Bars(navController)
+    BarsScreens(navController)
     val semestres = listOf(
         "I" to listOf(
             MateriaKardex("ACF0901", "CALC DIF", "5", "98", "Repetición"),
