@@ -50,9 +50,7 @@ fun AvisosOpcion(navController: NavController) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AvisosSelectorScreen(navController: NavController) {
-    // Lista combinada de avisos de Carrera y TECNM (excluyendo el aviso principal)
     val avisosSecundarios = listOf(
-        // Avisos de Carrera
         Aviso(
             imageResId = R.drawable.avisoscarrerauno,
             title = "Open House",
@@ -111,7 +109,7 @@ fun AvisosSelectorScreen(navController: NavController) {
     )
 
     Scaffold(
-        topBar = { BarsScreens(navController) },
+        topBar = { BarsScreens("Avisos" , navController) },
         containerColor = Color(0xFFEAEAEA) // Fondo consistente con la pantalla Documentos
     ) { innerPadding ->
         Column(
