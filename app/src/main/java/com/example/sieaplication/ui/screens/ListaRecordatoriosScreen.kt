@@ -8,16 +8,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.navigation.NavController
 import com.example.sieaplication.data.viewmodel.RecordatorioViewModel
+import com.example.sieaplication.ui.components.BarsScreens
 
 @Composable
-fun ListaRecordatoriosScreen (viewModel: RecordatorioViewModel) {
+fun ListaRecordatoriosScreen (viewModel: RecordatorioViewModel, navController: NavController) {
+    BarsScreens("Lista de Recordatorios" , navController )
+
     val recordatorios by viewModel.recordatorios.collectAsState()
 
     Column(modifier = Modifier
         .fillMaxSize()
         .padding(24.dp)) {
-        Text("Tus Recordatorios", style = MaterialTheme.typography.headlineSmall)
 
         Spacer(modifier = Modifier.height(16.dp))
 

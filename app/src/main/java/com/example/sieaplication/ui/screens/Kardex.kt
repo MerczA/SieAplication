@@ -44,7 +44,7 @@ fun KardexInfo(navController: NavController) {
     )
 
     Scaffold(
-        topBar = { BarsScreens(navController) },
+        topBar = { BarsScreens("Kardex" , navController) },
         containerColor = Color(0xFFE0E0E0)
     ) { innerPadding ->
         Column(
@@ -55,18 +55,6 @@ fun KardexInfo(navController: NavController) {
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Text(
-                text = "Información del Estudiante",
-                style = TextStyle(
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 22.sp,
-                    color = Color.Black
-                ),
-                modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.Center
-            )
             Spacer(modifier = Modifier.height(16.dp))
 
             Card(

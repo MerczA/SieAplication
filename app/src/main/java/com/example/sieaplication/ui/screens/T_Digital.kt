@@ -3,20 +3,14 @@ package com.example.sieaplication.ui.screens
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
-import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
-import android.graphics.Color as AndroidColor // Renombrado para evitar conflicto
+import android.graphics.Color as AndroidColor
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color // Para Jetpack Compose
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
@@ -29,18 +23,14 @@ import com.example.sieaplication.R
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.common.BitMatrix
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.style.TextAlign
-import com.example.sieaplication.ui.components.Bars
 import com.example.sieaplication.ui.components.BarsScreens
 
 
 @Composable
 fun T_Digital(navController: NavHostController) {
 
-    BarsScreens(navController)
+    BarsScreens("Credencial Digital", navController)
 
-    var isFlipped by remember { mutableStateOf(false) } // Estado para voltear la tarjeta
 
     val qrBitmap = generateQRCode("https://sie.aguascalientes.tecnm.mx/cgi-bin/sie.pl?Opc=PINDEXESTUDIANTE&psie=intertec&dummy=0")
 
@@ -51,25 +41,6 @@ fun T_Digital(navController: NavHostController) {
             .padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-
-            Text(
-                text = "Credencial Digital",
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.weight(1f)
-            )
-        }
-
-
-
-
         // Tarjeta Digital
         Box(
             modifier = Modifier

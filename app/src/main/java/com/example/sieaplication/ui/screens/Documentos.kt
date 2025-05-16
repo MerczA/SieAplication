@@ -33,7 +33,7 @@ import com.example.sieaplication.ui.components.BarsScreens
 @Composable
 fun Documentos(navController: NavHostController) {
     Scaffold(
-        topBar = { BarsScreens(navController) },
+        topBar = { BarsScreens("Documentos" , navController) },
         containerColor = Color(0xFFEAEAEA)
     ) { innerPadding ->
         Column(
@@ -51,23 +51,8 @@ fun Documentos(navController: NavHostController) {
                     .padding(horizontal = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 16.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = "Documentos",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 20.sp,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.weight(1f)
-                    )
-                }
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Fila 1
                 ButtonRow(
                     leftButtonText = "Ficha de pago",
                     leftButtonIcon = R.drawable.inscripsion_icon,

@@ -16,22 +16,18 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.sieaplication.data.model.Materia
-import com.example.sieaplication.ui.components.Bars
 import com.example.sieaplication.ui.components.BarsScreens
 
 @Composable
 fun CalificacionesScreen(navController: NavController) {
-    BarsScreens(navController)
+    BarsScreens("Calificaciones" , navController)
     val materias = listOf(
         Materia("TALLER INVESTIG.", listOf(90.0, 85.0, 88.0, 92.0, 87.0, 91.0)),
         Materia("DES. APL / DISP. MOV", listOf(80.0, 75.0, 78.0, 82.0, 77.0, 81.0)),
@@ -49,26 +45,7 @@ fun CalificacionesScreen(navController: NavController) {
             .padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Botón de regreso y título
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 8.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
 
-
-            Text(
-                text = "Calificaciones",
-                fontWeight = FontWeight.Bold,
-                fontSize = MaterialTheme.typography.headlineSmall.fontSize,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.weight(1f) // Esto lo centra correctamente
-            )
-
-        }
-
-        // Lista de materias con tarjetas animadas
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
