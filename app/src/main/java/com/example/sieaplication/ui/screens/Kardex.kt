@@ -94,18 +94,24 @@ fun KardexInfo(navController: NavController) {
                 }
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(10.dp))
 
             Button(
                 onClick = { navController.navigate("screen_kardex_full") },
                 modifier = Modifier
-                    .width(220.dp)
+                    .width(250.dp)
                     .align(Alignment.CenterHorizontally)
             ) {
-                Text(text = "Ver Kardex gráfico")
+                Text(text = "Ver Kardex por semestre")
             }
-
-            Spacer(modifier = Modifier.height(32.dp))
+            Button(
+                onClick = { navController.navigate("full_kardex") },
+                modifier = Modifier
+                    .width(250.dp)
+                    .align(Alignment.CenterHorizontally)
+            ) {
+                Text(text = "Ver Kardex gráfico completo")
+            }
         }
     }
 }
