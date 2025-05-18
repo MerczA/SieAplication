@@ -37,7 +37,13 @@ import com.example.sieaplication.R
 
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.sieaplication.data.model.UserModel
 import com.example.sieaplication.data.viewmodel.UserViewModel
@@ -91,14 +97,29 @@ fun LoginForm(
 
         Spacer(modifier = Modifier.height(12.dp))
 
+        var password by remember { mutableStateOf("") }
+        var passwordVisible by remember { mutableStateOf(false) }
+
         OutlinedTextField(
             value = password,
             onValueChange = { password = it },
             label = { Text("Contraseña") },
-            visualTransformation = PasswordVisualTransformation(),
             singleLine = true,
-            modifier = Modifier.fillMaxWidth(0.8f)
+            modifier = Modifier.fillMaxWidth(0.8f),
+            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+            trailingIcon = {
+                val image = if (passwordVisible)
+                    Icons.Filled.Visibility
+                else
+                    Icons.Filled.VisibilityOff
+
+                // Icon button para alternar visibilidad
+                IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                    Icon(imageVector = image, contentDescription = if (passwordVisible) "Ocultar contraseña" else "Mostrar contraseña")
+                }
+            }
         )
+
 
         Spacer(modifier = Modifier.height(20.dp))
 
@@ -165,6 +186,12 @@ fun TryLogin(user: String, password: String, context: Context, viewModel: UserVi
             Log.d("debug", "LOGIN STATUS: $loginStatus")
             if(loginStatus == "success"){
                 navController.navigate("main_menu")
+            }else {
+                Toast.makeText(
+                    context,
+                    "Credenciales Incorrectas, Vuelve a intentarlo",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
