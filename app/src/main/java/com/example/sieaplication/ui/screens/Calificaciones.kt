@@ -1,17 +1,6 @@
 package com.example.sieaplication.ui.screens
 
-
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -20,6 +9,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.sieaplication.data.model.Materia
@@ -27,7 +20,8 @@ import com.example.sieaplication.ui.components.BarsScreens
 
 @Composable
 fun CalificacionesScreen(navController: NavController) {
-    BarsScreens("Calificaciones" , navController)
+    BarsScreens("Calificaciones", navController)
+
     val materias = listOf(
         Materia("TALLER INVESTIG.", listOf(90.0, 85.0, 88.0, 92.0, 87.0, 91.0)),
         Materia("DES. APL / DISP. MOV", listOf(80.0, 75.0, 78.0, 82.0, 77.0, 81.0)),
@@ -45,15 +39,16 @@ fun CalificacionesScreen(navController: NavController) {
             .padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp)
         ) {
             items(materias) { materia ->
-                FlipCard(materia = materia)
-                Spacer(modifier = Modifier.height(12.dp))
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    FlipCard(materia = materia)
+                    Spacer(modifier = Modifier.height(12.dp))
+                }
             }
         }
     }
@@ -66,33 +61,33 @@ fun FlipCard(materia: Materia) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(160.dp)
+            .height(180.dp) // Un poco más alta para espacio del texto
             .clickable { isFlipped = !isFlipped },
         colors = CardDefaults.cardColors(
-            containerColor = if (isFlipped) Color(0xFF4CAF50) else Color(0xFF2196F3), // Verde o Azul
+            containerColor = if (isFlipped) Color(0xFF4CAF50) else Color(0xFF2196F3),
             contentColor = Color.White
         ),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(8.dp)
     ) {
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier.fillMaxSize()
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceBetween
         ) {
             if (isFlipped) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(text = "Promedio de la materia:", fontWeight = FontWeight.Bold)
                     Text(
-                        text = "${String.format("%.1f", materia.obtenerPromedio())}",
+                        text = String.format("%.1f", materia.obtenerPromedio()),
                         fontSize = 28.sp,
                         fontWeight = FontWeight.ExtraBold
                     )
                 }
             } else {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
                         text = materia.nombre,
                         fontWeight = FontWeight.Bold,
@@ -104,24 +99,27 @@ fun FlipCard(materia: Materia) {
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
-                        Column(horizontalAlignment = Alignment.CenterHorizontally,
-                            ) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text("U1: ${materia.calificaciones[0]}")
-                            Spacer(modifier = Modifier.height(5.dp))
                             Text("U2: ${materia.calificaciones[1]}")
-                            Spacer(modifier = Modifier.height(5.dp))
                             Text("U3: ${materia.calificaciones[2]}")
                         }
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text("U4: ${materia.calificaciones[3]}")
-                            Spacer(modifier = Modifier.height(5.dp))
                             Text("U5: ${materia.calificaciones[4]}")
-                            Spacer(modifier = Modifier.height(5.dp))
                             Text("U6: ${materia.calificaciones[5]}")
                         }
                     }
                 }
             }
+
+            // Texto que cambia según el estado
+            Text(
+                text = if (isFlipped) "↺ Toca para ver las calificaciones" else "↻ Toca para ver el promedio",
+                fontSize = 12.sp,
+                color = Color.White.copy(alpha = 0.8f),
+                modifier = Modifier.padding(top = 8.dp)
+            )
         }
     }
 }
