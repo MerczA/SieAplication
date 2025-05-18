@@ -189,7 +189,7 @@ fun TryLogin(user: String, password: String, context: Context, viewModel: UserVi
             }else {
                 Toast.makeText(
                     context,
-                    "Credenciales Incorrectas, Vuelve a intentarlo",
+                    "Ocurrio un error, VULVE A INTENTARLO ",
                     Toast.LENGTH_SHORT
                 ).show()
             }
