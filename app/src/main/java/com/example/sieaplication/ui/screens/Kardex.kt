@@ -44,7 +44,7 @@ fun KardexInfo(navController: NavController) {
     )
 
     Scaffold(
-        topBar = { BarsScreens("Kardex" , navController) },
+        topBar = { BarsScreens("Kardex", navController) },
         containerColor = Color(0xFFE0E0E0)
     ) { innerPadding ->
         Column(
@@ -58,75 +58,72 @@ fun KardexInfo(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Card(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
-                    InfoRow("Nombre", student.name)
-                    InfoRow("No. Control", student.controlNumber)
-                    InfoRow("CURP", student.curp)
-                    InfoRow("Período", student.period)
+                    SimpleInfo("Nombre: ${student.name}")
+                    SimpleInfo("No. Control: ${student.controlNumber}")
+                    SimpleInfo("CURP: ${student.curp}")
+                    SimpleInfo("Período: ${student.period}")
+
                     Divider(modifier = Modifier.padding(vertical = 8.dp))
 
-                    InfoRow("Carrera", student.selectedStudy)
-                    InfoRow("Plan", student.plan)
-                    InfoRow("Especialidad", student.specialty)
-                    InfoRow("Situación", student.status)
+                    SimpleInfo("Carrera: ${student.selectedStudy}")
+                    SimpleInfo("Plan: ${student.plan}")
+                    SimpleInfo("Especialidad: ${student.specialty}")
+                    SimpleInfo("Situación: ${student.status}")
+
                     Divider(modifier = Modifier.padding(vertical = 8.dp))
 
-                    InfoRow("Ingreso", student.admission)
-                    InfoRow("Semestres Validados", student.validatedSemesters.toString())
-                    InfoRow("Créditos Plan", student.totalCredits.toString())
-                    InfoRow("Créditos Aprobados", student.approvedCredits.toString())
-                    InfoRow("Porcentaje", "${student.progressPercentage}%")
+                    SimpleInfo("Ingreso: ${student.admission}")
+                    SimpleInfo("Semestres Validados: ${student.validatedSemesters}")
+                    SimpleInfo("Créditos Plan: ${student.totalCredits}")
+                    SimpleInfo("Créditos Aprobados: ${student.approvedCredits}")
+                    SimpleInfo("Porcentaje: ${student.progressPercentage}%")
+
                     Divider(modifier = Modifier.padding(vertical = 8.dp))
 
-                    InfoRow("Materias Totales", student.totalSubjects.toString())
-                    InfoRow("Materias Cursadas", student.takenSubjects.toString())
-                    InfoRow("Materias Aprobadas", student.approvedSubjects.toString())
-                    InfoRow("Prom. con Rep", student.gpaWithFails.toString())
-                    InfoRow("Prom. sin Rep", student.gpaWithoutFails.toString())
-                    InfoRow("Semestre", student.semester.toString())
-                    InfoRow("Materias Cursando", student.currentSubjects.toString())
-                    InfoRow("Créditos Cursando", student.currentCredits.toString())
+                    SimpleInfo("Materias Totales: ${student.totalSubjects}")
+                    SimpleInfo("Materias Cursadas: ${student.takenSubjects}")
+                    SimpleInfo("Materias Aprobadas: ${student.approvedSubjects}")
+                    SimpleInfo("Prom. con Rep: ${student.gpaWithFails}")
+                    SimpleInfo("Prom. sin Rep: ${student.gpaWithoutFails}")
+                    SimpleInfo("Semestre: ${student.semester}")
+                    SimpleInfo("Materias Cursando: ${student.currentSubjects}")
+                    SimpleInfo("Créditos Cursando: ${student.currentCredits}")
                 }
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(10.dp))
 
             Button(
                 onClick = { navController.navigate("screen_kardex_full") },
                 modifier = Modifier
-                    .width(220.dp)
+                    .width(250.dp)
                     .align(Alignment.CenterHorizontally)
             ) {
-                Text(text = "Ver Kardex gráfico")
+                Text(text = "Ver Kardex por semestre")
             }
-
-            Spacer(modifier = Modifier.height(32.dp))
+            Button(
+                onClick = { navController.navigate("full_kardex") },
+                modifier = Modifier
+                    .width(250.dp)
+                    .align(Alignment.CenterHorizontally)
+            ) {
+                Text(text = "Ver Kardex gráfico completo")
+            }
         }
     }
 }
 
 @Composable
-fun InfoRow(label: String, value: String) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 4.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Text(
-            text = label,
-            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-            color = Color.DarkGray
-        )
-        Text(
-            text = value,
-            style = MaterialTheme.typography.bodyLarge,
-            color = Color.Black
-        )
-    }
+fun SimpleInfo(text: String) {
+    Text(
+        text = text,
+        style = TextStyle(fontSize = 16.sp),
+        color = Color.Black,
+        modifier = Modifier.padding(vertical = 4.dp)
+    )
 }
