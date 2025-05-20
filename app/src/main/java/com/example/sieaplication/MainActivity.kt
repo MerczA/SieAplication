@@ -31,7 +31,7 @@ import com.example.sieaplication.data.model.AppDataBase
 import com.example.sieaplication.data.viewmodel.RecordatorioViewModel
 import androidx.compose.runtime.remember
 import com.example.sieaplication.ui.screens.AgregarRecordatorioScreen
-import com.example.sieaplication.ui.screens.GruposEnPreparacion
+import com.example.sieaplication.ui.screens.GrupoScreen
 import com.example.sieaplication.ui.screens.KardexCompleto
 import com.example.sieaplication.ui.screens.ListaRecordatoriosScreen
 import com.example.sieaplication.ui.screens.Reinscripcion
@@ -93,7 +93,7 @@ fun SetupNavGraph(
         composable("general_info") {GeneralInfoScreen(navController) }
         composable("agregar_recordatorio") { AgregarRecordatorioScreen(viewModel = recordatorioViewModel) }
         composable("ver_recordatorios") { ListaRecordatoriosScreen(viewModel = recordatorioViewModel, navController) }
-        composable("gruposPreparacion") {GruposEnPreparacion(navController) }
+        composable("gruposPreparacion") {GrupoScreen(navController) }
         composable("reinscripcion") {Reinscripcion(navController) }
         composable("full_kardex") {KardexCompleto(navController) }
 
