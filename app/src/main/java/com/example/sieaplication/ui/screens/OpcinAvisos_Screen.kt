@@ -4,6 +4,7 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -11,6 +12,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -45,7 +47,7 @@ fun AvisosOpcion(navController: NavController) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AvisosSelectorScreen(navController: NavController) {
-    val avisosSecundarios = listOf(
+    val avisos = listOf(
         Aviso(R.drawable.avisoscarrerauno, "Open House", "Los laboratorios de redes no estarán disponibles el 27 de marzo por motivos del evento.", AvisoSource.CARRERA),
         Aviso(R.drawable.avisoscarrerados, "Atención Psicológica", "Acudir a este correo si necesitas atención psicológica: atn.psicologica@aguascalientes.tecnm.mx", AvisoSource.CARRERA),
         Aviso(R.drawable.avisoscarreratres, "Objetos olvidados en el CC", "Dejaron estos termos en el área A del CC.", AvisoSource.CARRERA),
@@ -57,214 +59,130 @@ fun AvisosSelectorScreen(navController: NavController) {
         Aviso(R.drawable.avisostecnmcinco, "Cierra ITA con más de 800 titulados", "En 2024, el TecNM Aguascalientes gradúa más de 800 ingenieros y licenciados.", AvisoSource.TECNM)
     )
 
-    var showDialog by remember { mutableStateOf(false) }
     var selectedAviso by remember { mutableStateOf<Aviso?>(null) }
 
     Scaffold(
         topBar = { BarsScreens("Avisos", navController) },
-        containerColor = Color(0xFFEAEAEA)
+        containerColor = Color(0xFFF8F8F8)
     ) { innerPadding ->
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
                 .padding(horizontal = 16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(1f)
-                    .padding(top = 16.dp),
-                shape = RoundedCornerShape(12.dp),
-                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-                colors = CardDefaults.cardColors(containerColor = Color.White)
-            ) {
-                Column(
+            item {
+                Text(
+                    text = "Últimas noticias del ITA y TecNM",
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFF003087),
+                    modifier = Modifier.padding(top = 16.dp, bottom = 8.dp)
+                )
+            }
+
+            items(avisos) { aviso ->
+                Card(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                        .fillMaxWidth()
+                        .clickable { selectedAviso = aviso },
+                    shape = RoundedCornerShape(16.dp),
+                    elevation = CardDefaults.cardElevation(6.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color.White)
                 ) {
-                    Box(
-                        modifier = Modifier.fillMaxWidth(),
-                        contentAlignment = Alignment.Center
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(12.dp),
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text(
-                            text = "TODOS LOS AVISOS",
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFF003087)
+                        Image(
+                            painter = painterResource(id = aviso.imageResId),
+                            contentDescription = aviso.title,
+                            modifier = Modifier
+                                .size(70.dp)
+                                .clip(RoundedCornerShape(12.dp))
+                                .background(Color.LightGray),
+                            contentScale = ContentScale.Crop
                         )
-                    }
-
-                    LazyColumn(
-                        modifier = Modifier.fillMaxWidth().weight(1f),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        item {
-                            Column(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .height(200.dp)
-                                        .background(Color(0xFFF5F5F5))
-                                        .border(1.dp, Color(0xFFDDDDDD), RoundedCornerShape(8.dp)),
-                                    contentAlignment = Alignment.Center
-                                ) {
-                                    Image(
-                                        painter = painterResource(id = R.drawable.tecnmmejorescuela),
-                                        contentDescription = "Imagen de TECNM",
-                                        modifier = Modifier.fillMaxSize(),
-                                        contentScale = ContentScale.Fit
-                                    )
-                                }
-
-                                Column(
-                                    modifier = Modifier.padding(top = 8.dp),
-                                    horizontalAlignment = Alignment.CenterHorizontally,
-                                    verticalArrangement = Arrangement.spacedBy(4.dp)
-                                ) {
-                                    Text(
-                                        text = "Se consolida el TecNM como Mejor Escuela de Ingeniería del País",
-                                        fontSize = 16.sp,
-                                        fontWeight = FontWeight.Bold,
-                                        color = Color.DarkGray,
-                                        textAlign = TextAlign.Center
-                                    )
-                                    Text(
-                                        text = "Reconoce ANFEI al ITA como la mejor escuela de ingeniería en México.",
-                                        fontSize = 14.sp,
-                                        color = Color.DarkGray,
-                                        textAlign = TextAlign.Center,
-                                        lineHeight = 20.sp
-                                    )
-                                }
-                            }
+                        Spacer(modifier = Modifier.width(12.dp))
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                text = aviso.title,
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = 16.sp,
+                                color = Color(0xFF222222)
+                            )
+                            Text(
+                                text = aviso.description.take(80) + "...",
+                                fontSize = 13.sp,
+                                color = Color(0xFF555555),
+                                lineHeight = 18.sp,
+                                maxLines = 2
+                            )
                         }
-
-                        items(avisosSecundarios) { aviso ->
-                            Card(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(100.dp)
-                                    .clickable {
-                                        selectedAviso = aviso
-                                        showDialog = true
-                                    },
-                                shape = RoundedCornerShape(8.dp),
-                                elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
-                                colors = CardDefaults.cardColors(containerColor = Color.White)
-                            ) {
-                                Row(
-                                    modifier = Modifier.fillMaxSize(),
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    Box(
-                                        modifier = Modifier
-                                            .width(4.dp)
-                                            .fillMaxHeight()
-                                            .background(
-                                                if (aviso.source == AvisoSource.CARRERA) Color(0xFF1E90FF)
-                                                else Color(0xFF8B0000)
-                                            )
-                                    )
-                                    Row(
-                                        modifier = Modifier
-                                            .weight(1f)
-                                            .padding(8.dp),
-                                        verticalAlignment = Alignment.CenterVertically,
-                                        horizontalArrangement = Arrangement.spacedBy(8.dp)
-                                    ) {
-                                        Box(
-                                            modifier = Modifier
-                                                .size(60.dp)
-                                                .background(Color(0xFFF5F5F5))
-                                                .border(1.dp, Color(0xFFDDDDDD), RoundedCornerShape(8.dp)),
-                                            contentAlignment = Alignment.Center
-                                        ) {
-                                            Image(
-                                                painter = painterResource(id = aviso.imageResId),
-                                                contentDescription = "Imagen de ${aviso.title}",
-                                                modifier = Modifier.fillMaxSize(),
-                                                contentScale = ContentScale.Fit
-                                            )
-                                        }
-
-                                        Column(
-                                            modifier = Modifier.weight(1f),
-                                            verticalArrangement = Arrangement.spacedBy(4.dp)
-                                        ) {
-                                            Text(
-                                                text = aviso.title,
-                                                fontSize = 14.sp,
-                                                fontWeight = FontWeight.Bold,
-                                                color = Color.DarkGray
-                                            )
-                                        }
-                                    }
-                                    Box(
-                                        modifier = Modifier
-                                            .width(4.dp)
-                                            .fillMaxHeight()
-                                            .background(
-                                                if (aviso.source == AvisoSource.CARRERA) Color(0xFF1E90FF)
-                                                else Color(0xFF8B0000)
-                                            )
-                                    )
-                                }
-                            }
-                        }
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Box(
+                            modifier = Modifier
+                                .size(10.dp)
+                                .background(
+                                    if (aviso.source == AvisoSource.CARRERA) Color(0xFF1E90FF)
+                                    else Color(0xFF8B0000),
+                                    shape = CircleShape
+                                )
+                        )
                     }
                 }
             }
         }
 
-        // Diálogo emergente
-        if (showDialog && selectedAviso != null) {
-            Dialog(onDismissRequest = { showDialog = false }) {
+        selectedAviso?.let { aviso ->
+            Dialog(onDismissRequest = { selectedAviso = null }) {
                 Card(
-                    shape = RoundedCornerShape(12.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color.White),
+                    shape = RoundedCornerShape(16.dp),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp)
+                        .padding(16.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color.White)
                 ) {
                     Column(
                         modifier = Modifier
-                            .padding(16.dp)
+                            .padding(20.dp)
                             .verticalScroll(rememberScrollState()),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Image(
-                            painter = painterResource(id = selectedAviso!!.imageResId),
+                            painter = painterResource(id = aviso.imageResId),
                             contentDescription = null,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(200.dp),
-                            contentScale = ContentScale.Fit
+                                .height(180.dp)
+                                .clip(RoundedCornerShape(12.dp)),
+                            contentScale = ContentScale.Crop
                         )
-                        Spacer(modifier = Modifier.height(8.dp))
+                        Spacer(modifier = Modifier.height(12.dp))
                         Text(
-                            text = selectedAviso!!.title,
-                            fontSize = 18.sp,
+                            text = aviso.title,
+                            fontSize = 20.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color.Black,
                             textAlign = TextAlign.Center
                         )
-                        Spacer(modifier = Modifier.height(8.dp))
+                        Spacer(modifier = Modifier.height(10.dp))
                         Text(
-                            text = selectedAviso!!.description,
+                            text = aviso.description,
                             fontSize = 14.sp,
                             color = Color.DarkGray,
-                            textAlign = TextAlign.Justify
+                            textAlign = TextAlign.Justify,
+                            lineHeight = 20.sp
                         )
                         Spacer(modifier = Modifier.height(16.dp))
-                        Button(onClick = { showDialog = false }) {
-                            Text("Cerrar")
+                        Button(
+                            onClick = { selectedAviso = null },
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF003087))
+                        ) {
+                            Text("Cerrar", color = Color.White)
                         }
                     }
                 }
