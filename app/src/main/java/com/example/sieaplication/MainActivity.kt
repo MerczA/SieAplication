@@ -54,7 +54,7 @@ fun ComposeMultiScreenApp() {
 
     //  Instanciar base de datos
     val context = androidx.compose.ui.platform.LocalContext.current
-     val db = Room.databaseBuilder(
+    val db = Room.databaseBuilder(
         context,
         AppDataBase::class.java,
         "recordatorios_db"
@@ -91,7 +91,7 @@ fun SetupNavGraph(
         composable("new_password") {NewPasswordScreen(navController) }
         composable("edit_personal_info") { PersonalInfoEditScreen(navController) }
         composable("general_info") {GeneralInfoScreen(navController) }
-        composable("agregar_recordatorio") { AgregarRecordatorioScreen(viewModel = recordatorioViewModel) }
+        composable("agregar_recordatorio") { AgregarRecordatorioScreen(viewModel = recordatorioViewModel, navController) }
         composable("ver_recordatorios") { ListaRecordatoriosScreen(viewModel = recordatorioViewModel, navController) }
         composable("gruposPreparacion") {GrupoScreen(navController) }
         composable("reinscripcion") {Reinscripcion(navController) }
