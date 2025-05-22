@@ -20,7 +20,7 @@ import com.example.sieaplication.ui.components.BarsScreens
 
 @Composable
 fun CalificacionesScreen(navController: NavController) {
-    BarsScreens("Calificaciones", navController)
+    BarsScreens("Calificaciones", navController )
 
     val materias = listOf(
         Materia("TALLER INVESTIG.", listOf(90.0, 85.0, 88.0, 92.0, 87.0, 91.0)),
