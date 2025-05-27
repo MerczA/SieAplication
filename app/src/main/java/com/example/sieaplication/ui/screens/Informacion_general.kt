@@ -20,13 +20,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.sieaplication.R
-import com.example.sieaplication.ui.components.Bars
+import com.example.sieaplication.ui.components.BarsScreens
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GeneralInfoScreen(navController: NavHostController) {
     Scaffold(
-        topBar = { Bars(navController) }, // Usa tu TopAppBar existente
+        topBar = { BarsScreens("Informacion general" ,navController) }, // Usa tu TopAppBar existente
         containerColor = Color(0xFFF5F5F5)
     ) { innerPadding ->
         Column(
@@ -37,26 +37,7 @@ fun GeneralInfoScreen(navController: NavHostController) {
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Fila superior: botón de "Atrás" + título
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 8.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                IconButton(onClick = { navController.navigate("main_menu") }) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Atrás"
-                    )
-                }
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = "Cambio de Información",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = MaterialTheme.typography.headlineSmall.fontSize
-                )
-            }
+
 
             // NUEVA tarjeta para esta pantalla, con foto centrada y campos adicionales
             GeneralStudentInfoCard(

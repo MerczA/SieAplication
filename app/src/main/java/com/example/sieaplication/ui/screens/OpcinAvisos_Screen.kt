@@ -1,21 +1,18 @@
 package com.example.sieaplication.ui.screens
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -25,19 +22,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
 import com.example.sieaplication.R
 import com.example.sieaplication.ui.components.BarsScreens
 
 // Clase de datos para representar un aviso
 data class Aviso(
-    val imageResId: Int, // ID del recurso de la imagen
-    val title: String,   // Título del aviso
-    val description: String, // Texto descriptivo del aviso
-    val source: AvisoSource // Origen del aviso (Carrera o TECNM)
+    val imageResId: Int,
+    val title: String,
+    val description: String,
+    val source: AvisoSource
 )
 
-// Enum para definir el origen del aviso
 enum class AvisoSource {
     CARRERA, TECNM
 }
@@ -50,277 +47,142 @@ fun AvisosOpcion(navController: NavController) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AvisosSelectorScreen(navController: NavController) {
-    // Lista combinada de avisos de Carrera y TECNM (excluyendo el aviso principal)
-    val avisosSecundarios = listOf(
-        // Avisos de Carrera
-        Aviso(
-            imageResId = R.drawable.avisoscarrerauno,
-            title = "Open House",
-            description = "Los laboratorios de redes no estarán disponibles el 27 de marzo por motivos del evento.",
-            source = AvisoSource.CARRERA
-        ),
-        Aviso(
-            imageResId = R.drawable.avisoscarrerados,
-            title = "Atención Psicológica",
-            description = "Acudir a este correo si necesitas atención psicológica: atn.psicologica@aguascalientes.tecnm.mx",
-            source = AvisoSource.CARRERA
-        ),
-        Aviso(
-            imageResId = R.drawable.avisoscarreratres,
-            title = "Objetos olvidados en el CC",
-            description = "Dejaron estos termos en el área A del CC.",
-            source = AvisoSource.CARRERA
-        ),
-        Aviso(
-            imageResId = R.drawable.avisoscarreracuatro,
-            title = "Objetos olvidados",
-            description = "Olvidaron unos lentes, se encuentran con la coordinadora.",
-            source = AvisoSource.CARRERA
-        ),
-        // Avisos de TECNM
-        Aviso(
-            imageResId = R.drawable.avisotecnmuno,
-            title = "El ITA forma parte activa y sustancial",
-            description = "Desde su ámbito y experiencia, el TecNM a través del Tecnológico de Aguascalientes, participará activamente en el desarrollo de iniciativas clave, especialmente en el tema de semiconductores.",
-            source = AvisoSource.TECNM
-        ),
-        Aviso(
-            imageResId = R.drawable.avisostecnmdos,
-            title = "Acuerdan líneas trabajo colaborativo",
-            description = "El Instituto Tecnológico de Aguascalientes fungió como sede de la primera reunión ordinaria de la Comisión #3 del CITIA de la ANUIES.",
-            source = AvisoSource.TECNM
-        ),
-        Aviso(
-            imageResId = R.drawable.avisostecnmtres,
-            title = "Miembros de la Federación",
-            description = "La FEDESA y el TecNM Instituto Tecnológico de Aguascalientes firmaron un convenio de colaboración para brindar oportunidades de formación.",
-            source = AvisoSource.TECNM
-        ),
-        Aviso(
-            imageResId = R.drawable.avisostecnmcuatro,
-            title = "Estudiantes del Tecnológico de Aguascalientes conquistan los primeros lugares del INFOMATRIX",
-            description = "HealthSensor y Ergo Tec obtuvieron las preseas de plata y su participación en la Fase Nacional.",
-            source = AvisoSource.TECNM
-        ),
-        Aviso(
-            imageResId = R.drawable.avisostecnmcinco,
-            title = "Cierra ITA el año con más de 800 nuevos profesionistas titulados",
-            description = "El TecNM Aguascalientes entrega en 2024 más de 800 egresados de diversas ingenierías y licenciaturas.",
-            source = AvisoSource.TECNM
-        )
+    val avisos = listOf(
+        Aviso(R.drawable.avisoscarrerauno, "Open House", "Los laboratorios de redes no estarán disponibles el 27 de marzo por motivos del evento.", AvisoSource.CARRERA),
+        Aviso(R.drawable.avisoscarrerados, "Atención Psicológica", "Acudir a este correo si necesitas atención psicológica: atn.psicologica@aguascalientes.tecnm.mx", AvisoSource.CARRERA),
+        Aviso(R.drawable.avisoscarreratres, "Objetos olvidados en el CC", "Dejaron estos termos en el área A del CC.", AvisoSource.CARRERA),
+        Aviso(R.drawable.avisoscarreracuatro, "Objetos olvidados", "Olvidaron unos lentes, se encuentran con la coordinadora.", AvisoSource.CARRERA),
+        Aviso(R.drawable.avisotecnmuno, "El ITA forma parte activa y sustancial", "Desde su ámbito y experiencia, el TecNM participa activamente en iniciativas clave, especialmente semiconductores.", AvisoSource.TECNM),
+        Aviso(R.drawable.avisostecnmdos, "Acuerdan líneas trabajo colaborativo", "El ITA fue sede de la primera reunión de la Comisión #3 del CITIA de la ANUIES.", AvisoSource.TECNM),
+        Aviso(R.drawable.avisostecnmtres, "Miembros de la Federación", "FEDESA y el ITA firmaron un convenio para brindar formación académica.", AvisoSource.TECNM),
+        Aviso(R.drawable.avisostecnmcuatro, "Estudiantes conquistan INFOMATRIX", "HealthSensor y Ergo Tec ganan preseas de plata en la fase nacional.", AvisoSource.TECNM),
+        Aviso(R.drawable.avisostecnmcinco, "Cierra ITA con más de 800 titulados", "En 2024, el TecNM Aguascalientes gradúa más de 800 ingenieros y licenciados.", AvisoSource.TECNM)
     )
 
+    var selectedAviso by remember { mutableStateOf<Aviso?>(null) }
+
     Scaffold(
-        topBar = { BarsScreens(navController) },
-        containerColor = Color(0xFFEAEAEA) // Fondo consistente con la pantalla Documentos
+        topBar = { BarsScreens("Avisos", navController) },
+        containerColor = Color(0xFFF8F8F8)
     ) { innerPadding ->
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(horizontal = 16.dp), // Padding horizontal como en Documentos
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(horizontal = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            // Tarjeta principal
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(0.85f)
-                    .padding(top = 16.dp), // Espacio adicional para no pegarse al Top Bar
-                shape = RoundedCornerShape(12.dp),
-                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-                colors = CardDefaults.cardColors(containerColor = Color.White)
-            ) {
-                Column(
+            item {
+                Text(
+                    text = "Últimas noticias del ITA y TecNM",
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFF003087),
+                    modifier = Modifier.padding(top = 16.dp, bottom = 8.dp)
+                )
+            }
+
+            items(avisos) { aviso ->
+                Card(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                        .fillMaxWidth()
+                        .clickable { selectedAviso = aviso },
+                    shape = RoundedCornerShape(16.dp),
+                    elevation = CardDefaults.cardElevation(6.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color.White)
                 ) {
-                    // Encabezado
-                    Box(
+                    Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(bottom = 8.dp),
-                        contentAlignment = Alignment.Center
+                            .padding(12.dp),
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text(
-                            text = "TODOS LOS AVISOS",
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Bold,
-                            textAlign = TextAlign.Center,
-                            color = Color(0xFF003087)
+                        Image(
+                            painter = painterResource(id = aviso.imageResId),
+                            contentDescription = aviso.title,
+                            modifier = Modifier
+                                .size(70.dp)
+                                .clip(RoundedCornerShape(12.dp))
+                                .background(Color.LightGray),
+                            contentScale = ContentScale.Crop
+                        )
+                        Spacer(modifier = Modifier.width(12.dp))
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                text = aviso.title,
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = 16.sp,
+                                color = Color(0xFF222222)
+                            )
+                            Text(
+                                text = aviso.description.take(80) + "...",
+                                fontSize = 13.sp,
+                                color = Color(0xFF555555),
+                                lineHeight = 18.sp,
+                                maxLines = 2
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Box(
+                            modifier = Modifier
+                                .size(10.dp)
+                                .background(
+                                    if (aviso.source == AvisoSource.CARRERA) Color(0xFF1E90FF)
+                                    else Color(0xFF8B0000),
+                                    shape = CircleShape
+                                )
                         )
                     }
+                }
+            }
+        }
 
-                    // Lista de avisos en LazyColumn
-                    LazyColumn(
+        selectedAviso?.let { aviso ->
+            Dialog(onDismissRequest = { selectedAviso = null }) {
+                Card(
+                    shape = RoundedCornerShape(16.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color.White)
+                ) {
+                    Column(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(1f),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                            .padding(20.dp)
+                            .verticalScroll(rememberScrollState()),
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        // Aviso principal
-                        item {
-                            Column(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-                                // Imagen principal
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .height(200.dp)
-                                        .background(Color(0xFFF5F5F5))
-                                        .border(1.dp, Color(0xFFDDDDDD), RoundedCornerShape(8.dp)),
-                                    contentAlignment = Alignment.Center
-                                ) {
-                                    Image(
-                                        painter = painterResource(id = R.drawable.tecnmmejorescuela),
-                                        contentDescription = "Imagen de TECNM",
-                                        modifier = Modifier.fillMaxSize(),
-                                        contentScale = ContentScale.Fit
-                                    )
-                                }
-
-                                // Título y texto principal debajo de la imagen
-                                Column(
-                                    modifier = Modifier.padding(top = 8.dp),
-                                    horizontalAlignment = Alignment.CenterHorizontally,
-                                    verticalArrangement = Arrangement.spacedBy(4.dp)
-                                ) {
-                                    Box(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .height(40.dp)
-                                            .verticalScroll(rememberScrollState())
-                                    ) {
-                                        Text(
-                                            text = "Se consolida el TecNM campus Instituto Tecnológico de Aguascalientes como Mejor Escuela de Ingeniería del País",
-                                            fontSize = 16.sp,
-                                            fontWeight = FontWeight.Bold,
-                                            color = Color.DarkGray,
-                                            textAlign = TextAlign.Center
-                                        )
-                                    }
-                                    Box(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .height(100.dp)
-                                            .verticalScroll(rememberScrollState())
-                                    ) {
-                                        Text(
-                                            text = "Reconoce ANFEI AL TECNOLÓGICO de Aguascalientes como la mejor escuela de ingeniería en el país\n" +
-                                                    "Es el máximo reconocimiento que recibe una institución por su calidad educativa en el ámbito de las ingenierías.",
-                                            fontSize = 14.sp,
-                                            color = Color.DarkGray,
-                                            lineHeight = 20.sp,
-                                            textAlign = TextAlign.Center
-                                        )
-                                    }
-                                }
-                            }
-                        }
-
-                        // Avisos secundarios
-                        items(avisosSecundarios) { aviso ->
-                            Card(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(100.dp),
-                                shape = RoundedCornerShape(8.dp),
-                                elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
-                                colors = CardDefaults.cardColors(containerColor = Color.White)
-                            ) {
-                                Row(
-                                    modifier = Modifier.fillMaxSize(),
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    // Borde izquierdo
-                                    Box(
-                                        modifier = Modifier
-                                            .width(4.dp)
-                                            .fillMaxHeight()
-                                            .background(
-                                                when (aviso.source) {
-                                                    AvisoSource.CARRERA -> Color(0xFF1E90FF)
-                                                    AvisoSource.TECNM -> Color(0xFF8B0000)
-                                                }
-                                            )
-                                    )
-
-                                    // Contenido principal
-                                    Row(
-                                        modifier = Modifier
-                                            .weight(1f)
-                                            .padding(8.dp),
-                                        verticalAlignment = Alignment.CenterVertically,
-                                        horizontalArrangement = Arrangement.spacedBy(8.dp)
-                                    ) {
-                                        // Imagen a la izquierda
-                                        Box(
-                                            modifier = Modifier
-                                                .size(60.dp)
-                                                .background(Color(0xFFF5F5F5))
-                                                .border(1.dp, Color(0xFFDDDDDD), RoundedCornerShape(8.dp)),
-                                            contentAlignment = Alignment.Center
-                                        ) {
-                                            Image(
-                                                painter = painterResource(id = aviso.imageResId),
-                                                contentDescription = "Imagen de ${aviso.title}",
-                                                modifier = Modifier.fillMaxSize(),
-                                                contentScale = ContentScale.Fit
-                                            )
-                                        }
-
-                                        // Columna para título y texto
-                                        Column(
-                                            modifier = Modifier.weight(1f),
-                                            verticalArrangement = Arrangement.spacedBy(4.dp)
-                                        ) {
-                                            Box(
-                                                modifier = Modifier
-                                                    .fillMaxWidth()
-                                                    .height(24.dp)
-                                                    .verticalScroll(rememberScrollState())
-                                            ) {
-                                                Text(
-                                                    text = aviso.title,
-                                                    fontSize = 14.sp,
-                                                    fontWeight = FontWeight.Bold,
-                                                    color = Color.DarkGray
-                                                )
-                                            }
-                                            Box(
-                                                modifier = Modifier
-                                                    .fillMaxWidth()
-                                                    .height(48.dp)
-                                                    .verticalScroll(rememberScrollState())
-                                            ) {
-                                                Text(
-                                                    text = aviso.description,
-                                                    fontSize = 12.sp,
-                                                    color = Color.DarkGray,
-                                                    lineHeight = 16.sp
-                                                )
-                                            }
-                                        }
-                                    }
-
-                                    // Borde derecho
-                                    Box(
-                                        modifier = Modifier
-                                            .width(4.dp)
-                                            .fillMaxHeight()
-                                            .background(
-                                                when (aviso.source) {
-                                                    AvisoSource.CARRERA -> Color(0xFF1E90FF)
-                                                    AvisoSource.TECNM -> Color(0xFF8B0000)
-                                                }
-                                            )
-                                    )
-                                }
-                            }
+                        Image(
+                            painter = painterResource(id = aviso.imageResId),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(180.dp)
+                                .clip(RoundedCornerShape(12.dp)),
+                            contentScale = ContentScale.Crop
+                        )
+                        Spacer(modifier = Modifier.height(12.dp))
+                        Text(
+                            text = aviso.title,
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Black,
+                            textAlign = TextAlign.Center
+                        )
+                        Spacer(modifier = Modifier.height(10.dp))
+                        Text(
+                            text = aviso.description,
+                            fontSize = 14.sp,
+                            color = Color.DarkGray,
+                            textAlign = TextAlign.Justify,
+                            lineHeight = 20.sp
+                        )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Button(
+                            onClick = { selectedAviso = null },
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF003087))
+                        ) {
+                            Text("Cerrar", color = Color.White)
                         }
                     }
                 }
