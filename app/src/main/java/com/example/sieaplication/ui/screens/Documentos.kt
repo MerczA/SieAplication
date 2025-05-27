@@ -1,8 +1,10 @@
 package com.example.sieaplication.ui.screens
 
-import android.util.Log
+import android.content.Context
+import android.content.Intent
+import android.content.res.Configuration
+import android.net.Uri
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,10 +13,16 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -22,17 +30,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.sieaplication.R
-import android.content.Intent
-import android.net.Uri
-import androidx.compose.ui.platform.LocalContext
-import androidx.core.content.ContextCompat.startActivity
+import com.example.sieaplication.ui.components.BarsScreens
 import androidx.core.content.FileProvider
 import java.io.File
 import java.io.FileOutputStream
-import android.content.Context
-import androidx.compose.runtime.Composable
-
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -101,7 +102,6 @@ fun Documentos(navController: NavHostController) {
                 )
             )
         },
-        topBar = { BarsScreens("Documentos" , navController) },
         containerColor = Color(0xFFEAEAEA)
     ) { innerPadding ->
         Column(
@@ -139,9 +139,6 @@ fun Documentos(navController: NavHostController) {
                 Spacer(modifier = Modifier.height(16.dp))
 
                 DocumentButtonRow (
-                Spacer(modifier = Modifier.height(16.dp))
-
-                ButtonRow(
                     leftButtonText = "Ficha de pago",
                     leftButtonIcon = R.drawable.inscripsion_icon,
                     onLeftClick = { navController.navigate("screen_Ficha") },
@@ -265,4 +262,3 @@ fun MiPantalla() {
         Text("Abrir PDF")
     }
 }
-
