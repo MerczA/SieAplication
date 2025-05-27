@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.sieaplication.R
 import androidx.navigation.NavHostController
+import com.example.sieaplication.ui.components.BarsScreens
 
 
 // Ancho total de cada fila de botones: 160dp + 16dp + 160dp = 336dp
@@ -33,88 +34,9 @@ val GRID_WIDTH = 336.dp
 @Composable
 fun Main_Menu(navController: NavHostController) {
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Image(
-                            painter = painterResource(id = R.drawable.logotec),
-                            contentDescription = "Logo",
-                            modifier = Modifier
-                                .size(48.dp)
-                                .padding(end = 8.dp)
-                        )
-                        Text("Sie")
-                    }
-                },
-                actions = {
-                    var menuExpanded by remember { mutableStateOf(false) }
-                    Box {
-                        IconButton(onClick = { menuExpanded = !menuExpanded }) {
-                            Icon(
-                                imageVector = Icons.Default.AccountCircle,
-                                contentDescription = "Abrir menú",
-                                tint = Color.White
-                            )
-                        }
-                        DropdownMenu(
-                            expanded = menuExpanded,
-                            onDismissRequest = { menuExpanded = false }
-                        ) {
-                            DropdownMenuItem(
-                                text = { Text("Información General") },
-                                onClick = {
-                                    menuExpanded = false
-                                    navController.navigate("general_info")}
-                            )
-                            DropdownMenuItem(
-                                text = { Text("Cambiar datos") },
-                                onClick = {
-                                    menuExpanded = false
-                                    navController.navigate("edit_personal_info")}
-                            )
-                            DropdownMenuItem(
-                                text = { Text("Cambiar contraseña") },
-                                onClick = {
-                                    menuExpanded = false
-                                    navController.navigate("new_password")}
-                            )
-                            DropdownMenuItem(
-                                text = { Text("Recordatorios") },
-                                onClick = {
-                                    menuExpanded = false
-                                    navController.navigate("agregar_recordatorio")
-                                }
-                            )
-                            DropdownMenuItem(
-                                text = { Text("Ver recordatorios") },
-                                onClick = {
-                                    menuExpanded = false
-                                    navController.navigate("ver_recordatorios")
-                                }
-                            )
-
-                            DropdownMenuItem(
-                                text = { Text("Cerrar sesión") },
-                                onClick = { menuExpanded = false }
-                            )
-                        }
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF2196F3),
-                    titleContentColor = Color.White
-                )
-            )
-        },
-        containerColor = Color(0xFFEAEAEA)
     ) { innerPadding -> //aquí inician los cambios para adaptar el landscape
-
-        // Detecta la configuración actual de la pantalla (portrait o landscape)
         val configuration = LocalConfiguration.current
-        //Verifica si la pantalla está en orientación horizontal
         val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
-        //Layout base que contiene toodo el contenido
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -122,7 +44,8 @@ fun Main_Menu(navController: NavHostController) {
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) { //
-            Spacer(modifier = Modifier.height(16.dp))
+            BarsScreens("SIE",navController)
+
 
             // Tarjeta de info: .fillMaxWidth() para ajustarse a la pantalla
             StudentInfoCard(
@@ -201,7 +124,7 @@ fun Main_Menu(navController: NavHostController) {
                     onLeftClick = { navController.navigate("screen_kardex") },
                     rightButtonText = "Grupos en preparación",
                     rightButtonIcon = R.drawable.grupos_en_preparacion_icon,
-                    onRightClick = {}
+                    onRightClick = {navController.navigate("gruposPreparacion")}
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -209,7 +132,7 @@ fun Main_Menu(navController: NavHostController) {
                 ButtonRow(
                     leftButtonText = "Reinscripción",
                     leftButtonIcon = R.drawable.inscripsion_icon,
-                    onLeftClick = {},
+                    onLeftClick = {navController.navigate("reinscripcion")},
                     rightButtonText = "Avisos Tecnm",
                     rightButtonIcon = R.drawable.aviso_icon,
                     onRightClick = { navController.navigate("screen_avisos") }
@@ -226,60 +149,6 @@ fun Main_Menu(navController: NavHostController) {
                     onRightClick = { navController.navigate("T_Digital") }
                 )
             }
-
-            //remplaze los buttonrow con una version que se adapta dinamicamente por medio de un if (POR ESO ESTA COMENTADO)
-
-//            // Fila 1
-//            ButtonRow(
-//                leftButtonText = "Calificaciones",
-//                leftButtonIcon = R.drawable.calificaciones_icon,
-//                onLeftClick = { navController.navigate("calif_screen") },
-//                rightButtonText = "Horario",
-//                rightButtonIcon = R.drawable.horario_icon,
-//                onRightClick = { navController.navigate("screen_horario") }
-//            )
-//
-//            Spacer(modifier = Modifier.height(16.dp))
-//
-//            // Fila 2
-//            ButtonRow(
-//                leftButtonText = "Kardex",
-//                leftButtonIcon = R.drawable.kardex_icon,
-//                onLeftClick = { navController.navigate("screen_kardex") },
-//                rightButtonText = "Grupos en preparación",
-//                rightButtonIcon = R.drawable.grupos_en_preparacion_icon,
-//                onRightClick = {}
-//            )
-//
-//            Spacer(modifier = Modifier.height(16.dp))
-//
-//            // Fila 3
-//            ButtonRow(
-//                leftButtonText = "Reinscripción",
-//                leftButtonIcon = R.drawable.inscripsion_icon,
-//                onLeftClick = {},
-//                rightButtonText = "Avisos Tecnm",
-//                rightButtonIcon = R.drawable.aviso_icon,
-//                onRightClick = { navController.navigate("screen_avisos") }
-//            )
-//
-//            Spacer(modifier = Modifier.height(16.dp))
-//
-//
-//
-//            // Fila 4
-//            ButtonRow(
-//                leftButtonText = "Documentos",
-//                leftButtonIcon = R.drawable.docuemntos_icon,
-//                onLeftClick = { navController.navigate("screen_Documentos")},
-//                rightButtonText = "Credencial Digital",
-//                rightButtonIcon = R.drawable.credencial_digital_icon,
-//                onRightClick = { navController.navigate("T_Digital")}
-//            )
-
-
-
-
             Spacer(modifier = Modifier.height(32.dp))
         }
     }

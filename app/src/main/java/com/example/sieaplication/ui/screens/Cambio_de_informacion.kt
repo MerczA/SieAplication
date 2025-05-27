@@ -13,7 +13,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -33,8 +32,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.sieaplication.R
-import com.example.sieaplication.ui.components.Bars
+import com.example.sieaplication.ui.components.BarsScreens
 import java.util.Calendar
 
 @Composable
@@ -42,14 +40,12 @@ fun PersonalInfoEditScreen(navController: NavHostController) {
 
     val context = LocalContext.current
 
-    // Estados con la información "guardada" (actual)
     var currentName by remember { mutableStateOf("Juan") }
     var currentLastName by remember { mutableStateOf("Pérez") }
     var currentAddress by remember { mutableStateOf("Calle Falsa 123") }
     var currentPhone by remember { mutableStateOf("555-123456") }
     var currentBirthDate by remember { mutableStateOf("") }
 
-    // Estados para la edición (temporales)
     var tempName by remember { mutableStateOf(currentName) }
     var tempLastName by remember { mutableStateOf(currentLastName) }
     var tempAddress by remember { mutableStateOf(currentAddress) }
@@ -59,7 +55,6 @@ fun PersonalInfoEditScreen(navController: NavHostController) {
     var showDatePicker by remember { mutableStateOf(false) }
     var showAlertDialog by remember { mutableStateOf(false) }
 
-    // Mostrar DatePickerDialog para actualizar tempBirthDate
     if (showDatePicker) {
         val calendar = Calendar.getInstance()
         DatePickerDialog(
@@ -74,8 +69,10 @@ fun PersonalInfoEditScreen(navController: NavHostController) {
         ).show()
     }
 
+    BarsScreens("Cambio de Informacion", navController)
+
+
     Scaffold(
-        topBar = {Bars(navController)},
         containerColor = Color(0xFFF5F5F5)
     ) { innerPadding ->
         Column(
@@ -86,27 +83,8 @@ fun PersonalInfoEditScreen(navController: NavHostController) {
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 8.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                IconButton(onClick = { navController.navigate("main_menu") }) {
-                    Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Atrás")
-                }
-                Spacer(modifier = Modifier.width(8.dp))
 
-                Text(
-                    text = "Cambio de Información",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = MaterialTheme.typography.headlineSmall.fontSize,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.weight(1f) // Esto lo centra correctamente
-                )
 
-                Spacer(modifier = Modifier.width(48.dp)) // Simula el espacio del ícono de regreso
-            }
 
             // Tarjeta que muestra la información actual guardada
             Card(
