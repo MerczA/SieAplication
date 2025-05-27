@@ -4,24 +4,28 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.sieaplication.data.model.MateriaKardex
 import com.example.sieaplication.ui.components.BarsScreens
 
 @Composable
-fun HorarioPorSemestreScreen(navController: NavController) {
-    BarsScreens("Kardex Grafico", navController)
-
-    val semestres = mapOf(
+fun KardexCompleto(navController: NavController) {
+    BarsScreens("Kardex Grafico" , navController)
+    val semestres = listOf(
         "I" to listOf(
             MateriaKardex("ACF0901", "CALC DIF", "5", "98", "Repetición"),
             MateriaKardex("AEF1032", "FUND DE PROGR", "5", "91", "Cursada"),
@@ -65,7 +69,7 @@ fun HorarioPorSemestreScreen(navController: NavController) {
             MateriaKardex("AEB1055", "PROGRA WEB", "5", "90", "Cursada"),
             MateriaKardex("TID1010", "DESARR. DE EMPREND.", "5", "82", "Especial"),
             MateriaKardex("ACD1008", "DESR SUST", "5", "88", "Cursada"),
-            MateriaKardex("TIC1061", "SIS OPE I", "5", "", "No tomada")
+            MateriaKardex("TIC1061", "SIS OPE I", "5", "","No tomada")
         ),
         "VII" to listOf(
             MateriaKardex("TIF1026", "REDES EMERGENTES", "5", "92", "Cursada"),
@@ -79,97 +83,68 @@ fun HorarioPorSemestreScreen(navController: NavController) {
             MateriaKardex("TIC1006", "AUDITORIA TEC. INF", "5", "", "No tomada"),
             MateriaKardex("TIC1015", "ING CONOCIMIENTO", "5", "", "No tomada"),
             MateriaKardex("TIC1023", "NEGOCIOS ELEC II", "5", "", "No tomada"),
-            MateriaKardex("TDB2401", "COMPUTO EN LA NUBE", "5", "", "No tomada"),
-            MateriaKardex("TDB2402", "BIG DATA ANALYTICS", "5", "", "No tomada")
+            MateriaKardex("TDB2401", "COMPUTO EN LA NUBE", "5", "","No tomada"),
+            MateriaKardex("TDB2402", "BIG DATA ANALYTICS", "5","" ,"No tomada")
         ),
         "IX" to listOf(
-            MateriaKardex("TDB2403", "SEG TEC INFORM", "5", "", "No tomada"),
-            MateriaKardex("TDB2404", "APPS MOVILES MULTIPLA", "5", "", "No tomada"),
-            MateriaKardex("TDB2405", "TOP AVANZ DES WEB", "5", "", "No tomada"),
-            MateriaKardex("TDB2406", "SIST EMBEBIDOS EMERG", "5", "", "No tomada"),
-            MateriaKardex("TDB2407", "SIST GEN RECOL DATOS", "5", "", "No tomada")
+            MateriaKardex("TDB2403", "SEG TEC INFORM", "5", "","No tomada"),
+            MateriaKardex("TDB2404", "APPS MOVILES MULTIPLA", "5","", "No tomada"),
+            MateriaKardex("TDB2405", "TOP AVANZ DES WEB", "5", "","No tomada"),
+            MateriaKardex("TDB2406", "SIST EMBEBIDOS EMERG", "5", "","No tomada"),
+            MateriaKardex("TDB2407", "SIST GEN RECOL DATOS", "5", "","No tomada")
         )
     )
-
-    val semestreKeys = semestres.keys.toList()
-    var selectedSemester by remember { mutableStateOf("I") }
-    var dropdownExpanded by remember { mutableStateOf(false) }
-
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 90.dp)
+            .padding(top = 90.dp) // Ajuste para la TopBar
     ) {
-        // Selector y leyenda
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            // Selector
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text("Semestre: ", fontSize = 16.sp)
-                Box {
-                    OutlinedButton(onClick = { dropdownExpanded = true }) {
-                        Text(text = selectedSemester)
-                    }
-                    DropdownMenu(
-                        expanded = dropdownExpanded,
-                        onDismissRequest = { dropdownExpanded = false }
-                    ) {
-                        semestreKeys.forEach { semestre ->
-                            DropdownMenuItem(
-                                text = { Text("Semestre $semestre") },
-                                onClick = {
-                                    selectedSemester = semestre
-                                    dropdownExpanded = false
-                                }
-                            )
-                        }
-                    }
-                }
-            }
-
-            // Leyenda de colores
-            Column() {
-                ColorLegendBox(color = Color.Green, label = "Cursada")
-                Spacer(modifier = Modifier.width(4.dp))
-                ColorLegendBox(color = Color.Cyan, label = "Repetición")
-                Spacer(modifier = Modifier.width(4.dp))
-                ColorLegendBox(color = Color.Yellow, label = "Especial")
-                Spacer(modifier = Modifier.width(4.dp))
-                ColorLegendBox(color = Color.Gray, label = "No tomada")
-            }
+            Spacer(modifier = Modifier.weight(1f)) // Empuja el texto hacia el centro
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
+        LazyColumn(
+            modifier = Modifier.fillMaxSize()
+        ) {
             item {
-                Column(
-                    modifier = Modifier.padding(horizontal = 16.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                LazyRow(
+                    modifier = Modifier.padding(8.dp)
                 ) {
-                    Text(
-                        text = "Semestre $selectedSemester",
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(vertical = 8.dp)
-                    )
-
-                    semestres[selectedSemester]?.forEach { materia ->
-                        MateriaBox(materia)
+                    items(semestres) { (semestre, materias) ->
+                        Column(
+                            modifier = Modifier.padding(end = 5.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(
+                                text = semestre,
+                                fontSize = 18.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.Black,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(8.dp),
+                                textAlign = TextAlign.Center
+                            )
+                            materias.forEach { materia ->
+                                CuadroMateria(materia)
+                            }
+                        }
                     }
                 }
             }
         }
     }
+
+
 }
 
 @Composable
-fun MateriaBox(materia: MateriaKardex) {
+fun CuadroMateria(materia: MateriaKardex) {
     val color = when (materia.estado) {
         "Cursada" -> Color.Green
         "Repetición" -> Color.Cyan
@@ -179,35 +154,18 @@ fun MateriaBox(materia: MateriaKardex) {
 
     Box(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 4.dp)
-            .height(130.dp)
+            .width(200.dp)
+            .height(140.dp)
+            .padding(4.dp)
             .border(2.dp, Color.Black, RoundedCornerShape(8.dp))
             .background(color, RoundedCornerShape(8.dp))
             .padding(8.dp)
     ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center
-        ) {
+        Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
             Text(text = materia.codigo, fontWeight = FontWeight.Bold, color = Color.Black)
             Text(text = materia.nombre, color = Color.Black)
             Text(text = "Créditos: ${materia.creditos}", color = Color.Black)
             Text(text = materia.calificacion, color = Color.Black)
         }
-    }
-}
-
-@Composable
-fun ColorLegendBox(color: Color, label: String) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Box(
-            modifier = Modifier
-                .size(12.dp)
-                .background(color, RoundedCornerShape(2.dp))
-                .border(1.dp, Color.Black, RoundedCornerShape(2.dp))
-        )
-        Spacer(modifier = Modifier.width(4.dp))
-        Text(text = label, fontSize = 12.sp)
     }
 }

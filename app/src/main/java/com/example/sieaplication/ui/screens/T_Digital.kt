@@ -4,18 +4,17 @@ import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
 import android.graphics.Bitmap
-import android.graphics.Color as AndroidColor // Renombrado para evitar conflicto
+import android.graphics.Color as AndroidColor
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color // Para Jetpack Compose
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -28,6 +27,8 @@ import com.example.sieaplication.R
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.common.BitMatrix
+
+import com.example.sieaplication.ui.components.BarsScreens
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -50,6 +51,28 @@ fun T_Digital(navController: NavHostController) {
         },
     content = { paddingValues ->
             Column(
+    BarsScreens("Credencial Digital", navController)
+
+
+    val qrBitmap = generateQRCode("https://sie.aguascalientes.tecnm.mx/cgi-bin/sie.pl?Opc=PINDEXESTUDIANTE&psie=intertec&dummy=0")
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(top = 95.dp, bottom = 80.dp) // Espacio para la TopBar y BottomBar
+            .padding(horizontal = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        // Tarjeta Digital
+        Box(
+            modifier = Modifier
+                .fillMaxHeight()
+                .padding(bottom = 16.dp), // Espacio extra para evitar empalmes
+            contentAlignment = Alignment.Center
+        ) {
+            Card(
+                shape = RoundedCornerShape(16.dp),
+
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)

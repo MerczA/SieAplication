@@ -101,6 +101,7 @@ fun Documentos(navController: NavHostController) {
                 )
             )
         },
+        topBar = { BarsScreens("Documentos" , navController) },
         containerColor = Color(0xFFEAEAEA)
     ) { innerPadding ->
         Column(
@@ -138,6 +139,9 @@ fun Documentos(navController: NavHostController) {
                 Spacer(modifier = Modifier.height(16.dp))
 
                 DocumentButtonRow (
+                Spacer(modifier = Modifier.height(16.dp))
+
+                ButtonRow(
                     leftButtonText = "Ficha de pago",
                     leftButtonIcon = R.drawable.inscripsion_icon,
                     onLeftClick = { navController.navigate("screen_Ficha") },
